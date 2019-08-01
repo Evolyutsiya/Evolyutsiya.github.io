@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>使用github搭建博客，项目管理</title>
+      <link href="/2019/07/31/%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%EF%BC%8C%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
+      <url>/2019/07/31/%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%EF%BC%8C%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1、使用ssh生成公钥和私钥"><a href="#1、使用ssh生成公钥和私钥" class="headerlink" title="1、使用ssh生成公钥和私钥"></a>1、使用ssh生成公钥和私钥</h1><p>win7需要安装ssh工具，win10自带有<br>在 cmd/powershell 窗口执行 ssh-keygen -t rsa 会在用户根目录下生成公钥文件（.pub）和私钥文件（.rsa）<br>公钥文件作为文件之间传输的口令，私钥文件则是认证令牌，丢失则只能重新生成</p><h1 id="2、使用github项目管理"><a href="#2、使用github项目管理" class="headerlink" title="2、使用github项目管理"></a>2、使用github项目管理</h1><h2 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h2><p>1。yum install git 安装git<br>2。创建用户git，切换git用户<br>3。进入git用户的根目录，修改 .ssh 700 文件夹权限（限制ssh服务）创建authorized_keys 600 文件权限，如果权限不正确可能会认证失败。<br>4。在git用户的家目录下创建project目录，用来存放git项目<br>5。执行 git init –bare 文件名.git 初始化一个git项目</p><h2 id="PC端"><a href="#PC端" class="headerlink" title="PC端"></a>PC端</h2><p>安装git客户端<br><img src="/%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%EF%BC%8C%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/20190731084648181.png" alt><br><img src="/%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%EF%BC%8C%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/20190731084702392.png" alt><br>一路回车，安装成功后，运行Git Bash，执行ssh-keygen一路回车，将生成的 公钥写入虚拟机 创建的authorized_keys。<br><strong>注意：</strong>vim 复制粘贴时先 i 后粘贴否则可能会有遗漏<br>在Git Bash上执行一些命令<br>git clone git@ip:/home/git/Project/创建的文件名一致.git     相当于复制文件<br>git pull   下载<br>git push   上传<br>Git Bash有个漏洞，执行 ssh git@IP 即可连接服务器<br>关闭方法：<br>服务端执行 usermod -s /sbin/nologin git</p><h1 id="3、github博客（使用hexo博客上传git仓库）"><a href="#3、github博客（使用hexo博客上传git仓库）" class="headerlink" title="3、github博客（使用hexo博客上传git仓库）"></a>3、github博客（使用hexo博客上传git仓库）</h1><p>准备：<br>    1。安装node.js和git客户端<br>    2。在创建的博客文件夹执行cmd命令</p><pre><code>npm install –g hexo-cli –registry=https//registry.npm.taobao.org   执行的是掏宝的源3。执行hexo init **注意:** 必须保证下载完成，否则需要清除文件夹重新下载4。执行hexo g5。执行hexo s  浏览器访问相关hexo配置文档 https://hexo.io/zh-cn/docs/     hexo配置文档</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第二周 </tag>
+            
+            <tag> 工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Tomcat服务器的搭建</title>
+      <link href="/2019/07/31/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
+      <url>/2019/07/31/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1、kail修改源"><a href="#1、kail修改源" class="headerlink" title="1、kail修改源"></a>1、kail修改源</h1><p>vi或vim /etc/apt/soures.list<br><img src="https://i.loli.net/2019/07/31/5d4185019ce5e82169.png" alt><br>相关源可以百度等：清华源、阿里云源、中科大源</p><h1 id="2、Tomcat服务器配置"><a href="#2、Tomcat服务器配置" class="headerlink" title="2、Tomcat服务器配置"></a>2、Tomcat服务器配置</h1><p>准备环境：CentOS-7-mini<br>步骤：</p><pre><code>1．    下载Tomcat服务器的Linux压缩包2．    解压，根据需要修改 conf/server.xml文件修改端口是在：conf/server.xml文件&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; connectionTimeout=&quot;20000&quot; redirectPort=&quot;8843&quot;/&gt;中的8080端口修改3．    执行 bin/startup.sh脚本    ./startup.sh4．    启动防火墙、添加白名单        注意：防火墙端口和 conf/service.xml修改的端口一致防火墙启动systemctl start firewalld添加白名单firewall-cmd --zone=public --add-port=8080/tcp --permanent重启防火墙firewall-cmd --reload5．    PC浏览器输入虚拟机IP或虚拟机浏览器输入IP（本地：127.0.0.1）查看问题：检测PC与虚拟机的ping是否通；查看防火墙端口是否添加</code></pre><h1 id="3、Tomcat添加管理员用户和密码"><a href="#3、Tomcat添加管理员用户和密码" class="headerlink" title="3、Tomcat添加管理员用户和密码"></a>3、Tomcat添加管理员用户和密码</h1><p>vim /home/cent/Desktop/wss/apache-tomcat-8.5.43/conf/tomcat-users.xml     html语言根据该文件复述添加修改用户即可<br><img src="https://i.loli.net/2019/07/31/5d41852a50ff335920.png" alt><br>再次登陆输入密码即可进入后台管理    </p><h1 id="4、Tomcat文件上传漏洞"><a href="#4、Tomcat文件上传漏洞" class="headerlink" title="4、Tomcat文件上传漏洞"></a>4、Tomcat文件上传漏洞</h1><p>如果PC端连接Tomcat服务器出现403：<br>修改 ./apache-tomcat-8.5.43/webapps/manager/META-INF/context.xml 允许外网上传文件<br><img src="https://i.loli.net/2019/07/31/5d418a498ef8b50175.png" alt><br>allow=”\d+.\d+.\d+.\d+”    正则表达式，筛选出IP地址</p><h2 id="PC端上传webshell的流程"><a href="#PC端上传webshell的流程" class="headerlink" title="PC端上传webshell的流程"></a>PC端上传webshell的流程</h2><p>1。进入Tomcat后台管理系统<br>2。<img src="https://i.loli.net/2019/07/31/5d418a494181f32204.png" alt><br>选择编写好的WebShell上传<br>3。查看WebShell源码确定登陆密码，刷新页面，进入上传得文件内<img src="https://i.loli.net/2019/07/31/5d418a495ed6557015.png" alt><br>此漏洞的关闭方法：<br>虚拟机执行 usermod -s /sbin/nologin git 目的是修改passwd文件中用户的 /bin/bash 可执行目录，nologin是不运行用户登录。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第二周 </tag>
+            
+            <tag> 工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux根目录下的文件夹</title>
+      <link href="/2019/07/31/Linux%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9/"/>
+      <url>/2019/07/31/Linux%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1、-目录下的文件夹"><a href="#1、-目录下的文件夹" class="headerlink" title="1、/ 目录下的文件夹"></a>1、/ 目录下的文件夹</h1><p><img src="/Linux%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9/20190731072913217.png" alt></p><table><thead><tr><th>目录</th><th>作用</th></tr></thead><tbody><tr><td>/bin</td><td>放置可执行的文件目录</td></tr><tr><td>/dev</td><td>任何设备以文件形态存放</td></tr><tr><td>/medi</td><td>放置可移动设备</td></tr><tr><td>/opt</td><td>第三方协议软件放置目录</td></tr><tr><td>/tmp</td><td>暂时存放文件的地方</td></tr><tr><td>/home</td><td>用户主目录</td></tr><tr><td>/root</td><td>系统管理员</td></tr><tr><td>/proc</td><td>虚拟文件系统</td></tr><tr><td>/etc</td><td>Linux系统配置文件</td></tr><tr><td>/usr</td><td>安装的第三方软件默认位置</td></tr><tr><td>/var</td><td>针对常态性变动文件</td></tr><tr><td>/usr/bin</td><td>系统用户使用的应用程序</td></tr><tr><td>/usr/sbin</td><td>场及用户使用的较高级别的系统守护程序</td></tr><tr><td>/usr/src</td><td>内核源代码默认的放置目录</td></tr><tr><td>/var</td><td>存放着不断扩充着的东西，习惯将这些经常被修改的目录放在这个目录下，包括日志文件</td></tr><tr><td>/run·</td><td>是一个临时文件系统，存储系统启动以来的信息，当系统重启时，这个目录下的文件应该被删掉或清除。如果系统上有 /var/run目录，应该让他指向run</td></tr><tr><td>/lib</td><td>存放着系统最基本的动态连接共享库，起作用类似Windows里的Dll文件，几乎所有的应用程序都需要用这些共享库</td></tr><tr><td>/lost+found</td><td>这个目录一般情况下是空的，当系统非法关机，会存放一些文件</td></tr><tr><td>/mnt</td><td>系统提供该目录是为了让用户临时挂载别的文件系统，可以将光盘挂载在/mnt上，然后进入该目录就可以查看光驱里的内容</td></tr><tr><td>/selinux</td><td>Redhat/CentOS所特有的目录，Selinux一个安全机制，类似windows的防火墙，但这套机制比较复杂，这个目录就是存放selinux相关的文件</td></tr><tr><td>/srv</td><td>存放一些服务启动后需要提取的数据</td></tr></tbody></table><p>绝对路径和相对路径<br>/boot |存放的是启动Linux时使用的一些核心文件，包括一些连接文件以及镜像文件<br>        绝对路径：以 / 目录为开始点<br>        相对路径：以当前路径为开始点，标准写法 ./ 开头（pwd察看当前所在文件路径）</p><h1 id="2、标准输出流"><a href="#2、标准输出流" class="headerlink" title="2、标准输出流"></a>2、标准输出流</h1><p>nohup ./program &gt; /dev/null 2 &gt; log &amp;        只输出错误信息到日志文件<br>nohup ping 8.8.8.8 &gt; /dev/null/ 2 &gt; &amp;1 &amp;     输出信息中什么信息也不要</p><p>说明：</p><pre><code>/dev/null ：在Linux中俗称黑洞，代表Linux的空设备文件2 &gt;&amp;1     ：重定向邦定，&amp;将两个输出邦定到一起，错误输出（2）和标准输出（1，0标准键盘输出）到同一个地方/dev/null/ 2 &gt; &amp;1 &amp;   ：将错误信息和标准信息邦定，此时只有错误信息，标准信息会输出到屏幕，&amp;则是进行会后台输出，没有接受文件所以丢弃输出信息/dev/null 2 &gt; log &amp;       ：将错误信息输入log     &amp;在后台进行输出</code></pre><table><thead><tr><th>类型</th><th>文件描述符</th><th>默认情况</th><th>对应文件句柄位置</th></tr></thead><tbody><tr><td>标准输入（standard input）</td><td>0</td><td>从键盘获得输入</td><td>/proc/self/fd/0</td></tr><tr><td>标准输出（standard output）</td><td>1</td><td>输出到屏幕（即控制台）</td><td>/proc/self/fd/1</td></tr><tr><td>错误输出（error output）</td><td>2</td><td>输出到屏幕（即控制台）</td><td>/proc/self/fd/2</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第一周 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>虚拟机修改系统网卡和IP</title>
+      <link href="/2019/07/31/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E7%BD%91%E5%8D%A1%E5%92%8CIP/"/>
+      <url>/2019/07/31/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E7%BD%91%E5%8D%A1%E5%92%8CIP/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1、查看虚拟机的网卡配置"><a href="#1、查看虚拟机的网卡配置" class="headerlink" title="1、查看虚拟机的网卡配置"></a>1、查看虚拟机的网卡配置</h1><p><img src="https://i.loli.net/2019/07/31/5d417a4074af411807.png" alt><br><img src="https://i.loli.net/2019/07/31/5d417a406f2f817392.png" alt><br>进入该系统目录<br><img src="https://i.loli.net/2019/07/31/5d417a40431f290385.png" alt><br>使用vi/vim进行修改</p><pre><code>关于Linux图形界面和命令界面的切换，Ctrl+Alt+F2~F6 是命令行界面；Ctrl+Alt+F1是图形界面</code></pre><p><img src="https://i.loli.net/2019/07/31/5d417a40425a043281.png" alt><br>静态IP地址的设置<br>Ifcfg-eno16777736    文件中的各项含义：<br>        BOOTPROTO        网络参数设置：静态IP：STATIC或、动态IP：DCHP、NONE：不指定<br>        DEFROUTE<br>        IPV4_FAILURE_FATAL<br>        IPV6INIT<br>        IPV6_AUTOCONF<br>        IPv6_DEFROUTE<br>        IPV6_FAILURE_FATAL<br>        NAME<br>        UUID        通用唯一识别码。<br>        DEVICE        物理设备的名字（动态ppp设备除外，是罗辑名）<br>        ONBOOT        yes：设备在boot时被激活，no：设备在boot时不被激活<br>        USERCTL        yes：非root用户可以控制设备，no：非root用户不允许控制设备<br>        BOOTPROTO    none：不使用boot协议，bootp：使用bootp协议，dhcp：使用dhcp协议<br>        PEERDMS<br>        PEERROUTES<br>        IPV6_PEERDMS<br>        IPV6_PEERROUTES<br>        IPADDR        IP地址<br>        NETMASK    网络掩码<br>        NETWORK    网络地址<br>        BROADCAST    广播地址<br>        GATEWAY        网关地址</p><pre><code>PPP和SLIP文件所使用的数值：    PERSIST        yes：设备将一直维持激活状态，即使modem被挂断导致非激活状态，no：设备不一直维持激活状态    MODEMPORT        modem设备名称    LINESPEED        modem的线速率    DEFABORT    yes：在创建或编辑该接口的脚本时插入默认种植字符串，no：在创建或编辑该接口的脚本时不插入默认种植字符串使用与所有ppp文件    DEFROUTE    yes：该接口为默认路由器，no：不将该接口设置为默认路由器    ESCAPECHARS        yes：使用预定义的asymcmap，no：不要使用预定义的asyncmap。（这里代表了一种简化的接口；它不让用户指定使用escape字符。然而，几乎任何情况下都可以使用一个00000000的asyncmap,而且如果需要的话，可以通过设置 PPPOPTIONS来使用任意的asyncmap.）    HARDFLOWCTL    yes：使用硬件流控制，no：不使用硬件流控制    PPPOPTIONS        是任意的选项字符串。它被放置在命令行的末尾，以覆盖前面的选项    PAPNAME=name,这里name是pppd命令行中“name $PAPNAME”的一部分。注意选项“remotename”总是指定为逻辑ppp设备名，如“ppp0”（如果先前有其它ppp设备被激活的话，这就可能是物理设备ppp1）这样做便于管理pap/chap 文件--name/passwd对与逻辑ppp设备名关联，因此它们可以被一起管理。理论上说，为逻辑PPP设备起除“ppp0”--“pppN”之外的如“worldnet”或”myISP“ 的名字是可行的。    REMIP    远端IP地址    MTU    设置MTU数值    MRU    设置MRU数值    DISCONNECTTIMEOUT        当一个成功连接被终止后要等等多少秒进行再次连接    ERTRYTIMEOUT        当一个失败连接要等都少秒后再次连接</code></pre><h1 id="2、桥接模式和NAT模式"><a href="#2、桥接模式和NAT模式" class="headerlink" title="2、桥接模式和NAT模式"></a>2、桥接模式和NAT模式</h1><pre><code>    桥接模式：网络层面，虚拟机和PC处于同级地位，虚拟机直接和路由器相连    NAT模式：网络层面，虚拟机处于PC的子级，虚拟机通过主机转换后和路由器相连</code></pre><h1 id="3、静态IP连接和动态IP连接"><a href="#3、静态IP连接和动态IP连接" class="headerlink" title="3、静态IP连接和动态IP连接"></a>3、静态IP连接和动态IP连接</h1><pre><code>    静态IP：固定IP地址上网，    动态IP：自动获取IP地址上网，有成DHCP模式特点：    静态IP：ISP（Internet Service Provider）提供的IP地址可直接上网，因为IPv4地址已经分配完毕，索引很稀缺        对特殊需求的服务器，不允许地址经常改变，常见于局域网打印机，网站服务器，FTP服务器等    动态IP：不是真实IP地址，根据域名服务器动态分配给用户IP地址    常用于大型局域网，通过DHCP服务器获取地址，降低网络管理员的工作量</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第一周 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MakeDown常用语法</title>
+      <link href="/2019/07/31/MakeDown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/"/>
+      <url>/2019/07/31/MakeDown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h1 id="常见Markdown格式"><a href="#常见Markdown格式" class="headerlink" title="常见Markdown格式"></a>常见Markdown格式</h1><h2 id="1、标题"><a href="#1、标题" class="headerlink" title="1、标题"></a>1、标题</h2><pre><code>  #一级标题  ##二级标题以此类推</code></pre><h2 id="2、文本样式"><a href="#2、文本样式" class="headerlink" title="2、文本样式"></a>2、文本样式</h2><p>  (带 * 的原版中没有，大部分衍生标准中被添加)<br>    链接 : [Title](URL)<br>    加粗 : **Bold**<br>    斜体字 : *Italics*<br>    删除线 : <del>\</del>text~~<br>    分割线： ___<br>    段落 : 段落之间空一行<br>    换行符 : 一行结束时输入两个空格<br>    列表 :* 添加星号成为一个新的列表项。<br>    引用 :&gt; 引用内容<br>    内嵌代码 : `alert(‘Hello World’);`<br>    画水平线 (HR) :——–<br>    方框：- [ ] -<br>    首行缩进： &amp;ensp  一个半角的空格<br>              &amp;emsp  一个全角的空格 两个全角空格用的比较多</p><h2 id="3、图片"><a href="#3、图片" class="headerlink" title="3、图片"></a>3、图片</h2><p>  ![标题](链接，图片位置)</p><h2 id="4、脚注（标准Markdown中不存在）"><a href="#4、脚注（标准Markdown中不存在）" class="headerlink" title="4、脚注（标准Markdown中不存在）"></a>4、脚注（标准Markdown中不存在）</h2><p>  你好 [^n]<br>  [^n]:<a href="http://baidu.com" target="_blank" rel="noopener">http://baidu.com</a><br>  n为任意字符都可</p><h2 id="5、代码"><a href="#5、代码" class="headerlink" title="5、代码"></a>5、代码</h2><h3 id="插入两种方式："><a href="#插入两种方式：" class="headerlink" title="插入两种方式："></a>插入两种方式：</h3><pre><code>  1、键入 `  2、使用tab进行缩进</code></pre><h2 id="6、表格插入"><a href="#6、表格插入" class="headerlink" title="6、表格插入"></a>6、表格插入</h2><p> 表项|表项|表项<br> -|-|-|<br> 文字|文字|文字</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Markdown </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>网络安全常见术语</title>
+      <link href="/2019/07/31/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B8%B8%E8%A7%81%E6%9C%AF%E8%AF%AD/"/>
+      <url>/2019/07/31/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B8%B8%E8%A7%81%E6%9C%AF%E8%AF%AD/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1．网络安全："><a href="#1．网络安全：" class="headerlink" title="1．网络安全："></a>1．网络安全：</h1><p>不因偶然或者恶意的破坏、更改、泄露，系统能连续、可靠正常的运行，服务不中断，在网络环境下能够识别和消除不安因素的能力</p><h1 id="2．OWASP"><a href="#2．OWASP" class="headerlink" title="2．OWASP"></a>2．OWASP</h1><h1 id="3．黑客术语："><a href="#3．黑客术语：" class="headerlink" title="3．黑客术语："></a>3．黑客术语：</h1><pre><code>弱口令：密码强度不够WebShell：asp、php、jsp、cgi等网页形式存在一种命令执行环境，一种网页后门。得到一个命令执行环境达到服务器的目的    特点：隐蔽性强，功能强大，穿越防火墙，无系统日志（在中间件中保留日志）    分类：        大码：功能齐全，大量脚本语言建立体积庞大        小码：一句话代码，依赖管理软件木马：表面上伪装成正常程序获得系统权限    木马和病毒的区别：    木马：伪装潜伏，等待链接    病毒：破坏，索取资金为主后门：在获取权限后，编写程序为日后联结获取电脑权限做准备内网：通俗，局域网外网：直接联入Internet，IP地址不是保留内网IP地址端口：用于接收某些数据，提供相应服务，一般一个端口对应一个服务远控：通过计算机网络异地拨号或双方接入Internet等手段，连同需被控制的计算机，通过本地计算机对远程计算机进行控制修改免杀：通过加壳，加密、花指令等躲避杀毒软件提取：操作系统地权限用户提升为管理员权限</code></pre><h1 id="4．渗透测试："><a href="#4．渗透测试：" class="headerlink" title="4．渗透测试："></a>4．渗透测试：</h1><p>模拟恶意黑客攻击网站进行评估计算机网络系统的安全<br>    白盒测试：有域名，代码审计，资产清单（应用文件配置，应用部署情况）<br>    黑盒测试：只有域名进行渗透测试<br>    渗透测试的步骤：</p><h2 id="1．-信息收集"><a href="#1．-信息收集" class="headerlink" title="1．    信息收集"></a>1．    信息收集</h2><h2 id="2．-威胁建模"><a href="#2．-威胁建模" class="headerlink" title="2．    威胁建模"></a>2．    威胁建模</h2><h2 id="3．-渗透测试"><a href="#3．-渗透测试" class="headerlink" title="3．    渗透测试"></a>3．    渗透测试</h2><h2 id="4．-后渗透测试：（拿到WebShell为一个简易标准）"><a href="#4．-后渗透测试：（拿到WebShell为一个简易标准）" class="headerlink" title="4．    后渗透测试：（拿到WebShell为一个简易标准）"></a>4．    后渗透测试：（拿到WebShell为一个简易标准）</h2><h2 id="5．渗透测试工具："><a href="#5．渗透测试工具：" class="headerlink" title="5．渗透测试工具："></a>5．渗透测试工具：</h2><pre><code>1．信息搜集    A．Nmap：探测计算机网络上的主机和服务的一种安全扫描器    B．御剑：网站后台扫描工具    C．Google hack（google高级搜索）    D．Maltego：专业数字取证软件    E．Whois查询：查询一个域名是否已经被注册，以及域名注册后的详细信息    F．Kail Linux：基于Debian的Linux（7）发行版本，用于数字取证    常用网站：        Google        Baidu        www.exploit-db.com    英文不收费        www.seebug.net        中文收费        www.shadon.io        专门搜索企业的信息资产        www.zoomeye.org        X情报社区2．漏洞扫描    A．AWVS：自动化Web应用程序安全测试工具    B．H3C WebScan：Web应用风险深度扫描工具    C．AppScan：自动评估扫描，检测，所有常见Web应用程序漏洞    D．Netsparker：综合性Web应用安全漏洞扫描工具，分专业和免费版    E．Nessus：目前最常用的系统漏洞扫描分析软件    F．巡风：企业内网漏洞快速应急，扫描系统3．漏洞利用    A．中国菜刀：专业的网站管理软件    B．Sqlmap：开放源码的渗透测试工具，自动探测和利用Sql漏洞来接管数据库    C．啊D：注入验证利用工具，目前Sql中比较好用的4．综合平台    A．BurpSuite：针对Web应用程序的集成平台    B．Metasploit：开源的安全漏洞检测工具</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第一周 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
