@@ -4,8 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="使用github搭建博客，项目管理, Evolyutsiya">
-    <meta name="description" content="1、使用ssh生成公钥和私钥win7需要安装ssh工具，win10自带有在 cmd/powershell 窗口执行 ssh-keygen -t rsa 会在用户根目录下生成公钥文件（.pub）和私钥文件（.rsa）公钥文件作为文件之间传输的">
+    <meta name="keywords" content="Evolyutsiya">
+    <meta name="description" content="Evolyutsiya">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>使用github搭建博客，项目管理 | Evolyutsiya</title>
+    <title>Evolyutsiya</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -261,13 +261,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        使用github搭建博客，项目管理
+                        
                     </div>
                 </div>
             </div>
@@ -376,29 +376,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/第二周/" target="_blank">
-                                <span class="chip bg-color">第二周</span>
-                            </a>
-                        
-                            <a href="/tags/工具/" target="_blank">
-                                <span class="chip bg-color">工具</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fa fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/i春秋/" class="post-category" target="_blank">
-                                i春秋
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -406,14 +389,14 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-31
+                    2019-08-01
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        452
+                        0
                     </div>
                     
 
@@ -436,16 +419,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="1、使用ssh生成公钥和私钥"><a href="#1、使用ssh生成公钥和私钥" class="headerlink" title="1、使用ssh生成公钥和私钥"></a>1、使用ssh生成公钥和私钥</h1><p>win7需要安装ssh工具，win10自带有<br>在 cmd/powershell 窗口执行 ssh-keygen -t rsa 会在用户根目录下生成公钥文件（.pub）和私钥文件（.rsa）<br>公钥文件作为文件之间传输的口令，私钥文件则是认证令牌，丢失则只能重新生成</p>
-<h1 id="2、使用github项目管理"><a href="#2、使用github项目管理" class="headerlink" title="2、使用github项目管理"></a>2、使用github项目管理</h1><h2 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h2><p>1。yum install git 安装git<br>2。创建用户git，切换git用户<br>3。进入git用户的根目录，修改 .ssh 700 文件夹权限（限制ssh服务）创建authorized_keys 600 文件权限，如果权限不正确可能会认证失败。<br>4。在git用户的家目录下创建project目录，用来存放git项目<br>5。执行 git init –bare 文件名.git 初始化一个git项目</p>
-<h2 id="PC端"><a href="#PC端" class="headerlink" title="PC端"></a>PC端</h2><p>安装git客户端<br><img src="/%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%EF%BC%8C%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/20190731084648181.png" alt><br><img src="/%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%EF%BC%8C%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/20190731084702392.png" alt><br>一路回车，安装成功后，运行Git Bash，执行ssh-keygen一路回车，将生成的 公钥写入虚拟机 创建的authorized_keys。<br><strong>注意：</strong>vim 复制粘贴时先 i 后粘贴否则可能会有遗漏<br>在Git Bash上执行一些命令<br>git clone git@ip:/home/git/Project/创建的文件名一致.git     相当于复制文件<br>git pull   下载<br>git push   上传<br>Git Bash有个漏洞，执行 ssh git@IP 即可连接服务器<br>关闭方法：<br>服务端执行 usermod -s /sbin/nologin git</p>
-<h1 id="3、github博客（使用hexo博客上传git仓库）"><a href="#3、github博客（使用hexo博客上传git仓库）" class="headerlink" title="3、github博客（使用hexo博客上传git仓库）"></a>3、github博客（使用hexo博客上传git仓库）</h1><p>准备：<br>    1。安装node.js和git客户端<br>    2。在创建的博客文件夹执行cmd命令</p>
-<pre><code>npm install –g hexo-cli –registry=https//registry.npm.taobao.org   执行的是掏宝的源
-
-3。执行hexo init **注意:** 必须保证下载完成，否则需要清除文件夹重新下载
-4。执行hexo g
-5。执行hexo s  浏览器访问
-相关hexo配置文档 https://hexo.io/zh-cn/docs/     hexo配置文档</code></pre>
+                
             </div>
             <hr/>
 
@@ -603,9 +577,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《使用github搭建博客，项目管理》
+                    《》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/07/31/使用github搭建博客，项目管理/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/08/01/20190801082408/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Evolyutsiya
             </a> 采用
@@ -645,9 +619,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2019/08/01/20190801082408/">
                     <div class="card-image">
@@ -665,9 +640,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-01
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -676,6 +651,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -686,19 +662,19 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/31/Tomcat服务器的搭建/">
+                <a href="/2019/07/31/使用github搭建博客，项目管理/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Tomcat服务器的搭建">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="使用github搭建博客，项目管理">
                         
-                        <span class="card-title">Tomcat服务器的搭建</span>
+                        <span class="card-title">使用github搭建博客，项目管理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            kail修改更新源；Tomcat的搭建和文件上传漏洞
+                            使用github提供的免费仓库域名，利用node.js和hexo工具搭建属于自己的博客，虽然步骤有点繁琐但却十分有趣。
                         
                     </div>
                     <div class="publish-info">
