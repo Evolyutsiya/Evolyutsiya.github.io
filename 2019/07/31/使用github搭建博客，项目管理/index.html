@@ -258,6 +258,19 @@
 </header>
 
 
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -654,30 +667,29 @@ hexo d  上传（需要进行相关设置）</code></pre><h1 id="5、本地博�
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/07/31/使用github搭建博客，项目管理/">
+                <a href="/2019/08/01/Linux下应用的安装/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="使用github搭建博客，项目管理">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Linux下应用的安装">
                         
-                        <span class="card-title">使用github搭建博客，项目管理</span>
+                        <span class="card-title">Linux下应用的安装</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            使用github提供的免费仓库域名，利用node.js和hexo工具搭建属于自己的博客，虽然步骤有点繁琐但却十分有趣。
+                            在Linux系统下的安装和Windows下系统安装的方式类似，分三种：1。安装包安装 2。压缩包安装 3。源码安装
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-31
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-01
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -690,16 +702,11 @@ hexo d  上传（需要进行相关设置）</code></pre><h1 id="5、本地博�
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
                     <a href="/tags/第二周/" target="_blank">
                         <span class="chip bg-color">第二周</span>
-                    </a>
-                    
-                    <a href="/tags/工具/" target="_blank">
-                        <span class="chip bg-color">工具</span>
                     </a>
                     
                 </div>
@@ -740,6 +747,10 @@ hexo d  上传（需要进行相关设置）</code></pre><h1 id="5、本地博�
                                     i春秋
                                 </a>
                             
+                            <a href="/categories/i春秋/工具/" class="post-category" target="_blank">
+                                    工具
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -749,10 +760,6 @@ hexo d  上传（需要进行相关设置）</code></pre><h1 id="5、本地博�
                     
                     <a href="/tags/第二周/" target="_blank">
                         <span class="chip bg-color">第二周</span>
-                    </a>
-                    
-                    <a href="/tags/工具/" target="_blank">
-                        <span class="chip bg-color">工具</span>
                     </a>
                     
                 </div>
@@ -880,7 +887,7 @@ hexo d  上传（需要进行相关设置）</code></pre><h1 id="5、本地博�
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">4k</span>
+                <span class="white-color">5.7k</span>
             
 
             
