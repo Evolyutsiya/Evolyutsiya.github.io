@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>CSRF漏洞</title>
+      <link href="/2019/08/03/CSRF%E6%BC%8F%E6%B4%9E/"/>
+      <url>/2019/08/03/CSRF%E6%BC%8F%E6%B4%9E/</url>
+      
+        <content type="html"><![CDATA[<h1 id="CSRF原理"><a href="#CSRF原理" class="headerlink" title="CSRF原理"></a>CSRF原理</h1><p>利用受信人的信息伪造请求，向被受信的网站发送请求。<br>依靠网站对用户标示的信任，欺骗用户浏览器发送HTTP请求给目标站点，通过IMG标签触发GET请求，利用GET信息实施攻击</p><h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><h2 id="1。选择有漏洞的网站发送请求查看消息"><a href="#1。选择有漏洞的网站发送请求查看消息" class="headerlink" title="1。选择有漏洞的网站发送请求查看消息"></a>1。选择有漏洞的网站发送请求查看消息</h2><p>提交请求查看发送的数据<br><img src="/CSRF%E6%BC%8F%E6%B4%9E/20190803083500046.png" alt></p><h2 id="2。根据相应的参数、响应确定伪造信息"><a href="#2。根据相应的参数、响应确定伪造信息" class="headerlink" title="2。根据相应的参数、响应确定伪造信息"></a>2。根据相应的参数、响应确定伪造信息</h2><h2 id="3。使用js编写代码，利用的ajax填写表单"><a href="#3。使用js编写代码，利用的ajax填写表单" class="headerlink" title="3。使用js编写代码，利用的ajax填写表单"></a>3。使用js编写代码，利用的ajax填写表单</h2><p><img src="/CSRF%E6%BC%8F%E6%B4%9E/20190803083836194.png" alt></p><h2 id="4。尝试运行查看效果"><a href="#4。尝试运行查看效果" class="headerlink" title="4。尝试运行查看效果"></a>4。尝试运行查看效果</h2><p>代码运行前<br><img src="/CSRF%E6%BC%8F%E6%B4%9E/20190803083949837.png" alt><br>代码运行后 按照填写的表单显示<br>消息响应200成功<br><img src="/CSRF%E6%BC%8F%E6%B4%9E/20190803084337230.png" alt><br><img src="/CSRF%E6%BC%8F%E6%B4%9E/20190803084425810.png" alt></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 漏洞 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第三周 </tag>
+            
+            <tag> 漏洞 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>sqli-labs和DVWA搭建</title>
       <link href="/2019/08/03/sql-lab/"/>
       <url>/2019/08/03/sql-lab/</url>
@@ -22,9 +51,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第二周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -51,9 +80,9 @@
       
         <tags>
             
-            <tag> 第三周 </tag>
-            
             <tag> 工具 </tag>
+            
+            <tag> 第三周 </tag>
             
         </tags>
       
@@ -80,9 +109,9 @@
       
         <tags>
             
-            <tag> 第三周 </tag>
-            
             <tag> 工具 </tag>
+            
+            <tag> 第三周 </tag>
             
         </tags>
       
@@ -138,9 +167,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第二周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -167,9 +196,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第二周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -196,9 +225,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第二周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -225,9 +254,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第二周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -267,9 +296,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第二周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -296,11 +325,11 @@
       
         <tags>
             
-            <tag> 第三周 </tag>
+            <tag> 第二周 </tag>
             
             <tag> 工具 </tag>
             
-            <tag> 第二周 </tag>
+            <tag> 第三周 </tag>
             
         </tags>
       
@@ -327,9 +356,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第二周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -379,9 +408,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第二周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
