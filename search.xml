@@ -4,6 +4,222 @@
   
     
     <entry>
+      <title></title>
+      <link href="/2019/08/04/PHP/"/>
+      <url>/2019/08/04/PHP/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JSON</title>
+      <link href="/2019/08/04/JSON/"/>
+      <url>/2019/08/04/JSON/</url>
+      
+        <content type="html"><![CDATA[<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><p>JSON文本格式在语法上与创建的JavaScript对象代码相同，可以用JSON数据来生成JavaScript对象<br>JSON是纯文本，可通过JavaScript进行解析，数据可使用AJAX进行传输。没有标签更短，读写速度更快，使用数组，不使用保留字</p><h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><pre><code>是JavaScript语法的子集    数据在名称/值对 中        值可以是：            数字(整数/浮点数)            字符串(在双引号中)            逻辑值(true或false)            数组（在[]）            对象（在{}）            null    数据由 ， 分割    {} 保存对象    [] 保存数组eg：&quot;firstName&quot;:&quot;John&quot;等价于firstName=&quot;John&quot;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 语言 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第三周 </tag>
+            
+            <tag> JSON </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>AJAX</title>
+      <link href="/2019/08/04/AJAX/"/>
+      <url>/2019/08/04/AJAX/</url>
+      
+        <content type="html"><![CDATA[<h1 id="AJAX-XHR创建对象"><a href="#AJAX-XHR创建对象" class="headerlink" title="AJAX XHR创建对象"></a>AJAX XHR创建对象</h1><p>XMLHttpRequest是AJAX的基础<br>XMLHttpRequest用于在后台与服务器交换数据，在不重新加载整个页面的情况下，对网页的某部分进行更新。</p><h2 id="XMLHttpRequest对象创建"><a href="#XMLHttpRequest对象创建" class="headerlink" title="XMLHttpRequest对象创建"></a>XMLHttpRequest对象创建</h2><pre><code>    eg： var=new XMLHttpRequest();</code></pre><h2 id="XMLHttpRequest对象用于和服务器交换数据"><a href="#XMLHttpRequest对象用于和服务器交换数据" class="headerlink" title="XMLHttpRequest对象用于和服务器交换数据"></a>XMLHttpRequest对象用于和服务器交换数据</h2><table><thead><tr><th>方法</th><th>描述</th></tr></thead><tbody><tr><td>open(method,url,async)</td><td>规定请求的类型、URL 以及是否异步处理请求。method：请求的类型；GET 或 POSTurl：文件在服务器上的位置async：true（异步）或 false（同步）</td></tr><tr><td>send(string)</td><td>将请求发送到服务器。string：仅用于 POST 请求</td></tr></tbody></table><h3 id="GET与POST"><a href="#GET与POST" class="headerlink" title="GET与POST"></a>GET与POST</h3><pre><code>GET更简单快速POST使用的前提：    1。无法使用缓存文件（更新服务器上的文件或数据库）    2。向服务器发送大量数据（POST没有数据量限制）    3。发送包含位字符的用户输入时，POST比GET更稳定可靠</code></pre><h2 id="服务器响应"><a href="#服务器响应" class="headerlink" title="服务器响应"></a>服务器响应</h2><table><thead><tr><th>属性</th><th>描述</th></tr></thead><tbody><tr><td>responseText</td><td>获得字符串形式的响应数据。</td></tr><tr><td>responseXML</td><td>获得 XML 形式的响应数据。</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 语言 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第三周 </tag>
+            
+            <tag> AJAX </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>jQuery</title>
+      <link href="/2019/08/04/jQuery/"/>
+      <url>/2019/08/04/jQuery/</url>
+      
+        <content type="html"><![CDATA[<h1 id="jQuery特性"><a href="#jQuery特性" class="headerlink" title="jQuery特性"></a>jQuery特性</h1><p>jQuery是一个JavaScript函数库，包含以下特性：<br>HTML元素选取、操作、CSS操作、HTML事件函数、JavaScript特效和动画、HTML DOM遍历和修改、AJAX</p><h1 id="jQuery库的引用"><a href="#jQuery库的引用" class="headerlink" title="jQuery库的引用"></a>jQuery库的引用</h1><pre><code>注意：&lt;script&gt; 标签应该位于页面的 &lt;head&gt; 部分    &lt;head&gt;        &lt;script type=&quot;text/javascript&quot; src=&quot;jquery.js&quot;&gt;&lt;/script&gt;    &lt;/head&gt;或者使用Google的CDN    &lt;head&gt;        &lt;script type=&quot;text/javascript&quot; src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js&quot;&gt;&lt;/script&gt;    &lt;/head&gt;Microsoft的CDN    &lt;head&gt;        &lt;script type=&quot;text/javascript&quot; src=&quot;http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js&quot;&gt;&lt;/script&gt;    &lt;/head&gt;</code></pre><h1 id="jQuery语法"><a href="#jQuery语法" class="headerlink" title="jQuery语法"></a>jQuery语法</h1><p>可以对HTML某些元素执行操作</p><h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><p>$(selector).action()<br>    $          定义jQuery<br>    (selector) 查询和查找HTML元素<br>    action()   执行对元素的操作</p><h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><p>jQuery元素选择器和属性选择器允许通过标签名、属性名、或内容对HTML元素进行选择。选择器运行对HTML元素组或单个元素进行操作</p><h3 id="jQuery元素选择器"><a href="#jQuery元素选择器" class="headerlink" title="jQuery元素选择器"></a>jQuery元素选择器</h3><p>使用CSS选择器来选取HTML元素</p><pre><code>    $(&quot;p&quot;)选取的&lt;p&gt;元素    $(&quot;p.intro&quot;)选取所有class=&quot;intro&quot;的&lt;p&gt;元素    $(&quot;p#demo&quot;)选取所有id=&quot;demo&quot;的&lt;p&gt;元素</code></pre><h3 id="jQuery属性选择器"><a href="#jQuery属性选择器" class="headerlink" title="jQuery属性选择器"></a>jQuery属性选择器</h3><p>使用XPath表达式来选择带有给定属性的元素</p><pre><code>    $(&quot;[href]&quot;)选取所有带有href属性的元素    $(&quot;[href=&#39;#&#39;]&quot;)选取所有带有href值等于&quot;#&quot;的元素    $(&quot;[href！=&#39;#&#39;]&quot;)选取所有带有href值不等于&quot;#&quot;的元素    $(&quot;[href$=&#39;.jpg&#39;]&quot;)选取所有href值以&quot;.jpg&quot;结尾的元素</code></pre><h2 id="jQuery事件"><a href="#jQuery事件" class="headerlink" title="jQuery事件"></a>jQuery事件</h2><p>jQuery事件处理方法是jQuery中的核心函数。<br>最好把jQuery放置到独立的 .js文件爱女中</p><pre><code>eg：    &lt;head&gt;        &lt;script type=&quot;text/javascript&quot; src=&quot;jquery.js&quot;&gt;&lt;/script&gt;        &lt;script type=&quot;text/javascript&quot; src=&quot;my_jquery_functions.js&quot;&gt;&lt;/script&gt;    &lt;/head&gt;</code></pre><p>如果出现名称冲突，jQuery.noConflict()</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 语言 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第三周 </tag>
+            
+            <tag> jQuery </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HTML DOM</title>
+      <link href="/2019/08/04/HTML-DOM/"/>
+      <url>/2019/08/04/HTML-DOM/</url>
+      
+        <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>DOM将XML文档作为一个树形结构，而树叶被定义为节点。<br><img src="/HTML-DOM/20190804063543124.png" alt></p><h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><p>DOM，XML文档中的每一个成分都是一个节点。<br>    1。整个文档是一个文档节点<br>    2。每个XML标签是一个元素节点<br>    3。包含在XML元素中的文本是文本节点<br>    4。每一个XML属性是一个属性节点<br>    5。注释属于注释节点<br>注意：元素节点的文本是存储在文本节点中的</p><h2 id="节点树"><a href="#节点树" class="headerlink" title="节点树"></a>节点树</h2><p>把XML DOM文档视为一棵节点树，树中所有节点彼此都有关系。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 语言 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第三周 </tag>
+            
+            <tag> HTML DOM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JavaScript语言</title>
+      <link href="/2019/08/04/JavaScript%E8%AF%AD%E8%A8%80/"/>
+      <url>/2019/08/04/JavaScript%E8%AF%AD%E8%A8%80/</url>
+      
+        <content type="html"><![CDATA[<h1 id="JavaScript特点"><a href="#JavaScript特点" class="headerlink" title="JavaScript特点"></a>JavaScript特点</h1><p>设计相HTML页面交互，是一种轻量级的编程语言（脚本语言），由数行可执行计算机代码组成，通常直接嵌入到HTML页面，是一种解释性语言。<br>1。分离了HTML和代码<br>2。使HTML和JavaScript更易于维护<br>3。已缓存的JavaScript文件可加速页面的加载</p><h1 id="JavaScript引用方式（和CSS类似）"><a href="#JavaScript引用方式（和CSS类似）" class="headerlink" title="JavaScript引用方式（和CSS类似）"></a>JavaScript引用方式（和CSS类似）</h1><pre><code>在HTML中JavaScript代码必须位于&lt;script&gt;与&lt;/script&gt;标签之间</code></pre><h2 id="1、在head标签内引用"><a href="#1、在head标签内引用" class="headerlink" title="1、在head标签内引用"></a>1、在head标签内引用</h2><pre><code>eg：&lt;head&gt;    &lt;script &gt;        function MyFunction(){            document.getElementById(&quot;demo&quot;).innerHTML=&quot;段落更改&quot;        }    &lt;/script&gt;&lt;/head&gt;</code></pre><h2 id="2、在body标签内引用"><a href="#2、在body标签内引用" class="headerlink" title="2、在body标签内引用"></a>2、在body标签内引用</h2><pre><code>eg:&lt;body&gt;    &lt;script &gt;        function MyFunction(){            document.getElementById(&quot;demo&quot;).innerHTML=&quot;段落更改&quot;        }    &lt;/script&gt;&lt;/body&gt;</code></pre><h2 id="3、外部脚本"><a href="#3、外部脚本" class="headerlink" title="3、外部脚本"></a>3、外部脚本</h2><pre><code>eg：遵循相对路径或绝对路径    &lt;script  src=&quot;/Users/用户/Desktop/html/JS/shiyan.js&quot;&gt;&lt;/script&gt;    &lt;script type=&quot;text/javascript&quot; src=&quot;JS/shiyan.js&quot;&gt;&lt;/script&gt;</code></pre><h2 id="4、外部网页引用"><a href="#4、外部网页引用" class="headerlink" title="4、外部网页引用"></a>4、外部网页引用</h2><pre><code>eg：使用完整的url路径或相当于当前网页的路径引用外部脚本&lt;script src=&quot;https://www.w3school.com.cn/js/myScript1.js&quot;&gt;&lt;/script&gt;&lt;script src=&quot;https://www.w3school.com.cn/js/myScript1.js&quot;&gt;&lt;/script&gt;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 语言 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第三周 </tag>
+            
+            <tag> JavaScript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSS语言</title>
+      <link href="/2019/08/04/CSS%E8%AF%AD%E8%A8%80/"/>
+      <url>/2019/08/04/CSS%E8%AF%AD%E8%A8%80/</url>
+      
+        <content type="html"><![CDATA[<h1 id="CSS的引入方法"><a href="#CSS的引入方法" class="headerlink" title="CSS的引入方法"></a>CSS的引入方法</h1><h2 id="1、内嵌式："><a href="#1、内嵌式：" class="headerlink" title="1、内嵌式："></a>1、内嵌式：</h2><pre><code>直接在&lt;head&gt;标签中完成CSS文件的引入</code></pre><pre><code>    &lt;style type=&quot;text/css&quot;&gt;        使用选择器控制HTML格式    &lt;/style&gt;</code></pre><h2 id="2、外链式："><a href="#2、外链式：" class="headerlink" title="2、外链式："></a>2、外链式：</h2><pre><code>通过引入&lt;link&gt;标签完成CSS文件的引入</code></pre><pre><code>    &lt;link rel=&quot;&quot; type=&quot;&quot; href=&quot;&quot;&gt;    rel：定义当前文档与被链接文档之间的关系    type：规定被链接文档的MIME类    href：引入CSS文件的位置两种写法        1。相对路径            a)    ./        代表文件的所在目录（可以省略）            b)    ../        代表文件的上级目录            c)    ../../        代表文件的上上级目录            d)    /        代表文件所在的根目录         2.绝对路径 完整的路径地址            文件从根目录开始查找，注意win的路径符号 \ 换成 /</code></pre><h2 id="3、行内式："><a href="#3、行内式：" class="headerlink" title="3、行内式："></a>3、行内式：</h2><p>直接在HTML元素标签内编写属性 使用 style</p><h2 id="4、导入式："><a href="#4、导入式：" class="headerlink" title="4、导入式："></a>4、导入式：</h2><p>通过 @import 导入外部样式，遵循相对路径或绝对路径</p><h3 id="四种导入方式的比较"><a href="#四种导入方式的比较" class="headerlink" title="四种导入方式的比较"></a>四种导入方式的比较</h3><table><thead><tr><th>导入方式</th><th>导入方法</th><th>CSS文件位置</th><th>CSS文件加载</th></tr></thead><tbody><tr><td>行内式</td><td>元素标签内 style</td><td>HTML文件内</td><td>同时</td></tr><tr><td>内嵌式</td><td>在head标签内使用 style标签</td><td>HTML文件内</td><td>同时</td></tr><tr><td>外链式</td><td>在head标签内使用 link标签</td><td>与HTML文件分离，在单独的文件内</td><td>页面加载时，同时加载CSS样式</td></tr><tr><td>导入式</td><td>在head标签内 使用style标签用 @import</td><td>与HTML文件分离，在单独的文件内</td><td>在读取完THML之后加载</td></tr></tbody></table><p>CSS样式执行的优先级是就近原则<br>一般是：行内式 &gt; 内嵌式 &gt; 外链式 &gt; 导入式</p><h1 id="CSS基础语法"><a href="#CSS基础语法" class="headerlink" title="CSS基础语法"></a>CSS基础语法</h1><p>CSS通过选择器对HTML元素进行控制。</p><blockquote><p>选择器的构成：</p><blockquote><p>选择器名 {声明1；声明2；…声明n；}</p><blockquote><p>声明是 属性：值</p><blockquote><p><strong>注释：</strong>声明使用花括号包围，值如果是若干单词使用引号括起。eg：p{font-family:”sans serif”;}<br>多个声明之间使用 ； 链接，建议使用代码的方式，一行写一个声明。虽然最后一个声明可以不加 ； 但是为了日后便于修改管理统一加上   ;</p></blockquote></blockquote></blockquote></blockquote><h1 id="CSS高级语法"><a href="#CSS高级语法" class="headerlink" title="CSS高级语法"></a>CSS高级语法</h1><h2 id="1、选择器分组"><a href="#1、选择器分组" class="headerlink" title="1、选择器分组"></a>1、选择器分组</h2><p>可以对不同种类的选择器进行分组，同组的选择器具有相同的属性，用 ， 进行分割</p><pre><code>eg:h1,h2,h3{   color:green;}</code></pre><h2 id="2、选择器继承"><a href="#2、选择器继承" class="headerlink" title="2、选择器继承"></a>2、选择器继承</h2><p>子元素从父元素继承属性，如果需要改变子元素的属性重新设置即可</p><h2 id="3、派生选择器"><a href="#3、派生选择器" class="headerlink" title="3、派生选择器"></a>3、派生选择器</h2><p>允许根据上下文的关系来确定某个标签的样式</p><pre><code>strong {     color: red;     }h2 {     color: yellow;     }h2 strong {     color: blue;     }只会影响&lt;p&gt;我是段落&lt;strong&gt;red&lt;/strong&gt;.&lt;/p&gt;&lt;h2&gt;我是标题1&lt;/h2&gt;&lt;h2&gt;我是标题2&lt;strong&gt;blue&lt;/strong&gt;.&lt;/h2&gt;</code></pre><p><img src="/CSS%E8%AF%AD%E8%A8%80/20190804050836249.png" alt></p><h2 id="4、后代选择器（包含选择器）"><a href="#4、后代选择器（包含选择器）" class="headerlink" title="4、后代选择器（包含选择器）"></a>4、后代选择器（包含选择器）</h2><p>定义后代选择器创建一些规则，使这些规则在某些文档结构中起作用，而在另外一些结构中不起作用。</p><pre><code>eg：只希望对h1元素中的em元素应用样式    h1 em{color:red;}    &lt;h1&gt;我是&lt;em&gt;重要&lt;/em&gt;标题&lt;/h1&gt;    &lt;p&gt;我是&lt;em&gt;重要&lt;/em&gt;段落&lt;/p&gt;</code></pre><p>效果：<br><img src="/CSS%E8%AF%AD%E8%A8%80/20190804051549999.png" alt></p><h2 id="5、子元素选择器（Child-selectors"><a href="#5、子元素选择器（Child-selectors" class="headerlink" title="5、子元素选择器（Child selectors)"></a>5、子元素选择器（Child selectors)</h2><p>如果不希望选择任意的后代元素，而是缩小范围，只选择某个元素的子元素。</p><pre><code>    eg:希望选择制作为h1元素子元素的strong元素    h1&gt;strong{color:red;}    会把第一个h1下面的两个strong元素改变颜色，但第二个h1不受影响    &lt;h1&gt;我是&lt;strong&gt;非常&lt;/strong&gt; &lt;strong&gt;非常&lt;/strong&gt; 重要的。&lt;/h1&gt;    &lt;h1&gt;我是&lt;em&gt;非常&lt;/em&gt; &lt;em&gt;非常&lt;/em&gt; 重要的。&lt;/h1&gt;</code></pre><p>效果图：<br><img src="/CSS%E8%AF%AD%E8%A8%80/20190804052325897.png" alt></p><h2 id="6、相邻兄弟选择器（Adjacent-sibling-selector）"><a href="#6、相邻兄弟选择器（Adjacent-sibling-selector）" class="headerlink" title="6、相邻兄弟选择器（Adjacent sibling selector）"></a>6、相邻兄弟选择器（Adjacent sibling selector）</h2><p>如果需要选择紧接在另一个元素后的元素，而且两者有相同的父元素。</p><pre><code>    eg：要增加紧接在h1元素后出现的段落的上边距    h1+p{margin-top:50px}    &lt;h1&gt;我是标题&lt;/h1&gt;    &lt;p&gt;我是段落&lt;/p&gt;    &lt;p&gt;我是段落&lt;/p&gt;    &lt;p&gt;我是段落&lt;/p&gt;</code></pre><p>效果图<br><img src="/CSS%E8%AF%AD%E8%A8%80/20190804052909219.png" alt></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 语言 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第三周 </tag>
+            
+            <tag> CSS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HTML和XML语言</title>
+      <link href="/2019/08/04/HTML%E5%92%8CXML%E8%AF%AD%E8%A8%80/"/>
+      <url>/2019/08/04/HTML%E5%92%8CXML%E8%AF%AD%E8%A8%80/</url>
+      
+        <content type="html"><![CDATA[<h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><p>由&lt;关键词&gt;组成分开始标签&lt;关键词&gt;结束标签&lt;/关键词&gt;<br>标签分为开放标签（只有开始标签）、闭合标签（有开始和结束标签）</p><h1 id="元素"><a href="#元素" class="headerlink" title="元素"></a>元素</h1><p>元素指的是从开始标签到结束标签的所有代码。<br><strong>注释：</strong>开始标签（开放标签），结束标签（闭合标签）</p><h2 id="元素语法"><a href="#元素语法" class="headerlink" title="元素语法"></a>元素语法</h2><p>HTML元素以开始标签起，以结束标签止。元素内容是开始标签与结束标签之间的内容。空元素在开始标签中进行关闭（以开始标签的结束而结束）</p><h1 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h1><p>属性提供了关于HTML元素的功多信息。属性总是以 名称/值对 的形式出现 eg： name=”value”，属性总是在HTML元素的开始标签中定义。</p><hr><h1 id="HTML标签"><a href="#HTML标签" class="headerlink" title="HTML标签"></a>HTML标签</h1><h2 id="注释：因为MarkDown格式原因，标签内的-请无视"><a href="#注释：因为MarkDown格式原因，标签内的-请无视" class="headerlink" title="注释：因为MarkDown格式原因，标签内的 \ 请无视"></a><strong>注释：</strong>因为MarkDown格式原因，标签内的 \ 请无视</h2><h3 id="1、基础功能标签"><a href="#1、基础功能标签" class="headerlink" title="1、基础功能标签"></a>1、基础功能标签</h3><table><thead><tr><th>标签</th><th>描述</th></tr></thead><tbody><tr><td>&lt;!DOCTYPE&gt;</td><td>定义文档类型。</td></tr><tr><td>&lt;\html&gt;</td><td>定义 HTML 文档。</td></tr><tr><td>&lt;\title&gt;</td><td>定义文档的标题。</td></tr><tr><td>&lt;\body&gt;</td><td>定义文档的主体。</td></tr><tr><td>&lt;\h1&gt;to &lt;\h6&gt;</td><td>定义 HTML 标题。</td></tr><tr><td>&lt;\p&gt;</td><td>定义段落。</td></tr><tr><td>&lt;\br&gt;</td><td>定义简单的折行。</td></tr><tr><td>&lt;\hr&gt;</td><td>定义水平线。</td></tr><tr><td>&lt;!–…–&gt;</td><td>定义注释。</td></tr></tbody></table><h3 id="2、格式化标签"><a href="#2、格式化标签" class="headerlink" title="2、格式化标签"></a>2、格式化标签</h3><table><thead><tr><th>标签</th><th>描述</th></tr></thead><tbody><tr><td>&lt;\acronym&gt;</td><td>定义只取首字母的缩写。</td></tr><tr><td>&lt;\abbr&gt;</td><td>定义缩写。</td></tr><tr><td>&lt;\address&gt;</td><td>定义文档作者或拥有者的联系信息。</td></tr><tr><td>&lt;\b&gt;</td><td>定义粗体文本。</td></tr><tr><td>&lt;\bdi&gt;</td><td>定义文本的文本方向，使其脱离其周围文本的方向设置。</td></tr><tr><td>&lt;\bdo&gt;</td><td>定义文字方向。</td></tr><tr><td>&lt;\big&gt;</td><td>定义大号文本。</td></tr><tr><td>&lt;\blockquote&gt;</td><td>定义长的引用。</td></tr><tr><td>&lt;\center&gt;</td><td>不赞成使用。定义居中文本。</td></tr><tr><td>&lt;\cite&gt;</td><td>定义引用(citation)。</td></tr><tr><td>&lt;\code&gt;</td><td>定义计算机代码文本。</td></tr><tr><td>&lt;\del&gt;</td><td>定义被删除文本。</td></tr><tr><td>&lt;\dfn&gt;</td><td>定义定义项目。</td></tr><tr><td>&lt;\em&gt;</td><td>定义强调文本。</td></tr><tr><td>&lt;\font&gt;</td><td>不赞成使用。定义文本的字体、尺寸和颜色</td></tr><tr><td>&lt;\i&gt;</td><td>定义斜体文本。</td></tr><tr><td>&lt;\ins&gt;</td><td>定义被插入文本。</td></tr><tr><td>&lt;\kbd&gt;</td><td>定义键盘文本。</td></tr><tr><td>&lt;\mark&gt;</td><td>定义有记号的文本。</td></tr><tr><td>&lt;\meter&gt;</td><td>定义预定义范围内的度量。</td></tr><tr><td>&lt;\pre&gt;</td><td>定义预格式文本。</td></tr><tr><td>&lt;\progress&gt;</td><td>定义任何类型的任务的进度。</td></tr><tr><td>&lt;\q&gt;</td><td>定义短的引用。</td></tr><tr><td>&lt;\rp&gt;</td><td>定义若浏览器不支持 ruby 元素显示的内容。</td></tr><tr><td>&lt;\rt&gt;</td><td>定义 ruby 注释的解释。</td></tr><tr><td>&lt;\ruby&gt;</td><td>定义 ruby 注释。</td></tr><tr><td>&lt;\s&gt;</td><td>不赞成使用。定义加删除线的文本。</td></tr><tr><td>&lt;\samp&gt;</td><td>定义计算机代码样本。</td></tr><tr><td>&lt;\small&gt;</td><td>定义小号文本。</td></tr><tr><td>&lt;\strike&gt;</td><td>不赞成使用。定义加删除线文本。</td></tr><tr><td>&lt;\strong&gt;</td><td>定义语气更为强烈的强调文本。</td></tr><tr><td>&lt;\sup&gt;</td><td>定义上标文本。</td></tr><tr><td>&lt;\sub&gt;</td><td>定义下标文本。</td></tr><tr><td>&lt;\time&gt;</td><td>定义日期/时间。</td></tr><tr><td>&lt;\tt&gt;</td><td>定义打字机文本。</td></tr><tr><td>&lt;\u&gt;</td><td>不赞成使用。定义下划线文本。</td></tr><tr><td>&lt;\var&gt;</td><td>定义文本的变量部分。</td></tr><tr><td>&lt;\wbr&gt;</td><td>定义可能的换行符。</td></tr></tbody></table><h3 id="3、表单标签"><a href="#3、表单标签" class="headerlink" title="3、表单标签"></a>3、表单标签</h3><table><thead><tr><th>标签</th><th>描述</th></tr></thead><tbody><tr><td>&lt;\form&gt;</td><td>定义供用户输入的 HTML 表单。</td></tr><tr><td>&lt;\input&gt;</td><td>定义输入控件。</td></tr><tr><td>&lt;\textarea&gt;</td><td>定义多行的文本输入控件。</td></tr><tr><td>&lt;\button&gt;</td><td>定义按钮。</td></tr><tr><td>&lt;\select&gt;</td><td>定义选择列表（下拉列表）。</td></tr><tr><td>&lt;\optgroup&gt;</td><td>定义选择列表中相关选项的组合。</td></tr><tr><td>&lt;\option&gt;</td><td>定义选择列表中的选项。</td></tr><tr><td>&lt;\label&gt;</td><td>定义 input 元素的标注。</td></tr><tr><td>&lt;\fieldset&gt;</td><td>定义围绕表单中元素的边框。</td></tr><tr><td>&lt;\legend&gt;</td><td>定义 fieldset 元素的标题。</td></tr><tr><td>&lt;\isindex&gt;</td><td>不赞成使用。定义与文档相关的可搜索索引。</td></tr><tr><td>&lt;\datalist&gt;</td><td>定义下拉列表。</td></tr><tr><td>&lt;\keygen&gt;</td><td>定义生成密钥。</td></tr><tr><td>&lt;\output&gt;</td><td>定义输出的一些类型。</td></tr></tbody></table><h3 id="4、框架标签"><a href="#4、框架标签" class="headerlink" title="4、框架标签"></a>4、框架标签</h3><table><thead><tr><th>标签</th><th>描述</th></tr></thead><tbody><tr><td>&lt;\frame&gt;</td><td>定义框架集的窗口或框架。</td></tr><tr><td>&lt;\frameset&gt;</td><td>定义框架集。</td></tr><tr><td>&lt;\noframes&gt;</td><td>定义针对不支持框架的用户的替代内容。</td></tr><tr><td>&lt;\iframe&gt;</td><td>定义内联框架。</td></tr></tbody></table><h3 id="5、图象标签"><a href="#5、图象标签" class="headerlink" title="5、图象标签"></a>5、图象标签</h3><table><thead><tr><th>标签</th><th>描述</th></tr></thead><tbody><tr><td>&lt;\img&gt;</td><td>定义图像。</td></tr><tr><td>&lt;\map&gt;</td><td>定义图像映射。</td></tr><tr><td>&lt;\area&gt;</td><td>定义图像地图内部的区域。</td></tr><tr><td>&lt;\canvas&gt;</td><td>定义图形。</td></tr><tr><td>&lt;\figcaption&gt;</td><td>定义 figure 元素的标题。</td></tr><tr><td>&lt;\figure&gt;</td><td>定义媒介内容的分组，以及它们的标题。</td></tr></tbody></table><h3 id="6、音频-视频标签"><a href="#6、音频-视频标签" class="headerlink" title="6、音频/视频标签"></a>6、音频/视频标签</h3><table><thead><tr><th>标签</th><th>描述</th></tr></thead><tbody><tr><td>&lt;\audio&gt;</td><td>定义声音内容。</td></tr><tr><td>&lt;\source&gt;</td><td>定义媒介源。</td></tr><tr><td>&lt;\track&gt;</td><td>定义用在媒体播放器中的文本轨道。</td></tr><tr><td>&lt;\video&gt;</td><td>定义视频。</td></tr></tbody></table><h3 id="7、链接标签"><a href="#7、链接标签" class="headerlink" title="7、链接标签"></a>7、链接标签</h3><table><thead><tr><th>标签</th><th>描述</th></tr></thead><tbody><tr><td>&lt;\a&gt;</td><td>定义锚。</td></tr><tr><td>&lt;\link&gt;</td><td>定义文档与外部资源的关系。</td></tr><tr><td>&lt;\nav&gt;</td><td>定义导航链接。</td></tr></tbody></table><h3 id="8、列表标签"><a href="#8、列表标签" class="headerlink" title="8、列表标签"></a>8、列表标签</h3><table><thead><tr><th>标签</th><th>描述</th></tr></thead><tbody><tr><td>&lt;\ul&gt;</td><td>定义无序列表。</td></tr><tr><td>&lt;\ol&gt;</td><td>定义有序列表。</td></tr><tr><td>&lt;\li&gt;</td><td>定义列表的项目。</td></tr><tr><td>&lt;\dir&gt;</td><td>不赞成使用。定义目录列表。</td></tr><tr><td>&lt;\dl&gt;</td><td>定义定义列表。</td></tr><tr><td>&lt;\dt&gt;</td><td>定义定义列表中的项目。</td></tr><tr><td>&lt;\dd&gt;</td><td>定义定义列表中项目的描述。</td></tr><tr><td>&lt;\menu&gt;</td><td>定义命令的菜单/列表。</td></tr><tr><td>&lt;\menuitem&gt;</td><td>定义用户可以从弹出菜单调用的命令/菜单项目。</td></tr><tr><td>&lt;\command&gt;</td><td>定义命令按钮。</td></tr></tbody></table><h3 id="9、表格标签"><a href="#9、表格标签" class="headerlink" title="9、表格标签"></a>9、表格标签</h3><table><thead><tr><th>标签</th><th>描述</th></tr></thead><tbody><tr><td>&lt;\table&gt;</td><td>定义表格</td></tr><tr><td>&lt;\caption&gt;</td><td>定义表格标题。</td></tr><tr><td>&lt;\th&gt;</td><td>定义表格中的表头单元格。</td></tr><tr><td>&lt;\tr&gt;</td><td>定义表格中的行。</td></tr><tr><td>&lt;\td&gt;</td><td>定义表格中的单元。</td></tr><tr><td>&lt;\thead&gt;</td><td>定义表格中的表头内容。</td></tr><tr><td>&lt;\tbody&gt;</td><td>定义表格中的主体内容。</td></tr><tr><td>&lt;\tfoot&gt;</td><td>定义表格中的表注内容（脚注）。</td></tr><tr><td>&lt;\col&gt;</td><td>定义表格中一个或多个列的属性值。</td></tr><tr><td>&lt;\colgroup&gt;</td><td>定义表格中供格式化的列组。</td></tr></tbody></table><h3 id="10、样式-节标签"><a href="#10、样式-节标签" class="headerlink" title="10、样式/节标签"></a>10、样式/节标签</h3><table><thead><tr><th>标签</th><th>描述</th></tr></thead><tbody><tr><td>&lt;\style&gt;</td><td>定义文档的样式信息。</td></tr><tr><td>&lt;\div&gt;</td><td>定义文档中的节。</td></tr><tr><td>&lt;\span&gt;</td><td>定义文档中的节。</td></tr><tr><td>&lt;\header&gt;</td><td>定义 section 或 page 的页眉。</td></tr><tr><td>&lt;\footer&gt;</td><td>定义 section 或 page 的页脚。</td></tr><tr><td>&lt;\section&gt;</td><td>定义 section。</td></tr><tr><td>&lt;\article&gt;</td><td>定义文章。</td></tr><tr><td>&lt;\aside&gt;</td><td>定义页面内容之外的内容。</td></tr><tr><td>&lt;\details&gt;</td><td>定义元素的细节。</td></tr><tr><td>&lt;\dialog&gt;</td><td>定义对话框或窗口。</td></tr><tr><td>&lt;\summary&gt;</td><td>为 &lt;\details&gt; 元素定义可见的标题。</td></tr></tbody></table><h3 id="11、元信息标签"><a href="#11、元信息标签" class="headerlink" title="11、元信息标签"></a>11、元信息标签</h3><table><thead><tr><th>标签</th><th>描述</th></tr></thead><tbody><tr><td>&lt;\head&gt;</td><td>定义关于文档的信息。</td></tr><tr><td>&lt;\meta&gt;</td><td>定义关于 HTML 文档的元信息。</td></tr><tr><td>&lt;\base&gt;</td><td>定义页面中所有链接的默认地址或默认目标。</td></tr><tr><td>&lt;\basefont&gt;</td><td>不赞成使用。定义页面中文本的默认字体、颜色或尺寸。</td></tr></tbody></table><h3 id="12、编程标签"><a href="#12、编程标签" class="headerlink" title="12、编程标签"></a>12、编程标签</h3><table><thead><tr><th>标签</th><th>描述</th></tr></thead><tbody><tr><td>&lt;\script&gt;</td><td>定义客户端脚本。</td></tr><tr><td>&lt;\noscript&gt;</td><td>定义针对不支持客户端脚本的用户的替代内容。</td></tr><tr><td>&lt;\applet&gt;</td><td>不赞成使用。定义嵌入的 applet。</td></tr><tr><td>&lt;\embed&gt;</td><td>为外部应用程序（非 HTML）定义容器。</td></tr><tr><td>&lt;\object&gt;</td><td>定义嵌入的对象。</td></tr><tr><td>&lt;\param&gt;</td><td>定义对象的参数。</td></tr></tbody></table><h1 id="XML语言"><a href="#XML语言" class="headerlink" title="XML语言"></a>XML语言</h1><p>被用来描述数据，其焦点是数据内容，因此也被称为无作为语言。XML用来结构化、存储以及传输信息。但不进行任何数据之外的操作。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 语言 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第三周 </tag>
+            
+            <tag> HTML </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CSRF漏洞</title>
       <link href="/2019/08/03/CSRF%E6%BC%8F%E6%B4%9E/"/>
       <url>/2019/08/03/CSRF%E6%BC%8F%E6%B4%9E/</url>
@@ -80,9 +296,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第三周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -109,9 +325,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第三周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -325,11 +541,11 @@
       
         <tags>
             
+            <tag> 第三周 </tag>
+            
             <tag> 第二周 </tag>
             
             <tag> 工具 </tag>
-            
-            <tag> 第三周 </tag>
             
         </tags>
       
