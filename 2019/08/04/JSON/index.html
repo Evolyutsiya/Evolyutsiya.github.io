@@ -653,6 +653,28 @@ eg：&quot;firstName&quot;:&quot;John&quot;等价于firstName=&quot;John&quot;</
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '0900bb25542f967729e4',
+        clientSecret: '09b4dc7bcd15f4fceedce63e682e0cf8f116f882',
+        repo: 'blogtalk',
+        owner: 'Evolyutsiya',
+        admin: "Evolyutsiya",
+        id: '2019-08-04T19-21-32',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
 
     
 
@@ -675,15 +697,15 @@ eg：&quot;firstName&quot;:&quot;John&quot;等价于firstName=&quot;John&quot;</
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="PHP">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">PHP</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            PHP超文本与处理器，是一种通用开源脚本语言，混合了C、Java、Perl以及PHP自创语法。主要用于Web开发领域。
                         
                     </div>
                     <div class="publish-info">
@@ -692,11 +714,31 @@ eg：&quot;firstName&quot;:&quot;John&quot;等价于firstName=&quot;John&quot;</
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            Evolyutsiya
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                    i春秋
+                                </a>
+                            
+                            <a href="/categories/i春秋/语言/" class="post-category" target="_blank">
+                                    语言
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/第三周/" target="_blank">
+                        <span class="chip bg-color">第三周</span>
+                    </a>
+                    
+                    <a href="/tags/PHP/" target="_blank">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -763,6 +805,43 @@ eg：&quot;firstName&quot;:&quot;John&quot;等价于firstName=&quot;John&quot;</
 </article>
 </div>
 
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Evolyutsiya<br />'
+            + '作者: Evolyutsiya<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
 
 
     </div>
@@ -863,12 +942,15 @@ eg：&quot;firstName&quot;:&quot;John&quot;等价于firstName=&quot;John&quot;</
 </main>
 
 
+
 <script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script>
     MathJax.Hub.Config({
         tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
     });
 </script>
+
+
 
 <footer class="page-footer bg-color">
     <div class="container row center-align">
@@ -879,23 +961,13 @@ eg：&quot;firstName&quot;:&quot;John&quot;等价于firstName=&quot;John&quot;</
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">10.9k</span>
+                <span class="white-color">11.5k</span>
             
 
             
 			
                 <br>
                 
-                <span id="busuanzi_container_site_pv">
-                    <i class="fa fa-heart-o"></i>
-                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
-                </span>
-                
-                
-                <span id="busuanzi_container_site_uv">
-                    <i class="fa fa-users"></i>
-                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
-                </span>
                 
             
         </div>
@@ -958,6 +1030,17 @@ $(function () {
 <script src="/js/matery.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
 
 
 

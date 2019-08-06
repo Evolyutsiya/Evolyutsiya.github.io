@@ -467,6 +467,41 @@ $(function () {
                     
 
                     
+                        <link rel="stylesheet" href="/libs/dplayer/DPlayer.min.css">
+<div class="video-player">
+    
+    <div class="title center-align">
+        <i class="fa fa-video-camera"></i>&nbsp;&nbsp;精彩视频
+    </div>
+    
+    <div class="row">
+        <div class="col l8 offset-l2 m10 offset-m1 s12">
+            <div id="dplayer" class="dplayer-video"
+                    ></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/dplayer/DPlayer.min.js"></script>
+<script>
+    $(function () {
+        new DPlayer({
+            container: document.getElementById('dplayer'),
+            autoplay: 'true' === 'true',
+            theme: '#42b983',
+            loop: 'true' === 'true',
+            lang: 'zh-CN' === 'zh-CN' ? 'zh-cn' : 'en',
+            preload: 'auto',
+            volume: Number('0.7'),
+            video: {
+                url: '//f.us.sinaimg.cn/0022u1cplx07pWtye5Re01040201drwt0E010.mp4?label=mp4_720p&template=1280x720.20.0&Expires=1565055089&ssig=R1TFFyflJl&KID=unistore,video',
+                pic: '',
+                thumbnails: ''
+            }
+        });
+    });
+</script>
+                    
 
                     <div id="recommend-sections" class="recommend">
                         
@@ -522,16 +557,16 @@ $(function () {
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="PHP">
                             
-                            <span class="card-title"></span>
+                            <span class="card-title">PHP</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                
+                                PHP超文本与处理器，是一种通用开源脚本语言，混合了C、Java、Perl以及PHP自创语法。主要用于Web开发领域。
                             
                         </div>
                         <div class="publish-info">
@@ -540,13 +575,33 @@ $(function () {
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-user fa-fw"></i>
-                                Evolyutsiya
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                    i春秋
+                                </a>
+                                
+                                <a href="/categories/i春秋/语言/" class="post-category" target="_blank">
+                                    语言
+                                </a>
+                                
                                 
                             </span>
                         </div>
                     </div>
 
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/第三周/" target="_blank">
+                            <span class="chip bg-color">第三周</span>
+                        </a>
+                        
+                        <a href="/tags/PHP/" target="_blank">
+                            <span class="chip bg-color">PHP</span>
+                        </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -1086,23 +1141,13 @@ $(function () {
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">10.9k</span>
+                <span class="white-color">11.5k</span>
             
 
             
 			
                 <br>
                 
-                <span id="busuanzi_container_site_pv">
-                    <i class="fa fa-heart-o"></i>
-                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
-                </span>
-                
-                
-                <span id="busuanzi_container_site_uv">
-                    <i class="fa fa-users"></i>
-                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
-                </span>
                 
             
         </div>
@@ -1165,6 +1210,17 @@ $(function () {
 <script src="/js/matery.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
 
 
 

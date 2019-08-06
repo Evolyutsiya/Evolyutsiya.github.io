@@ -4,13 +4,29 @@
   
     
     <entry>
-      <title></title>
+      <title>PHP</title>
       <link href="/2019/08/04/PHP/"/>
       <url>/2019/08/04/PHP/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>php不能独立运行，需要依赖中间件进行处理常用中间件Apache和Nginx</p><h1 id="php规则"><a href="#php规则" class="headerlink" title="php规则"></a>php规则</h1><p>php脚本以 <?php 开始，以?>结束 ?&gt;可以没有<br>php脚本可以单独存在也可以与HTML页面结合<br>php的规则很重要，对于研究文件上传有帮助，中间件的配置则关系到PHP文件的解析问题。<br>** php变量区分大小写，以 $ 开头 **<br>** false true null 不区分大小写 **</p><h2 id="php流程"><a href="#php流程" class="headerlink" title="php流程"></a>php流程</h2><p>php会将所有的输出显示到html当中。在输出中会进行HTML标签格式化。php输出的就是网页的源代码。</p><h3 id="php的执行方式"><a href="#php的执行方式" class="headerlink" title="php的执行方式"></a>php的执行方式</h3><p>1。通过中间件<br>2。在命令行<br>3。在客户端输出</p><h3 id="php的输入输出"><a href="#php的输入输出" class="headerlink" title="php的输入输出"></a>php的输入输出</h3><p>php用 . 连接字符串</p><h4 id="EOF-‘’-“”-区别"><a href="#EOF-‘’-“”-区别" class="headerlink" title="EOF ‘’ “” 区别"></a>EOF ‘’ “” 区别</h4><pre><code>    EOF 不影响里面的内容，同时EOF可以换成其他的字符是一种在命令行shell和程序语言里定义一个字符串的方法    格式：    &lt;&lt;&lt;AAA    AAA;规则：    1。必须后解分号    2。EOF可以其他字符代替，但必须保证开始和结束一致    3。结束标签独占一行，必须从首行开始后不接任何空白和字符    &#39;&#39;  内的所有特殊意义的字符都无效，除了 &#39;&#39; 它自己    &quot;&quot;  内的所有特殊意义的字符都有效</code></pre><h4 id="服务端的输入"><a href="#服务端的输入" class="headerlink" title="服务端的输入"></a>服务端的输入</h4><pre><code>$_GET[]$_POST[]$_REQUEST[]  </code></pre><h4 id="客户端的输入"><a href="#客户端的输入" class="headerlink" title="客户端的输入"></a>客户端的输入</h4><p>argc 参数个数<br>argv 参数数组</p><h2 id="php短标签"><a href="#php短标签" class="headerlink" title="php短标签"></a>php短标签</h2><p>短标签是绕过防御的一种手段。<br>&lt;?php  这是完整标签<br>&lt;?     这是短标签<br>短标签的开启需要设置 php.ini将其中的short_open_tag=On<br>修改为Off</p><h3 id="php4种常见风格标签写法"><a href="#php4种常见风格标签写法" class="headerlink" title="php4种常见风格标签写法"></a>php4种常见风格标签写法</h3><h4 id="1、XML风格（默认开启）"><a href="#1、XML风格（默认开启）" class="headerlink" title="1、XML风格（默认开启）"></a>1、XML风格（默认开启）</h4><pre><code>    当php代码需要嵌入XML文件中    &lt;?php        代码    ?&gt;</code></pre><h4 id="2、短标签，如果要嵌入XML文档会干扰文档声明-默认禁止"><a href="#2、短标签，如果要嵌入XML文档会干扰文档声明-默认禁止" class="headerlink" title="2、短标签，如果要嵌入XML文档会干扰文档声明(默认禁止)"></a>2、短标签，如果要嵌入XML文档会干扰文档声明(默认禁止)</h4><pre><code>    &lt;?        代码    ?&gt;</code></pre><h4 id="3、asp-net习惯写法-默认禁止"><a href="#3、asp-net习惯写法-默认禁止" class="headerlink" title="3、asp.net习惯写法(默认禁止)"></a>3、asp.net习惯写法(默认禁止)</h4><pre><code>    &lt;%        代码    %&gt;</code></pre><h4 id="4、JS、VBscript等脚本程序风格-默认禁止"><a href="#4、JS、VBscript等脚本程序风格-默认禁止" class="headerlink" title="4、JS、VBscript等脚本程序风格(默认禁止)"></a>4、JS、VBscript等脚本程序风格(默认禁止)</h4><pre><code>    &lt;script language=&quot;php&quot;&gt;        代码    &lt;/script&gt;</code></pre><h1 id="php常用函数"><a href="#php常用函数" class="headerlink" title="php常用函数"></a>php常用函数</h1>]]></content>
       
       
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 语言 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第三周 </tag>
+            
+            <tag> PHP </tag>
+            
+        </tags>
       
     </entry>
     

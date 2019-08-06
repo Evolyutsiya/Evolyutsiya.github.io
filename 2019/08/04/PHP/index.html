@@ -4,8 +4,9 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Evolyutsiya">
-    <meta name="description" content="Evolyutsiya">
+    <meta name="keywords" content="PHP, Evolyutsiya">
+    <meta name="description" content="php不能独立运行，需要依赖中间件进行处理常用中间件Apache和Nginx
+php规则php脚本以 结束 ?&amp;gt;可以没有php脚本可以单独存在也可以与HTML页面结合php的规则很重要，对于研究文件上传有帮助，中间件的配置则关系到PH">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Evolyutsiya</title>
+    <title>PHP | Evolyutsiya</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -274,13 +275,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        
+                        PHP
                     </div>
                 </div>
             </div>
@@ -389,12 +390,33 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/第三周/" target="_blank">
+                                <span class="chip bg-color">第三周</span>
+                            </a>
+                        
+                            <a href="/tags/PHP/" target="_blank">
+                                <span class="chip bg-color">PHP</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                i春秋
+                            </a>
+                        
+                            <a href="/categories/i春秋/语言/" class="post-category" target="_blank">
+                                语言
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -409,7 +431,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        518
                     </div>
                     
 
@@ -432,7 +454,37 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>php不能独立运行，需要依赖中间件进行处理常用中间件Apache和Nginx</p>
+<h1 id="php规则"><a href="#php规则" class="headerlink" title="php规则"></a>php规则</h1><p>php脚本以 <?php 开始，以?>结束 ?&gt;可以没有<br>php脚本可以单独存在也可以与HTML页面结合<br>php的规则很重要，对于研究文件上传有帮助，中间件的配置则关系到PHP文件的解析问题。<br>** php变量区分大小写，以 $ 开头 **<br>** false true null 不区分大小写 **</p>
+<h2 id="php流程"><a href="#php流程" class="headerlink" title="php流程"></a>php流程</h2><p>php会将所有的输出显示到html当中。在输出中会进行HTML标签格式化。php输出的就是网页的源代码。</p>
+<h3 id="php的执行方式"><a href="#php的执行方式" class="headerlink" title="php的执行方式"></a>php的执行方式</h3><p>1。通过中间件<br>2。在命令行<br>3。在客户端输出</p>
+<h3 id="php的输入输出"><a href="#php的输入输出" class="headerlink" title="php的输入输出"></a>php的输入输出</h3><p>php用 . 连接字符串</p>
+<h4 id="EOF-‘’-“”-区别"><a href="#EOF-‘’-“”-区别" class="headerlink" title="EOF ‘’ “” 区别"></a>EOF ‘’ “” 区别</h4><pre><code>    EOF 不影响里面的内容，同时EOF可以换成其他的字符
+是一种在命令行shell和程序语言里定义一个字符串的方法
+    格式：
+    &lt;&lt;&lt;AAA
+    AAA;
+规则：
+    1。必须后解分号
+    2。EOF可以其他字符代替，但必须保证开始和结束一致
+    3。结束标签独占一行，必须从首行开始后不接任何空白和字符
+
+    &#39;&#39;  内的所有特殊意义的字符都无效，除了 &#39;&#39; 它自己
+
+    &quot;&quot;  内的所有特殊意义的字符都有效</code></pre><h4 id="服务端的输入"><a href="#服务端的输入" class="headerlink" title="服务端的输入"></a>服务端的输入</h4><pre><code>$_GET[]
+$_POST[]
+$_REQUEST[]  </code></pre><h4 id="客户端的输入"><a href="#客户端的输入" class="headerlink" title="客户端的输入"></a>客户端的输入</h4><p>argc 参数个数<br>argv 参数数组</p>
+<h2 id="php短标签"><a href="#php短标签" class="headerlink" title="php短标签"></a>php短标签</h2><p>短标签是绕过防御的一种手段。<br>&lt;?php  这是完整标签<br>&lt;?     这是短标签<br>短标签的开启需要设置 php.ini将其中的short_open_tag=On<br>修改为Off</p>
+<h3 id="php4种常见风格标签写法"><a href="#php4种常见风格标签写法" class="headerlink" title="php4种常见风格标签写法"></a>php4种常见风格标签写法</h3><h4 id="1、XML风格（默认开启）"><a href="#1、XML风格（默认开启）" class="headerlink" title="1、XML风格（默认开启）"></a>1、XML风格（默认开启）</h4><pre><code>    当php代码需要嵌入XML文件中
+    &lt;?php
+        代码
+    ?&gt;</code></pre><h4 id="2、短标签，如果要嵌入XML文档会干扰文档声明-默认禁止"><a href="#2、短标签，如果要嵌入XML文档会干扰文档声明-默认禁止" class="headerlink" title="2、短标签，如果要嵌入XML文档会干扰文档声明(默认禁止)"></a>2、短标签，如果要嵌入XML文档会干扰文档声明(默认禁止)</h4><pre><code>    &lt;?
+        代码
+    ?&gt;</code></pre><h4 id="3、asp-net习惯写法-默认禁止"><a href="#3、asp-net习惯写法-默认禁止" class="headerlink" title="3、asp.net习惯写法(默认禁止)"></a>3、asp.net习惯写法(默认禁止)</h4><pre><code>    &lt;%
+        代码
+    %&gt;</code></pre><h4 id="4、JS、VBscript等脚本程序风格-默认禁止"><a href="#4、JS、VBscript等脚本程序风格-默认禁止" class="headerlink" title="4、JS、VBscript等脚本程序风格(默认禁止)"></a>4、JS、VBscript等脚本程序风格(默认禁止)</h4><pre><code>    &lt;script language=&quot;php&quot;&gt;
+        代码
+    &lt;/script&gt;</code></pre><h1 id="php常用函数"><a href="#php常用函数" class="headerlink" title="php常用函数"></a>php常用函数</h1>
             </div>
             <hr/>
 
@@ -590,7 +642,7 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《》
+                    《PHP》
                 </span> 由
             <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/08/04/PHP/" property="cc:attributionName"
                rel="cc:attributionURL">
@@ -618,6 +670,28 @@
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '0900bb25542f967729e4',
+        clientSecret: '09b4dc7bcd15f4fceedce63e682e0cf8f116f882',
+        repo: 'blogtalk',
+        owner: 'Evolyutsiya',
+        admin: "Evolyutsiya",
+        id: '2019-08-04T19-46-21',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
 
     
 
@@ -641,15 +715,15 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="PHP">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">PHP</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            PHP超文本与处理器，是一种通用开源脚本语言，混合了C、Java、Perl以及PHP自创语法。主要用于Web开发领域。
                         
                     </div>
                     <div class="publish-info">
@@ -658,13 +732,33 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            Evolyutsiya
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                    i春秋
+                                </a>
+                            
+                            <a href="/categories/i春秋/语言/" class="post-category" target="_blank">
+                                    语言
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/第三周/" target="_blank">
+                        <span class="chip bg-color">第三周</span>
+                    </a>
+                    
+                    <a href="/tags/PHP/" target="_blank">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -730,6 +824,43 @@
 </article>
 </div>
 
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Evolyutsiya<br />'
+            + '作者: Evolyutsiya<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
 
 
     </div>
@@ -830,12 +961,15 @@
 </main>
 
 
+
 <script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script>
     MathJax.Hub.Config({
         tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
     });
 </script>
+
+
 
 <footer class="page-footer bg-color">
     <div class="container row center-align">
@@ -846,23 +980,13 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">10.9k</span>
+                <span class="white-color">11.5k</span>
             
 
             
 			
                 <br>
                 
-                <span id="busuanzi_container_site_pv">
-                    <i class="fa fa-heart-o"></i>
-                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
-                </span>
-                
-                
-                <span id="busuanzi_container_site_uv">
-                    <i class="fa fa-users"></i>
-                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
-                </span>
                 
             
         </div>
@@ -925,6 +1049,17 @@ $(function () {
 <script src="/js/matery.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
 
 
 
