@@ -431,14 +431,14 @@ php规则php脚本以 结束 ?&amp;gt;可以没有php脚本可以单独存在也
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        518
+                        1.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        3 分
                     </div>
                     
                 
@@ -484,7 +484,171 @@ $_REQUEST[]  </code></pre><h4 id="客户端的输入"><a href="#客户端的输�
         代码
     %&gt;</code></pre><h4 id="4、JS、VBscript等脚本程序风格-默认禁止"><a href="#4、JS、VBscript等脚本程序风格-默认禁止" class="headerlink" title="4、JS、VBscript等脚本程序风格(默认禁止)"></a>4、JS、VBscript等脚本程序风格(默认禁止)</h4><pre><code>    &lt;script language=&quot;php&quot;&gt;
         代码
-    &lt;/script&gt;</code></pre><h1 id="php常用函数"><a href="#php常用函数" class="headerlink" title="php常用函数"></a>php常用函数</h1>
+    &lt;/script&gt;</code></pre><h1 id="php常用函数"><a href="#php常用函数" class="headerlink" title="php常用函数"></a>php常用函数</h1><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>addcslashes()</td>
+<td>返回在指定的字符前添加反斜杆的字符串</td>
+</tr>
+<tr>
+<td>addslashes()</td>
+<td>返回在预定义的字符前添加反斜杠的字符串（防止sql注入的主要函数）</td>
+</tr>
+<tr>
+<td>bin2hex()</td>
+<td>把ASCII字符的字符串转换为十六进制值</td>
+</tr>
+<tr>
+<td>chop()</td>
+<td>一处字符串右侧的空白字符或其他字符</td>
+</tr>
+<tr>
+<td>chr()</td>
+<td>从指定ASCII值返回字符</td>
+</tr>
+<tr>
+<td>chunk_split()</td>
+<td>把字符串分割为一连串更小的部分</td>
+</tr>
+<tr>
+<td>convert_uudecode()</td>
+<td>对uuencode编码字符串进行解码</td>
+</tr>
+<tr>
+<td>convert_uuencode()</td>
+<td>使用uuencode算法对字符串进行编码</td>
+</tr>
+<tr>
+<td>count_chars()</td>
+<td>返回字符串所用字符的信息</td>
+</tr>
+<tr>
+<td>crc32()</td>
+<td>计算一个字符串的32位CRC</td>
+</tr>
+<tr>
+<td>crypt()</td>
+<td>单向的字符串加密法</td>
+</tr>
+<tr>
+<td>echo()</td>
+<td>输出一个或多个字符串</td>
+</tr>
+<tr>
+<td>explode()</td>
+<td>把字符打散为数组</td>
+</tr>
+<tr>
+<td>fprintf()</td>
+<td>把格式化的字符串写入到指定的输出流</td>
+</tr>
+<tr>
+<td>hex2bin()</td>
+<td>把十六进制值的字符串转换为ASCII字符串</td>
+</tr>
+<tr>
+<td>htmlspecialchars()</td>
+<td>把一些于定义的字符转换为HTML实体</td>
+</tr>
+<tr>
+<td>implode()</td>
+<td>返回一个由数组元素组合成的字符串</td>
+</tr>
+<tr>
+<td>join()</td>
+<td>implode()的别名</td>
+</tr>
+<tr>
+<td>lcfirst()</td>
+<td>把字符串中的首字符转换为小写</td>
+</tr>
+<tr>
+<td>ltrim()</td>
+<td>移出字符串左侧的空白字符或其他字符</td>
+</tr>
+<tr>
+<td>md5()</td>
+<td>计算字符串的MD5散列</td>
+</tr>
+<tr>
+<td>md5_file()</td>
+<td>计算文件的MD5散列</td>
+</tr>
+<tr>
+<td>nl2br()</td>
+<td>在字符串中的每一个新行之前插入HTML换行符</td>
+</tr>
+<tr>
+<td>rtrim()</td>
+<td>移出字符串右侧的空白字符或其他字符</td>
+</tr>
+<tr>
+<td>sha1()</td>
+<td>计算SHA-1散列</td>
+</tr>
+<tr>
+<td>sha1_file()</td>
+<td>计算文件的SHA-1散列</td>
+</tr>
+<tr>
+<td>str_shuffle()</td>
+<td>随机打乱字符串中的所有字符</td>
+</tr>
+<tr>
+<td>str_split()</td>
+<td>把字符串分割到数组中</td>
+</tr>
+<tr>
+<td>str_word_count()</td>
+<td>计算字符串中的单词</td>
+</tr>
+<tr>
+<td>strcasecmp()</td>
+<td>比较两个字符串（大小写不敏感）</td>
+</tr>
+<tr>
+<td>strchr()</td>
+<td>查找字符串在另一个字符串中的第一次出现</td>
+</tr>
+<tr>
+<td>strcmp()</td>
+<td>比较两个字符串（大小写敏感）</td>
+</tr>
+<tr>
+<td>strcoll()</td>
+<td>比较连个字符串(根据本地设置)</td>
+</tr>
+<tr>
+<td>strcspn()</td>
+<td>返回在找到指定的字符串之前，在字符串查找到的字符数</td>
+</tr>
+<tr>
+<td>strip_tags()</td>
+<td>剥去字符串中的HTML和PHP标签</td>
+</tr>
+<tr>
+<td>stripcslashes()</td>
+<td>删除由addcslashes()函数添加的反斜杠</td>
+</tr>
+<tr>
+<td>stripslashes()</td>
+<td>删除由addslashes()函数添加的反斜杠</td>
+</tr>
+<tr>
+<td>strlen()</td>
+<td>返回字符串的长度</td>
+</tr>
+<tr>
+<td>strrev()</td>
+<td>反转字符串</td>
+</tr>
+</tbody></table>
+
             </div>
             <hr/>
 
@@ -706,58 +870,43 @@ $_REQUEST[]  </code></pre><h4 id="客户端的输入"><a href="#客户端的输�
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/08/04/PHP/">
+                <a href="/2019/08/07/PHP代码练习/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="PHP">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="PHP代码练习">
                         
-                        <span class="card-title">PHP</span>
+                        <span class="card-title">PHP代码练习</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            PHP超文本与处理器，是一种通用开源脚本语言，混合了C、Java、Perl以及PHP自创语法。主要用于Web开发领域。
+                            素数查找// 素数:只能被1和自身整除
+for($i=1;$i&lt;100;$i++)
+{
+    for($j=1;$j&lt;$i;$j++)
+    {
+        if(($i%$j)==0)
+        {
+      
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-04
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-07
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/i春秋/" class="post-category" target="_blank">
-                                    i春秋
-                                </a>
-                            
-                            <a href="/categories/i春秋/语言/" class="post-category" target="_blank">
-                                    语言
-                                </a>
-                            
+                            <i class="fa fa-user fa-fw"></i>
+                            Evolyutsiya
                             
                         </span>
                     </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/第三周/" target="_blank">
-                        <span class="chip bg-color">第三周</span>
-                    </a>
-                    
-                    <a href="/tags/PHP/" target="_blank">
-                        <span class="chip bg-color">PHP</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -980,13 +1129,23 @@ $_REQUEST[]  </code></pre><h4 id="客户端的输入"><a href="#客户端的输�
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">11.5k</span>
+                <span class="white-color">12.8k</span>
             
 
             
 			
                 <br>
                 
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
                 
             
         </div>

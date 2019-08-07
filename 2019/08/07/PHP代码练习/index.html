@@ -4,9 +4,15 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="虚拟机修改系统网卡和IP, Evolyutsiya">
-    <meta name="description" content="1、查看虚拟机的网卡配置进入该系统目录使用vi/vim进行修改
-关于Linux图形界面和命令界面的切换，Ctrl+Alt+F2~F6 是命令行界面；Ctrl+Alt+F1是图形界面静态IP地址的设置Ifcfg-eno16777736    ">
+    <meta name="keywords" content="PHP代码练习, Evolyutsiya">
+    <meta name="description" content="素数查找// 素数:只能被1和自身整除
+for($i=1;$i&amp;lt;100;$i++)
+{
+    for($j=1;$j&amp;lt;$i;$j++)
+    {
+        if(($i%$j)==0)
+        {
+      ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +20,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>虚拟机修改系统网卡和IP | Evolyutsiya</title>
+    <title>PHP代码练习 | Evolyutsiya</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -275,13 +281,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        虚拟机修改系统网卡和IP
+                        PHP代码练习
                     </div>
                 </div>
             </div>
@@ -390,25 +396,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/第一周/" target="_blank">
-                                <span class="chip bg-color">第一周</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fa fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/i春秋/" class="post-category" target="_blank">
-                                i春秋
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -416,21 +409,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-31
+                    2019-08-07
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        909
+                        844
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        3 分
+                        4 分
                     </div>
                     
                 
@@ -446,33 +439,173 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="1、查看虚拟机的网卡配置"><a href="#1、查看虚拟机的网卡配置" class="headerlink" title="1、查看虚拟机的网卡配置"></a>1、查看虚拟机的网卡配置</h1><p><img src="https://i.loli.net/2019/07/31/5d417a4074af411807.png" alt><br><img src="https://i.loli.net/2019/07/31/5d417a406f2f817392.png" alt><br>进入该系统目录<br><img src="https://i.loli.net/2019/07/31/5d417a40431f290385.png" alt><br>使用vi/vim进行修改</p>
-<pre><code>关于Linux图形界面和命令界面的切换，Ctrl+Alt+F2~F6 是命令行界面；Ctrl+Alt+F1是图形界面</code></pre><p><img src="https://i.loli.net/2019/07/31/5d417a40425a043281.png" alt><br>静态IP地址的设置<br>Ifcfg-eno16777736    文件中的各项含义：<br>        BOOTPROTO        网络参数设置：静态IP：STATIC或、动态IP：DCHP、NONE：不指定<br>        DEFROUTE<br>        IPV4_FAILURE_FATAL<br>        IPV6INIT<br>        IPV6_AUTOCONF<br>        IPv6_DEFROUTE<br>        IPV6_FAILURE_FATAL<br>        NAME<br>        UUID        通用唯一识别码。<br>        DEVICE        物理设备的名字（动态ppp设备除外，是罗辑名）<br>        ONBOOT        yes：设备在boot时被激活，no：设备在boot时不被激活<br>        USERCTL        yes：非root用户可以控制设备，no：非root用户不允许控制设备<br>        BOOTPROTO    none：不使用boot协议，bootp：使用bootp协议，dhcp：使用dhcp协议<br>        PEERDMS<br>        PEERROUTES<br>        IPV6_PEERDMS<br>        IPV6_PEERROUTES<br>        IPADDR        IP地址<br>        NETMASK    网络掩码<br>        NETWORK    网络地址<br>        BROADCAST    广播地址<br>        GATEWAY        网关地址</p>
-<pre><code>PPP和SLIP文件所使用的数值：
-    PERSIST        yes：设备将一直维持激活状态，即使modem被挂断导致非激活状态，no：设备不一直维持激活状态
-    MODEMPORT        modem设备名称
-    LINESPEED        modem的线速率
-    DEFABORT    yes：在创建或编辑该接口的脚本时插入默认种植字符串，no：在创建或编辑该接口的脚本时不插入默认种植字符串
-使用与所有ppp文件
-    DEFROUTE    yes：该接口为默认路由器，no：不将该接口设置为默认路由器
-    ESCAPECHARS        yes：使用预定义的asymcmap，no：不要使用预定义的asyncmap。
-（这里代表了一种简化的接口；它不让用户指定使用escape字符。然而，几乎任何情况下都可以使用一个00000000的asyncmap,而且如果需要的话，可以通过设置 PPPOPTIONS来使用任意的asyncmap.）
-    HARDFLOWCTL    yes：使用硬件流控制，no：不使用硬件流控制
-    PPPOPTIONS        是任意的选项字符串。它被放置在命令行的末尾，以覆盖前面的选项
-    PAPNAME=name,这里name是pppd命令行中“name $PAPNAME”的一部分。
-注意选项“remotename”总是指定为逻辑ppp设备名，如“ppp0”（如果先前有其它ppp设备被激活的话，这就可能是物理设备ppp1）这样做便于管理pap/chap 文件--name/passwd对与逻辑ppp设备名关联，因此它们可以被一起管理。理论上说，为逻辑PPP设备起除“ppp0”--“pppN”之外的如“worldnet”或”myISP“ 的名字是可行的。
-    REMIP    远端IP地址
-    MTU    设置MTU数值
-    MRU    设置MRU数值
-    DISCONNECTTIMEOUT        当一个成功连接被终止后要等等多少秒进行再次连接
-    ERTRYTIMEOUT        当一个失败连接要等都少秒后再次连接</code></pre><h1 id="2、桥接模式和NAT模式"><a href="#2、桥接模式和NAT模式" class="headerlink" title="2、桥接模式和NAT模式"></a>2、桥接模式和NAT模式</h1><pre><code>    桥接模式：网络层面，虚拟机和PC处于同级地位，虚拟机直接和路由器相连
-    NAT模式：网络层面，虚拟机处于PC的子级，虚拟机通过主机转换后和路由器相连</code></pre><h1 id="3、静态IP连接和动态IP连接"><a href="#3、静态IP连接和动态IP连接" class="headerlink" title="3、静态IP连接和动态IP连接"></a>3、静态IP连接和动态IP连接</h1><pre><code>    静态IP：固定IP地址上网，
-    动态IP：自动获取IP地址上网，有成DHCP模式
-特点：
-    静态IP：ISP（Internet Service Provider）提供的IP地址可直接上网，因为IPv4地址已经分配完毕，索引很稀缺
-        对特殊需求的服务器，不允许地址经常改变，常见于局域网打印机，网站服务器，FTP服务器等
-    动态IP：不是真实IP地址，根据域名服务器动态分配给用户IP地址
-    常用于大型局域网，通过DHCP服务器获取地址，降低网络管理员的工作量</code></pre>
+                <h1 id="素数查找"><a href="#素数查找" class="headerlink" title="素数查找"></a>素数查找</h1><pre><code>// 素数:只能被1和自身整除
+for($i=1;$i&lt;100;$i++)
+{
+    for($j=1;$j&lt;$i;$j++)
+    {
+        if(($i%$j)==0)
+        {
+            $i++;
+            continue; //不是继续查找
+        }
+    }
+    echo $i.&quot;\n&quot;;
+}</code></pre><h1 id="三元排大小"><a href="#三元排大小" class="headerlink" title="三元排大小"></a>三元排大小</h1><pre><code>echo &quot;&lt;br&gt;&quot;;
+($a==$b&amp;&amp;$b==$c)?(
+    print &quot;$a=$b=$c&quot;
+):(
+    ($a==$b)?(
+        ($a&gt;$c)?(
+            print &quot;$a=$b&gt;$c&quot;
+        ):(
+            print &quot;$c&gt;$a=$b&quot;
+        )
+    ):(
+        ($a==$c)?(
+            ($a&gt;$b)?(
+                print &quot;$a=$c&gt;$b&quot;
+            ):(
+                print &quot;$b&gt;$a=$c&quot;
+            )
+        ):(
+        ($b==$c)?(
+            ($a&gt;$b)?(
+                print &quot;$a&gt;$b=$c&quot;
+            ):(
+                print &quot;$b=$c&gt;$a&quot;
+            )
+            ):(
+                ($a&gt;$b)? (($a&gt;$c)? (($c&gt;$b)? (print &quot;$a&gt;$c&gt;$b&quot;):(print &quot;$a&gt;$b&gt;$c&quot;)):(print &quot;$c&gt;$a&gt;$b&quot;)):(($b&gt;$c)? (($a&gt;$c)? (print &quot;$b&gt;$a&gt;$c&quot;):(print &quot;$b&gt;$c&gt;$a&quot;)):(print &quot;$c&gt;$b&gt;$a&quot;))
+            )
+        )
+    )
+);</code></pre><h1 id="五角星"><a href="#五角星" class="headerlink" title="五角星"></a>五角星</h1><pre><code>  for($i1=1;$i1&lt;7;$i1++)             /*这是五角星的上面一个角*/
+        {
+            for($j1=1;$j1&lt;19-$i1;$j1++)     /*这是空格*/
+                printf(&quot; &quot;);
+            for($k1=1;$k1&lt;=2*$i1-1;$k1++)   /*这是“*”*/
+                printf(&quot;*&quot;);
+            printf(&quot;\n&quot;);
+        }
+        for($i2=1;$i2&lt;5;$i2++)     /*这是五角星的中间两个角*/
+        {
+            for($j2=1;$j2&lt;3*$i2-3;$j2++)
+                printf(&quot; &quot;);
+            for($k2=1;$k2&lt;=42-6*$i2;$k2++)
+                printf(&quot;*&quot;);
+            printf(&quot;\n&quot;);
+        }
+        for($i3=1;$i3&lt;3;$i3++)        //这是中间与下部相接的部分
+        {
+            for($j3=1;$j3&lt;12-$i3;$j3++)
+                printf(&quot; &quot;);
+            for($k3=1;$k3&lt;=12+2*$i3;$k3++)
+                printf(&quot;*&quot;);
+            printf(&quot;\n&quot;);
+        }
+                for($i4=1;$i4&lt;5;$i4++)         // 这是五角星的下面两个角
+                {
+                    for($j4=1;$j4&lt;10-$i4;$j4++)
+                        printf(&quot; &quot;);
+                    for($k4=1;$k4&lt;=10-2*$i4;$k4++)
+                        printf(&quot;*&quot;);
+                    for($m4=1;$m4&lt;6*$i4-3;$m4++)
+                        printf(&quot; &quot;);
+                    for($n4=1;$n4&lt;=10-2*$i4;$n4++)
+                        printf(&quot;*&quot;);
+                    printf(&quot;\n&quot;);
+                }
+</code></pre><p><img src="/PHP%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/20190807055324467.png" alt></p>
+<h1 id="for循环实现关联数组的遍历"><a href="#for循环实现关联数组的遍历" class="headerlink" title="for循环实现关联数组的遍历"></a>for循环实现关联数组的遍历</h1><pre><code>$arr=[&#39;q&#39;=&gt;&#39;12&#39;,&#39;w&#39;=&gt;&#39;13&#39;,&#39;e&#39;=&gt;&#39;14&#39;,&#39;r&#39;=&gt;&quot;15&quot;];
+$num=count($arr);
+for($i=0;$i&lt;$num;$i++)
+{
+    echo key($arr).&quot;=&gt;&quot;.current($arr).&quot;\n&quot;;
+    next($arr);
+}</code></pre><h1 id="通过文件读写对HTML表格的操作"><a href="#通过文件读写对HTML表格的操作" class="headerlink" title="通过文件读写对HTML表格的操作"></a>通过文件读写对HTML表格的操作</h1><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;  &gt;
+    &lt;title&gt;news&lt;/title&gt;
+
+&lt;/head&gt;
+
+&lt;body background=&quot;img/2.jpg&quot;&gt;
+
+&lt;table border=&quot;1&quot; width=&quot;100%&quot; cellspacing=&quot;10&quot; cellpadding=&quot;10&quot; align=&quot;center &quot; bgcolor=&quot;#6495ed&quot;&gt;
+        &lt;tr&gt;
+            &lt;th id=&quot;pm&quot;&gt;排名&lt;/th&gt;
+            &lt;th id=&quot;mz&quot;&gt;名字&lt;/th&gt;
+            &lt;th id=&quot;jj&quot;  bgcolor=&quot;#a52a2a&quot;&gt;简介&lt;/th&gt;
+            &lt;th id=&quot;ss&quot;&gt;搜索指数&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;?php
+            // 打开数据文件
+            $file=fopen(&quot;/Project/PHP/news/data/new.db&quot;,&quot;r&quot;);
+
+            if($file==null)
+            {
+                echo &quot;文件打开失败&quot;;
+                die();
+            }
+            $str=fgets($file);  // 去掉表格标题
+            $i=0;
+            while(!feof($file))
+            {
+                $str=fgets($file);
+                $data=explode(&#39;||&#39;,$str);// 获取字符串按 || 分割成数组
+                if($i&lt;3)
+                {
+                    // 前三行调用图片和简介
+
+                    table_qiansan($data);
+                }
+                else{
+
+                    table_fun($data);// 调用自定义函数
+                }
+                $i++;
+            }
+
+            fclose($file);
+        ?&gt;
+
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+&lt;?php
+// 三行前的信息读取
+// 分别显示 id 图片 简介
+function table_qiansan($data)
+{
+    $data[2]=substr( $data[2],0,200);
+    echo &lt;&lt;&lt;EOF
+    &lt;tr&gt;
+        &lt;td&gt;$data[0]&lt;/td&gt;
+        &lt;td&gt;&lt;img src=&quot;img/1.jpg&quot;&gt;&lt;/td&gt;
+        &lt;td colspan=&quot;2&quot;&gt;$data[2]&lt;/td&gt;
+    &lt;/tr&gt;
+EOF;
+}
+
+// 三行后的信息
+function table_fun($data)
+{
+  echo &lt;&lt;&lt;EOF
+  &lt;tr&gt;
+    &lt;td&gt;$data[0]&lt;/td&gt;
+    &lt;td&gt;$data[1]&lt;/td&gt;
+    &lt;td&gt;$data[2]&lt;/td&gt;
+    &lt;td&gt;$data[3]&lt;/td&gt;
+  &lt;/tr&gt;;
+EOF;
+}
+?&gt;</code></pre><p>效果图<br><img src="/PHP%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/20190807083753363.png" alt></p>
+
             </div>
             <hr/>
 
@@ -630,9 +763,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《虚拟机修改系统网卡和IP》
+                    《PHP代码练习》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/07/31/虚拟机修改系统网卡和IP/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/08/07/PHP代码练习/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Evolyutsiya
             </a> 采用
@@ -673,7 +806,7 @@
         repo: 'blogtalk',
         owner: 'Evolyutsiya',
         admin: "Evolyutsiya",
-        id: '2019-07-31T19-15-44',
+        id: '2019-08-07T17-06-28',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -694,49 +827,46 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/07/31/Linux根目录下的文件夹/">
+                <a href="/2019/08/07/PHP代码练习/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Linux根目录下的文件夹">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="PHP代码练习">
                         
-                        <span class="card-title">Linux根目录下的文件夹</span>
+                        <span class="card-title">PHP代码练习</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简单分析Linux系统 / 目录下的各个文件夹的作用
+                            素数查找// 素数:只能被1和自身整除
+for($i=1;$i&lt;100;$i++)
+{
+    for($j=1;$j&lt;$i;$j++)
+    {
+        if(($i%$j)==0)
+        {
+      
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-07
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/i春秋/" class="post-category" target="_blank">
-                                    i春秋
-                                </a>
-                            
+                            <i class="fa fa-user fa-fw"></i>
+                            Evolyutsiya
                             
                         </span>
                     </div>
                 </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/第一周/" target="_blank">
-                        <span class="chip bg-color">第一周</span>
-                    </a>
-                    
-                </div>
+
                 
             </div>
         </div>
@@ -747,29 +877,37 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/31/MakeDown常用语法/">
+                <a href="/2019/08/04/PHP/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="MakeDown常用语法">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="PHP">
                         
-                        <span class="card-title">MakeDown常用语法</span>
+                        <span class="card-title">PHP</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Makedown一种标记语言。语法简明，是博客平台常用语言。
+                            PHP超文本与处理器，是一种通用开源脚本语言，混合了C、Java、Perl以及PHP自创语法。主要用于Web开发领域。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-31
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-04
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            Evolyutsiya
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                    i春秋
+                                </a>
+                            
+                            <a href="/categories/i春秋/语言/" class="post-category" target="_blank">
+                                    语言
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -777,8 +915,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/工具/" target="_blank">
-                        <span class="chip bg-color">工具</span>
+                    <a href="/tags/第三周/" target="_blank">
+                        <span class="chip bg-color">第三周</span>
+                    </a>
+                    
+                    <a href="/tags/PHP/" target="_blank">
+                        <span class="chip bg-color">PHP</span>
                     </a>
                     
                 </div>
