@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>SQL导入表查询数据</title>
+      <link href="/2019/08/13/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/"/>
+      <url>/2019/08/13/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="导入数据库"><a href="#导入数据库" class="headerlink" title="导入数据库"></a>导入数据库</h1><h2 id="1、创建数据库"><a href="#1、创建数据库" class="headerlink" title="1、创建数据库"></a>1、创建数据库</h2><p><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813023930457.png" alt><br>查看当前用户状态<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813023948231.png" alt><br>查看使用的数据库<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813024032661.png" alt><br>切换数据库<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813024047700.png" alt></p><h2 id="2、导入数库"><a href="#2、导入数库" class="headerlink" title="2、导入数库"></a>2、导入数库</h2><p><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813025138322.png" alt><br>成功效果<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813025452962.png" alt><br>        因为数据库中information_schema在内存中，不在文件中<br>            SCHEMATA    存着当前数据库的名字<br>            TABLES        存着所有数据库中的表<br>            COLUMNS    存着所有字段名<br>        所以可以通过对information_schema数据库的查询来间接查询导入的数据库<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813025511496.png" alt><br>跳转到information_schema数据库，进行查询<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813025545487.png" alt></p><h2 id="3、开始查询"><a href="#3、开始查询" class="headerlink" title="3、开始查询"></a>3、开始查询</h2><p>通过tables查询列名:<br>            查询的是SCHEMATA 存放当前数据库的名字<br>                Show columns from SCHEMATA         查询的是该表的设计表<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813025558591.png" alt><br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813025602743.png" alt><br>通过表内的列名查询表内的数据,查询该表的table_name的内容<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813025610766.png" alt><br>结果<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813025618714.png" alt><br>最下面是最新加入的表在COLUMNS表中查看相应的字段内容<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813025642861.png" alt><br>在navicat的表格设计中有22字段<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813025700645.png" alt><br>下面查找关于table_name和column_name的相关字段<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813025709863.png" alt><br>然后通过SELECT语句进行查询<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813025719358.png" alt><br>另外一个表<br><img src="/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/20190813025727700.png" alt><br>至此查询完毕</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第五周 </tag>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Cookie、Session和Token</title>
       <link href="/2019/08/11/Cookie%E3%80%81Session%E5%92%8CToken/"/>
       <url>/2019/08/11/Cookie%E3%80%81Session%E5%92%8CToken/</url>
@@ -15,12 +42,12 @@
           
           <category> i春秋 </category>
           
-          <category> 第四周 </category>
-          
       </categories>
       
       
         <tags>
+            
+            <tag> 第四周 </tag>
             
             <tag> 语言 </tag>
             
@@ -42,12 +69,12 @@
           
           <category> i春秋 </category>
           
-          <category> 第四周 </category>
-          
       </categories>
       
       
         <tags>
+            
+            <tag> 第四周 </tag>
             
             <tag> 语言 </tag>
             
@@ -69,12 +96,12 @@
           
           <category> i春秋 </category>
           
-          <category> 第四周 </category>
-          
       </categories>
       
       
         <tags>
+            
+            <tag> 第四周 </tag>
             
             <tag> 代码 </tag>
             
@@ -96,12 +123,12 @@
           
           <category> i春秋 </category>
           
-          <category> 第四周 </category>
-          
       </categories>
       
       
         <tags>
+            
+            <tag> 第四周 </tag>
             
             <tag> 代码 </tag>
             
@@ -420,9 +447,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第三周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -449,9 +476,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第三周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -665,11 +692,11 @@
       
         <tags>
             
+            <tag> 第三周 </tag>
+            
             <tag> 第二周 </tag>
             
             <tag> 工具 </tag>
-            
-            <tag> 第三周 </tag>
             
         </tags>
       
