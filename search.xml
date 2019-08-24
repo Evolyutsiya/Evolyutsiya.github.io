@@ -4,16 +4,76 @@
   
     
     <entry>
-      <title>端口</title>
-      <link href="/2019/08/24/%E7%AB%AF%E5%8F%A3/"/>
-      <url>/2019/08/24/%E7%AB%AF%E5%8F%A3/</url>
+      <title>关于TCP协议中的HTTP一些问题</title>
+      <link href="/2019/08/25/%E5%85%B3%E4%BA%8ETCP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84HTTP%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"/>
+      <url>/2019/08/25/%E5%85%B3%E4%BA%8ETCP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84HTTP%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</url>
       
-        <content type="html"><![CDATA[<h1 id="端口（port）"><a href="#端口（port）" class="headerlink" title="端口（port）"></a>端口（port）</h1><p>设备与外界通讯交流的出口。端口可分为虚拟端口和物理端口。<br>虚拟端口：计算机内部或交换机路由器内的端口，不可见<br>物理端口：可见端口<br>是接口电路中的一些寄存器，这些寄存器分别用来存放数据信息，控制信息和状态信息，相应的端口分别称为数据端口、控制端口、状态端口</p><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="硬件端口"><a href="#硬件端口" class="headerlink" title="硬件端口"></a>硬件端口</h3><p>CPU通过接口寄存器或特定电路与外设进行数据传送，这些寄存器或特定电路称之为端口</p><h3 id="网络端口"><a href="#网络端口" class="headerlink" title="网络端口"></a>网络端口</h3><p>在网路技术中，端口有好几种意思。集线器、交换机、路由器的端口指的是连接其他网络设备的接口。<br>特指TCP/IP协议中的端口，是逻辑端口</p><h4 id="网络中端口共有-2的16次方（65535个）端口号"><a href="#网络中端口共有-2的16次方（65535个）端口号" class="headerlink" title="网络中端口共有 2的16次方（65535个）端口号"></a>网络中端口共有 2的16次方（65535个）端口号</h4><p>0<del>1023：规则设计这负责<br>0</del>255：公用端口<br>256<del>1023：公司专用<br>1024</del>65535：临时端口</p><h4 id="常用的端口"><a href="#常用的端口" class="headerlink" title="常用的端口"></a>常用的端口</h4><p>8080：中间件（代理服务器的端口）<br>21：FTP<br>22：ssh<br>23：Telnet<br>25：SMTP，用于发送邮件<br>80：HTTP，用于网页浏览<br>102：Message transfer agent(MTA)-X 400 over TCP/IP，消息传输代理<br>110：Post Office Protocol-Version3<br>111：SUN公司的RPC服务所有端口<br>119：Network News Transfer Protocol<br>135：Location Service<br>137、138、139：NETBIOS Name Service<br>161：SNMP<br>177：X Display Managet Control Protocol<br>389：LDAP、ILS</p><h3 id="软件端口"><a href="#软件端口" class="headerlink" title="软件端口"></a>软件端口</h3><p>缓冲区</p><h1 id="端口转发-Port-forwarding"><a href="#端口转发-Port-forwarding" class="headerlink" title="端口转发(Port forwarding)"></a>端口转发(Port forwarding)</h1><p>有时称隧道，是安全壳（SSH）为网络安全通信使用的一种方法。<br>转发一个网络端口从一个网络节点到另一个网络节点的行为，是一个外部用户从外部经过一个被激活的NAT路由器到达一个在私有内部IP地址（局域网内部）上的一个端口。</p><h2 id="端口转发与端口映射"><a href="#端口转发与端口映射" class="headerlink" title="端口转发与端口映射"></a>端口转发与端口映射</h2><table><thead><tr><th>端口转发</th><th>端口映射</th></tr></thead><tbody><tr><td>将一个端口，这个端口可以是本机端口也可以是本机能访问的任意主机的端口可以转发到任意一台可以访问的IP上，通常这个IP是公网IP（方便使用）</td><td>原理核心和端口转发一样，不过是将本机的端口转发到远程的某个端口</td></tr></tbody></table><p><strong>在第三层网络层</strong></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="1。浏览器在与服务器建立了一个-TCP-连接后是否会在一个-HTTP-请求完成后断开？"><a href="#1。浏览器在与服务器建立了一个-TCP-连接后是否会在一个-HTTP-请求完成后断开？" class="headerlink" title="1。浏览器在与服务器建立了一个 TCP 连接后是否会在一个 HTTP 请求完成后断开？"></a>1。浏览器在与服务器建立了一个 TCP 连接后是否会在一个 HTTP 请求完成后断开？</h1><p>在HTTP/1.0中，一个服务器在发送完一个HTTP响应后，会断开TCP链接。但是每次请求重新建立和断开TCP连接，代价过大。所以某些服务器对Connection：keep-alive的Header进行了支持。<br>    在HTTP/1.1中，就把Connection头写进了标准，并且默认开启持久支持。除非请求中写明了Connection：close否则浏览器和服务器之间是会持续一段时间的TCP连接，不会一个请求就结束</p><h1 id="2。一个-TCP-连接可以对应几个-HTTP-请求？"><a href="#2。一个-TCP-连接可以对应几个-HTTP-请求？" class="headerlink" title="2。一个 TCP 连接可以对应几个 HTTP 请求？"></a>2。一个 TCP 连接可以对应几个 HTTP 请求？</h1><p>一个TCP连接如果持续连接可以发送多个HTTP请求</p><h1 id="3。一个-TCP-连接中-HTTP-请求发送可以一起发送么？"><a href="#3。一个-TCP-连接中-HTTP-请求发送可以一起发送么？" class="headerlink" title="3。一个 TCP 连接中 HTTP 请求发送可以一起发送么？"></a>3。一个 TCP 连接中 HTTP 请求发送可以一起发送么？</h1><pre><code>HTTP/1.1存在一个问题：两个请求的生命周期不能重叠，任意两个HTTP请求从开始到结束的时间在同一个TCP连接里不能重叠。HTTP/1.1中规定了Pipelining试图解决此问题，但是浏览器中默认关闭。（因为作为文本传输协议浏览器要分别不同文件的传输内容，程序设计会很复杂，同时资源消耗比较大）    HTTP2中Multiplexing存在，多个HTTP请求可以在同一个TCP连接中并行进行。    HTTP/1.1解决页面加载效率的方式：1．    维持和服务器已经建立的TCP连接，在同一连接顺序上处理多个请求2．    和服务器建立多个TCP连接</code></pre><h1 id="4。为什么有的时候刷新页面不需要重新建立-SSL-连接？"><a href="#4。为什么有的时候刷新页面不需要重新建立-SSL-连接？" class="headerlink" title="4。为什么有的时候刷新页面不需要重新建立 SSL 连接？"></a>4。为什么有的时候刷新页面不需要重新建立 SSL 连接？</h1><p>TCP 连接有的时候会被浏览器和服务端维持一段时间。TCP 不需要重新建立，SSL 自然也会用之前的。</p><h1 id="5。浏览器对同一-Host-建立-TCP-连接到数量有没有限制？"><a href="#5。浏览器对同一-Host-建立-TCP-连接到数量有没有限制？" class="headerlink" title="5。浏览器对同一 Host 建立 TCP 连接到数量有没有限制？"></a>5。浏览器对同一 Host 建立 TCP 连接到数量有没有限制？</h1><p>理论上可以无限多，但现实是会根据浏览器的设置自行设置。</p>]]></content>
       
       
       <categories>
           
           <category> i春秋 </category>
+          
+          <category> 网络基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第六周 </tag>
+            
+            <tag> 网络基础 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>DNS域名系统</title>
+      <link href="/2019/08/24/DNS%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F/"/>
+      <url>/2019/08/24/DNS%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="DNS（Domain-Name-System）域名系统"><a href="#DNS（Domain-Name-System）域名系统" class="headerlink" title="DNS（Domain Name System）域名系统"></a>DNS（Domain Name System）域名系统</h1><p>当前对于每一级域名长度限制是63个字符，域名总长度不能超过253个字符。只支持ASCII字符集，2008年后开始支持Unicode字符集。</p><h2 id="DNS系统中常见的资源记录类型"><a href="#DNS系统中常见的资源记录类型" class="headerlink" title="DNS系统中常见的资源记录类型"></a>DNS系统中常见的资源记录类型</h2><p>主条目：域名服务器记录列表<br>主机记录（A记录）：A记录是用于名称解析的重要记录，它将特定的主机名映射到对应的主机IP地址上。<br>别名记录（CNAME记录）：用于将某个别名指向到某个A记录上，这样就不需要再为某个新名字另外创建一条新的A记录<br>IPv6主机记录（AAAA记录）：与A记录对应，用于将特定的主机名映射到一个主机的IPv6地址上。<br>服务器位置记录（SRV记录）：用于定义提供服务器的位置，如主机（hostname），端口（port name）等<br>NAPTR记录：提供正则表达式方式去映射一个域名。<strong>代表：ENUM查询</strong></p><h1 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h1><p>DNS通过允许一个名称服务器把它的一部分名称服务（zone）委托给子服务器而实现的一种层次结构的名称空间。<br>任何一个使用IP计算机的网络都可以使用DNS来实现它自己的私有名称系统。而这是基于504个全球的根“根域名服务器”。</p><h2 id="域名解析的特点"><a href="#域名解析的特点" class="headerlink" title="域名解析的特点"></a>域名解析的特点</h2><p>一个域名对应一个IP地址，一个IP地址可以对应多个域名。</p><h2 id="域名解析的流程"><a href="#域名解析的流程" class="headerlink" title="域名解析的流程"></a>域名解析的流程</h2><p><img src="/DNS%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F/20190824115712448.png" alt></p><h3 id="DNS查询方式两种"><a href="#DNS查询方式两种" class="headerlink" title="DNS查询方式两种"></a>DNS查询方式两种</h3><h4 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h4><p>DNS客户端设置使用的DNS服务器一般使用递归，负责处理客户端的DNS查询请求。</p><h4 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h4><p>DNS服务端之间一般采用迭代查询方式</p><h3 id="以查询-www-baidu-com-为例"><a href="#以查询-www-baidu-com-为例" class="headerlink" title="以查询 www.baidu.com 为例"></a>以查询 <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 为例</h3><p>客户端：发送查询报文，至DNS服务器首先检查自身缓存，如果记录存在则直接返回结果。<br>如果记录不存在或过期则：</p><pre><code>    1.DNS服务器向根域名服务器发送查询报文，跟域名服务器返回顶级域名的域名服务器地址    2.DNS服务器向顶级域名服务器发送查询报文，得到二级域名服务器的域名服务器地址。    3.DNS服务器向二级域名服务器发送查询报文，得到主机A的记录，存入自身缓存并返回客户端。</code></pre><h4 id="分级查询"><a href="#分级查询" class="headerlink" title="分级查询"></a>分级查询</h4><p><a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 对应的真正域名 <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a>. 末尾的 . 称为根域名，每个域名都有根域名，因此通常省略<br>根域名——〉顶级域名——〉次级域名——〉主机名（host）又称三级域名。用户在自己的域里面为服务器配名称，任意。</p><h5 id="域名分别对应："><a href="#域名分别对应：" class="headerlink" title="域名分别对应："></a>域名分别对应：</h5><p>根域名：省略<br>顶级域名（Top-Level Domain，TLD）：eg： .com、.net<br>次级域名（Second-Level Domain，SLD）：这里是 .baidu<br>主机名：这里是 www</p><h4 id="WHOIS（域名数据库查询）"><a href="#WHOIS（域名数据库查询）" class="headerlink" title="WHOIS（域名数据库查询）"></a>WHOIS（域名数据库查询）</h4><p>一个域名所有者可以通过查询WHOIS数据库而被找到；对于大多数根域名服务器，基本的WHOIS由ICANN维护，而WHOIS的细节控制由控制那个域的域注册机构维护。<br>240多个国家代码顶级域名（ccTLDs）,通常由该域名权威注册机构负责维护WHOIS。<br>    中国互联网信息中心负责 .CN域名的WHOIS<br>    香港互联网注册管理有限公司负责 .HK<br>    台湾网上信息中心负责 .TW</p><h2 id="域名解析常用的类型"><a href="#域名解析常用的类型" class="headerlink" title="域名解析常用的类型"></a>域名解析常用的类型</h2><p>A记录解析：记录类型选择“A”；记录值填写空间商提供的主机地址；MX优先级不需要设置；TTL设置默认为3600<br>CNAME记录解析：解析方式和“A”记录类型基本一致<br>MX记录解析：解析邮箱时使用</p><h2 id="常见名词"><a href="#常见名词" class="headerlink" title="常见名词"></a>常见名词</h2><h3 id="泛域名解析"><a href="#泛域名解析" class="headerlink" title="泛域名解析"></a>泛域名解析</h3><p>将 *域名解析到同一IP</p><h3 id="域名智能解析"><a href="#域名智能解析" class="headerlink" title="域名智能解析"></a>域名智能解析</h3><p>除了具备一般的基本DNS解析功能外，还可以自动识别浏览者的来源，并把相同的域名智能DNS解析到双线路机器的网络中。</p><h3 id="MX记录"><a href="#MX记录" class="headerlink" title="MX记录"></a>MX记录</h3><p>路由器记录，用户可以将该域名下的邮件服务器指向自己的mail server上，然后自动操作所有的邮箱设置。</p><h3 id="CNAME记录"><a href="#CNAME记录" class="headerlink" title="CNAME记录"></a>CNAME记录</h3><p>别名记录，允许将多个名字映射到同一台计算机，与A记录不同的是，CNAME别名记录设置的可以是一个域名的描述而不一定是IP地址。通常用于同时提供WWW和MAIL服务的计算机</p><h4 id="CNAME记录特点"><a href="#CNAME记录特点" class="headerlink" title="CNAME记录特点"></a>CNAME记录特点</h4><p>方便管理，不同域名的记录</p><h3 id="TTL值（Time-To-Live）"><a href="#TTL值（Time-To-Live）" class="headerlink" title="TTL值（Time To Live）"></a>TTL值（Time To Live）</h3><p>DNS记录在DNS服务器缓存中存活的时间</p><h3 id="A记录"><a href="#A记录" class="headerlink" title="A记录"></a>A记录</h3><p>WEB服务器IP指向A（Address）记录使用来指定主机名（或域名）对应的IP地址记录</p><h3 id="URL转发"><a href="#URL转发" class="headerlink" title="URL转发"></a>URL转发</h3><p>一台服务器（没有独立IP地址）或者是域名B，当访问域名A时访问到B域名的内容。</p><h4 id="URL转发特点、与CNAME最大区别"><a href="#URL转发特点、与CNAME最大区别" class="headerlink" title="URL转发特点、与CNAME最大区别"></a>URL转发特点、与CNAME最大区别</h4><p>URL转发可以转发到某个目录下，某个文件上。而CNAME不行<br>CNAME是域名与域名别名对应的记录。</p><h3 id="动态域名解析"><a href="#动态域名解析" class="headerlink" title="动态域名解析"></a>动态域名解析</h3><p>A记录中域名对应的IP是静态IP，把域名解析到动态IP上的过程。（域名服务商支持动态域名解析，一般收费）</p><h3 id="域名解析器"><a href="#域名解析器" class="headerlink" title="域名解析器"></a>域名解析器</h3><p>把域名转换成主机所在IP地址的中介。系统会自动保存经常使用的IP地址与对应域名。访问直接从DNS缓存里提取对应IP地址，加快联网速度。</p><h2 id="根域名服务器"><a href="#根域名服务器" class="headerlink" title="根域名服务器"></a>根域名服务器</h2><p>全球有504个根“根域名服务器”（分成13组，分别编号为A至M）。从这504个根服务器开始，余下的Internet DNS名字空间被委托给其他的DNS服务器，这些服务器提供DNS名称空间中的特定部分。</p><h3 id="IPv4和IPv6根域名服务器"><a href="#IPv4和IPv6根域名服务器" class="headerlink" title="IPv4和IPv6根域名服务器"></a>IPv4和IPv6根域名服务器</h3><p>现在IPv4根服务器体系已经趋于完善。随着IPv6网络的发展，“雪人计划”于2016年在全球16个国家完成25台IPv6根服务器架设。形成在原13台根+25台IPv6根的新局面。中国有4台IPv6根（1台主根服务器和三台辅根服务器组成）。</p><h3 id="IPv4只有13台根服务器的原因"><a href="#IPv4只有13台根服务器的原因" class="headerlink" title="IPv4只有13台根服务器的原因"></a>IPv4只有13台根服务器的原因</h3><p>DNS协议（域名解析协议），使用了端口上的UDP和TCP协议。UDP通常用于主服务器和从服务器之间的传输。<br>由于在所有UDP查询和响应中能保证正常工作的最大长度是512字节，限制了根服务器的数量和名字。<br>要让所有的根服务器数据能包含在一个512字节的UDP包中，IPv4根服务器只能限制13个，而其每个服务器要使用字母表中的单个字母命名，这也是IPv4根服务器是从A–M命名的原因。</p><h3 id="国际化域名"><a href="#国际化域名" class="headerlink" title="国际化域名"></a>国际化域名</h3><p>主目录：Punycode<br>主要用于把域名从地方语言采用的Unicode编码转换为DNS系统的编码。Punycode可以防止IDN欺骗。</p><h4 id="IDN欺骗"><a href="#IDN欺骗" class="headerlink" title="IDN欺骗"></a>IDN欺骗</h4><p>网址欺骗的手法之一。利用国际化域名称（IDN）可以以Unicode字符命名网址的特性，使用同行异义字等。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 网络基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第六周 </tag>
+            
+            <tag> 网络基础 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>端口</title>
+      <link href="/2019/08/24/%E7%AB%AF%E5%8F%A3/"/>
+      <url>/2019/08/24/%E7%AB%AF%E5%8F%A3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="端口（port）"><a href="#端口（port）" class="headerlink" title="端口（port）"></a>端口（port）</h1><p>设备与外界通讯交流的出口。端口可分为虚拟端口和物理端口。<br>虚拟端口：计算机内部或交换机路由器内的端口，不可见<br>物理端口：可见端口<br>是接口电路中的一些寄存器，这些寄存器分别用来存放数据信息，控制信息和状态信息，相应的端口分别称为数据端口、控制端口、状态端口</p><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="硬件端口"><a href="#硬件端口" class="headerlink" title="硬件端口"></a>硬件端口</h3><p>CPU通过接口寄存器或特定电路与外设进行数据传送，这些寄存器或特定电路称之为端口</p><h3 id="网络端口"><a href="#网络端口" class="headerlink" title="网络端口"></a>网络端口</h3><p>在网路技术中，端口有好几种意思。集线器、交换机、路由器的端口指的是连接其他网络设备的接口。<br>特指TCP/IP协议中的端口，是逻辑端口</p><h4 id="网络中端口共有-2的16次方（65535个）端口号"><a href="#网络中端口共有-2的16次方（65535个）端口号" class="headerlink" title="网络中端口共有 2的16次方（65535个）端口号"></a>网络中端口共有 2的16次方（65535个）端口号</h4><p>0–1023：规则设计这负责<br>0–255：公用端口<br>256–1023：公司专用<br>1024–65535：临时端口</p><h4 id="常用的端口"><a href="#常用的端口" class="headerlink" title="常用的端口"></a>常用的端口</h4><p>8080：中间件（代理服务器的端口）<br>21：FTP<br>22：ssh<br>23：Telnet<br>25：SMTP，用于发送邮件<br>80：HTTP，用于网页浏览<br>102：Message transfer agent(MTA)-X 400 over TCP/IP，消息传输代理<br>110：Post Office Protocol-Version3<br>111：SUN公司的RPC服务所有端口<br>119：Network News Transfer Protocol<br>135：Location Service<br>137、138、139：NETBIOS Name Service<br>161：SNMP<br>177：X Display Managet Control Protocol<br>389：LDAP、ILS</p><h3 id="软件端口"><a href="#软件端口" class="headerlink" title="软件端口"></a>软件端口</h3><p>缓冲区</p><h1 id="端口转发-Port-forwarding"><a href="#端口转发-Port-forwarding" class="headerlink" title="端口转发(Port forwarding)"></a>端口转发(Port forwarding)</h1><p>有时称隧道，是安全壳（SSH）为网络安全通信使用的一种方法。<br>转发一个网络端口从一个网络节点到另一个网络节点的行为，是一个外部用户从外部经过一个被激活的NAT路由器到达一个在私有内部IP地址（局域网内部）上的一个端口。</p><h2 id="端口转发与端口映射"><a href="#端口转发与端口映射" class="headerlink" title="端口转发与端口映射"></a>端口转发与端口映射</h2><table><thead><tr><th>端口转发</th><th>端口映射</th></tr></thead><tbody><tr><td>将一个端口，这个端口可以是本机端口也可以是本机能访问的任意主机的端口可以转发到任意一台可以访问的IP上，通常这个IP是公网IP（方便使用）</td><td>原理核心和端口转发一样，不过是将本机的端口转发到远程的某个端口</td></tr></tbody></table><p><strong>在第三层网络层</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 网络基础 </category>
           
       </categories>
       
@@ -41,6 +101,8 @@
       <categories>
           
           <category> i春秋 </category>
+          
+          <category> 网络基础 </category>
           
       </categories>
       
@@ -76,9 +138,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第六周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -105,9 +167,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第六周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -731,9 +793,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第三周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -760,9 +822,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第三周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -976,9 +1038,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第三周 </tag>
+            
+            <tag> 工具 </tag>
             
             <tag> 第二周 </tag>
             
