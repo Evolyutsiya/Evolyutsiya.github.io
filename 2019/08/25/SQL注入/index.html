@@ -4,10 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="网络安全常见术语, Evolyutsiya">
-    <meta name="description" content="1．网络安全：不因偶然或者恶意的破坏、更改、泄露，系统能连续、可靠正常的运行，服务不中断，在网络环境下能够识别和消除不安因素的能力
-2．OWASP3．黑客术语：弱口令：密码强度不够
-WebShell：asp、php、jsp、cgi等网页形式">
+    <meta name="keywords" content="SQL注入, Evolyutsiya">
+    <meta name="description" content="攻击数据存储区几乎所有的应用程序都依赖数据存储区来管理应用程序中处理的数据。大多数数据存储区都保存有结构化、可以使用预测先定义的查询格式或语言访问的数据，并包含内部逻辑来管理这些数据。如果攻击者能够破坏应用程序与数据存储的交互，使应用程序检">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +13,7 @@ WebShell：asp、php、jsp、cgi等网页形式">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>网络安全常见术语 | Evolyutsiya</title>
+    <title>SQL注入 | Evolyutsiya</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -263,7 +261,7 @@ WebShell：asp、php、jsp、cgi等网页形式">
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
-        let pwd = '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92';
+        let pwd = '';
         if (pwd && pwd.length > 0) {
             if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
                 alert('密码错误，将返回主页！');
@@ -276,13 +274,13 @@ WebShell：asp、php、jsp、cgi等网页形式">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        网络安全常见术语
+                        SQL注入
                     </div>
                 </div>
             </div>
@@ -393,8 +391,12 @@ WebShell：asp、php、jsp、cgi等网页形式">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/第一周/" target="_blank">
-                                <span class="chip bg-color">第一周</span>
+                            <a href="/tags/第六周/" target="_blank">
+                                <span class="chip bg-color">第六周</span>
+                            </a>
+                        
+                            <a href="/tags/SQL注入/" target="_blank">
+                                <span class="chip bg-color">SQL注入</span>
                             </a>
                         
                     </div>
@@ -409,6 +411,10 @@ WebShell：asp、php、jsp、cgi等网页形式">
                                 i春秋
                             </a>
                         
+                            <a href="/categories/i春秋/数据库/" class="post-category" target="_blank">
+                                数据库
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -417,21 +423,21 @@ WebShell：asp、php、jsp、cgi等网页形式">
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-31
+                    2019-08-25
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        869
+                        2.6k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        3 分
+                        9 分
                     </div>
                     
                 
@@ -447,53 +453,75 @@ WebShell：asp、php、jsp、cgi等网页形式">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="1．网络安全："><a href="#1．网络安全：" class="headerlink" title="1．网络安全："></a>1．网络安全：</h1><p>不因偶然或者恶意的破坏、更改、泄露，系统能连续、可靠正常的运行，服务不中断，在网络环境下能够识别和消除不安因素的能力</p>
-<h1 id="2．OWASP"><a href="#2．OWASP" class="headerlink" title="2．OWASP"></a>2．OWASP</h1><h1 id="3．黑客术语："><a href="#3．黑客术语：" class="headerlink" title="3．黑客术语："></a>3．黑客术语：</h1><pre><code>弱口令：密码强度不够
-WebShell：asp、php、jsp、cgi等网页形式存在一种命令执行环境，一种网页后门。得到一个命令执行环境达到服务器的目的
-    特点：隐蔽性强，功能强大，穿越防火墙，无系统日志（在中间件中保留日志）
-    分类：
-        大码：功能齐全，大量脚本语言建立体积庞大
-        小码：一句话代码，依赖管理软件
-木马：表面上伪装成正常程序获得系统权限
-    木马和病毒的区别：
-    木马：伪装潜伏，等待链接
-    病毒：破坏，索取资金为主
-后门：在获取权限后，编写程序为日后联结获取电脑权限做准备
-内网：通俗，局域网
-外网：直接联入Internet，IP地址不是保留内网IP地址
-端口：用于接收某些数据，提供相应服务，一般一个端口对应一个服务
-远控：通过计算机网络异地拨号或双方接入Internet等手段，连同需被控制的计算机，通过本地计算机对远程计算机进行控制修改
-免杀：通过加壳，加密、花指令等躲避杀毒软件
-提取：操作系统地权限用户提升为管理员权限</code></pre><h1 id="4．渗透测试："><a href="#4．渗透测试：" class="headerlink" title="4．渗透测试："></a>4．渗透测试：</h1><p>模拟恶意黑客攻击网站进行评估计算机网络系统的安全<br>    白盒测试：有域名，代码审计，资产清单（应用文件配置，应用部署情况）<br>    黑盒测试：只有域名进行渗透测试<br>    渗透测试的步骤：</p>
-<h2 id="1．-信息收集"><a href="#1．-信息收集" class="headerlink" title="1．    信息收集"></a>1．    信息收集</h2><h2 id="2．-威胁建模"><a href="#2．-威胁建模" class="headerlink" title="2．    威胁建模"></a>2．    威胁建模</h2><h2 id="3．-渗透测试"><a href="#3．-渗透测试" class="headerlink" title="3．    渗透测试"></a>3．    渗透测试</h2><h2 id="4．-后渗透测试：（拿到WebShell为一个简易标准）"><a href="#4．-后渗透测试：（拿到WebShell为一个简易标准）" class="headerlink" title="4．    后渗透测试：（拿到WebShell为一个简易标准）"></a>4．    后渗透测试：（拿到WebShell为一个简易标准）</h2><h2 id="5．渗透测试工具："><a href="#5．渗透测试工具：" class="headerlink" title="5．渗透测试工具："></a>5．渗透测试工具：</h2><pre><code>1．信息搜集
-    A．Nmap：探测计算机网络上的主机和服务的一种安全扫描器
-    B．御剑：网站后台扫描工具
-    C．Google hack（google高级搜索）
-    D．Maltego：专业数字取证软件
-    E．Whois查询：查询一个域名是否已经被注册，以及域名注册后的详细信息
-    F．Kail Linux：基于Debian的Linux（7）发行版本，用于数字取证
-    常用网站：
-        Google
-        Baidu
-        www.exploit-db.com    英文不收费
-        www.seebug.net        中文收费
-        www.shadon.io        专门搜索企业的信息资产
-        www.zoomeye.org
-        X情报社区
-2．漏洞扫描
-    A．AWVS：自动化Web应用程序安全测试工具
-    B．H3C WebScan：Web应用风险深度扫描工具
-    C．AppScan：自动评估扫描，检测，所有常见Web应用程序漏洞
-    D．Netsparker：综合性Web应用安全漏洞扫描工具，分专业和免费版
-    E．Nessus：目前最常用的系统漏洞扫描分析软件
-    F．巡风：企业内网漏洞快速应急，扫描系统
-3．漏洞利用
-    A．中国菜刀：专业的网站管理软件
-    B．Sqlmap：开放源码的渗透测试工具，自动探测和利用Sql漏洞来接管数据库
-    C．啊D：注入验证利用工具，目前Sql中比较好用的
-4．综合平台
-    A．BurpSuite：针对Web应用程序的集成平台
-    B．Metasploit：开源的安全漏洞检测工具</code></pre>
+                <h1 id="攻击数据存储区"><a href="#攻击数据存储区" class="headerlink" title="攻击数据存储区"></a>攻击数据存储区</h1><p>几乎所有的应用程序都依赖数据存储区来管理应用程序中处理的数据。<br>大多数数据存储区都保存有结构化、可以使用预测先定义的查询格式或语言访问的数据，并包含内部逻辑来管理这些数据。<br>如果攻击者能够破坏应用程序与数据存储的交互，使应用程序检索或修改各种数据，那么攻击者就可以避开应用层对数据访问实施的任何控制。<br>迄今为止，最常用的数据存储区是SQL数据库、基于XML的资料数据库、LDAP目录、一些常见示例。</p>
+<h2 id="注入解释型语言（interpreted-language）"><a href="#注入解释型语言（interpreted-language）" class="headerlink" title="注入解释型语言（interpreted language）"></a>注入解释型语言（interpreted language）</h2><p>是一种在运行时由一个运行时组件（runtime component）解释语言代码并执行其中包含的指令的语言。</p>
+<h2 id="编译型语言（compiled-language）"><a href="#编译型语言（compiled-language）" class="headerlink" title="编译型语言（compiled language）"></a>编译型语言（compiled language）</h2><p>代码在生成时转换成机器指令，然后再运行时直接由使用该语言的计算机处理执行这些指令。</p>
+<h3 id="注释："><a href="#注释：" class="headerlink" title="注释："></a>注释：</h3><p>理论上任何语言都可以使用编译器或解释器来执行。这种区别并不是语言本身的内在特性。通常大多数语言只执行其中的一种方式。开发web应用程序使用的许多核心语言都是解释器执行。SQL、LDAP、Perl和PHP。</p>
+<h2 id="代码注入"><a href="#代码注入" class="headerlink" title="代码注入"></a>代码注入</h2><p>任何有实际用途的应用程序都会收到用户提交的数据，对其进行处理并执行相应的操作。解释器处理的数据实际上是由程序员编写的<strong>代码</strong>和<strong>用户提交的数据</strong>组成。</p>
+<h3 id="代码注入的方式"><a href="#代码注入的方式" class="headerlink" title="代码注入的方式"></a>代码注入的方式</h3><p>1。使用解释型语言语法的具有特殊意义的句法，向应用程序攻击<br>2。注入机器代码而不是相应语言编写的指令。</p>
+<pre><code>避开登陆：Web应用程序对数据存储实施自主访问控制，构造查询基于用户的帐户和类型来检索添加或修改数据存储区中的数据。
+                Eg：SQL中知道管理员的帐户名
+                    SELECT * FROM users WHERE username = ‘admin’—’ AND password=’foo’
+                    其中（- -）是注释符号上面的语句等同于
+                    SELECT * FROM users WHERE username=’admin’ 避开了密码检查
+              在大多数应用程序中，数据库的第一个账户为管理用户，因为这个账户通常手工创建，然后再通过它生成其他应用程序帐户。如果查询返回几个用户的资料，许多应用程序只会处理第一名用户
+                Eg：以数据库中的第一个用户身份登陆
+                    OR 1=1 - -
+                    执行下语句：
+                    SELECT * FROM users WHERE username= ‘’ OR 1=1 - - AND password = ‘foo’
+                    上语句等同于
+                    SELECT * FROM users WHERE username=’’ OR 1=1</code></pre><p><strong>提示：</strong>有时候可以不使用注释符号处理字符串末尾部分的引号，而用引号包含的字符串数据结束注入的输入，“平衡引号”</p>
+<pre><code>Eg：SELECT author,title,year FROM books WHERE publisher = ‘Wiley’ OR ‘a’=’a’ and published=1    效果和 1=1相同</code></pre><h1 id="注入不同的语句类型"><a href="#注入不同的语句类型" class="headerlink" title="注入不同的语句类型"></a>注入不同的语句类型</h1><h2 id="SELECT语句"><a href="#SELECT语句" class="headerlink" title="SELECT语句"></a>SELECT语句</h2><p>最常用的语句，SQL注入攻击的进入点（entry point）通常是查询中的where子句，将用于提交的数据传送给数据库，以控制查询结果的范围。因为WHERE子句一般在SELECT语句的最后，攻击者可以使用注释符号将查询截断到其输入的结束位置，而不使整个查询语法失效。<br>SQL注入漏洞偶尔会影响SELECT查询的其他部分，如ORDER BY子句或表和列名称。</p>
+<h2 id="INSERT语句"><a href="#INSERT语句" class="headerlink" title="INSERT语句"></a>INSERT语句</h2><p>INSERT语句用于在表中建立一个新的数据行。应用程序通常使用这种语句添加一条新的审计日志、创建一个新用户帐户或生成一个新订单。</p>
+<pre><code>Eg：如果username或password字段存在SQL漏洞，那么就可以在表中插入任何数据，包括自己的ID和privs值。</code></pre><p><strong>注意：</strong>必须确保VALUES子句的其他部分正常运行，特别是其中数据向的个数与类型必须正确。由于大多数的数据库都会隐式地将一个整数转换成一个字符串，因此可以在每一个位置都使用一个整数。</p>
+<h2 id="UPDATE语句"><a href="#UPDATE语句" class="headerlink" title="UPDATE语句"></a>UPDATE语句</h2><p>用于修改表中的一行或几行数据，运行机制和INSERT语句类似，只是UPDATE语句通常包含一个WHERE子句，告诉数据库更新表中那些行的数据</p>
+<pre><code>Eg：用户修改密码执行下面语句
+            UPDATE users SET password=’newsecret’ WHERE user=’marcus’ and password=’secret</code></pre><p><strong>注意：</strong>由于无法提前知道应用程序将根据专门设计的输入执行什么擦左，因此在一个远程应用程序中探查SQL注入漏洞往往非常危险。<strong>特别注意：修改UPDATE语句中的WHERE子句可能会使一个重要的数据库表发生彻底改变。</strong></p>
+<pre><code>例如：UPDATE users SET password=’newsecret’ WHERE user=’admin’ or 1=1 它会重置每一个用户的密码。有时候，在用户成功登陆后，应用程序会使用用户提交的用户名执行各种UPDATE查询，这意味着任何针对WHERE子句的攻击可能会复制到其它语句中，给所有应用程序用户的资料造成严重破坏。</code></pre><p><strong>为规避风险，在开始测试前进行数据库备份非常重要</strong></p>
+<h2 id="DELETE语句"><a href="#DELETE语句" class="headerlink" title="DELETE语句"></a>DELETE语句</h2><p>用于删除表中的一行或几行数。与UPDATE语句一样，通常使用WHERE子句告诉数据库更新表中那行数据，并可能在这个子句中并入用户提交的数据</p>
+<h1 id="注入符号HTTP中的URL编码"><a href="#注入符号HTTP中的URL编码" class="headerlink" title="注入符号HTTP中的URL编码"></a>注入符号HTTP中的URL编码</h1><pre><code>    1．&amp;和=用于连接名/值对，建立查询字符串和POST数据块    &amp; %26    = %3d
+    2．查询字符串不允许使用空格，如果使用空格整个字符串会立即中止。必须使用 + 或 %20对其编码
+    3．由于 + 用于编码空格，如果想在字符串中使用 + ，必须使用 %2b 对其编码
+    4．分号用于分割cookie字段，必须使用 %3b 对其编码</code></pre><h1 id="注入查询结构"><a href="#注入查询结构" class="headerlink" title="注入查询结构"></a>注入查询结构</h1><p>如果用户提交的数据被插入SQL查询结构，而不是查询中的数据项，这时实施SQL注入攻击只需要直接应用有效的SQL语法，而不需要进行任何转义。<br>SQL查询结构中最常见的注入点是ORDER BY子句。<br><strong>ORDER BY</strong>关键字接受某个列名或编号，并根据该列中的值对结果集进行排序。</p>
+<h1 id="“特征”识别数据库"><a href="#“特征”识别数据库" class="headerlink" title="“特征”识别数据库"></a>“特征”识别数据库</h1><p>一种最靠谱的方法：根据数据库联接字符串的不同方法进行识别。在控制某个字符串数据项的查询中，可以在一个请求中提交一个特殊值，然后测试这个连接方法，以生成那个字符串。如果得到相同的结果，就可以确定所使用的数据库类型。</p>
+<pre><code>Eg：数据库如何构建services字符串</code></pre><table>
+<thead>
+<tr>
+<th>Oracle</th>
+<th>‘serv’ &#124;&#124; ‘ices’</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MS-SQL</td>
+<td>‘serv’ + ‘ices’</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>‘serv’ ‘ices’  注意中间的空格</td>
+</tr>
+</tbody></table>
+<pre><code>        数字数据，每个数据项在目标数据库中的求值结果为0，在其它数据库中则会导致错误</code></pre><table>
+<thead>
+<tr>
+<th>Oracle</th>
+<th>BITAND(1,1) –BITAND(1,1)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MS-SQL</td>
+<td>@@PACK_RECEIVED-@@PACK_RECEIVED</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>CONNECTION_ID()-CONNECTION_ID()</td>
+</tr>
+</tbody></table>
+<p>在识别数据库时，MySQL如何处理某些行内注释（inline comment）也是一个值得关注的问题：<br>如果一个注释以 ! 开头，接着是数据库版本字符串，那么只要数据的实际版本等于或高于该字符串，应用程序就会将注释内容解释为SQL；否则，应用程序就会忽略注释内容，将它作为注释处理。</p>
+<pre><code>Eg：/* !32302 and 1=0 */    如果MySQL版本高于或等于 3.23.02，注入下面的字符串将使SELECT语句和WHERE子句为假</code></pre><h1 id="查找SQL注入漏洞"><a href="#查找SQL注入漏洞" class="headerlink" title="查找SQL注入漏洞"></a>查找SQL注入漏洞</h1><p>最简单的情况是，向应用输入一个意外输入，就可以发现并最终确定一个SQL注入漏洞。<br>复杂，通过检查提交给服务器和返回的任何数据包，检查数据错误信息。<br><strong>注意：</strong>在探查SQL注入漏洞时，一定要确保完全遍历任何可以提交专门设计的输入的多阶段过程。程序通常会从几个请求中收集数据，一旦收集到全部数据，就将其请求保存在数据库中。如果仅在每个请求中提交专门设计的数据并监控应用，对数据的响应，就会遗漏许多SQL注入漏洞。</p>
+<h1 id="UNION操作符"><a href="#UNION操作符" class="headerlink" title="UNION操作符"></a>UNION操作符</h1><p>将两个或几个SELECT语句的结果组合到一个独立的结果中。如果Web应用程序的SELECT语句存在SQL注入漏洞，通常可以使用UNION操作符执行另一次完全独立的查询，并将它的结果与第一次的结果组合在一起。<br>使用UNION操作符注入另外一个SELECT查询，并将查询结果附加在第一次查询结果之后，第二次查询能够从另外一个完全不同的数据库表中提取数据。</p>
+<h2 id="UNION的两个限制"><a href="#UNION的两个限制" class="headerlink" title="UNION的两个限制"></a>UNION的两个限制</h2><p>1。使用UNION操作符组合两个查询结果，这两个结果必须结构相同。他们的列数必须使用按相同顺序出现的相同或兼容的数据类型。<br>2。为注入另一个返回有用结果的查询，攻击者必须知道他所针对的数据库表的名称以及有关列的名称</p>
+<h2 id="查明第一个查询的结构"><a href="#查明第一个查询的结构" class="headerlink" title="查明第一个查询的结构"></a>查明第一个查询的结构</h2><p>1。第二个查询中每种数据要么必须与第一个查询中的对应类型完全相同，要么必须隐含的转换成任何数据类型。如果不知道1某个特殊字段的数据类型，只需要在那个字段输入SELECT NULL即可<br>2。如果数据库返回的错误信息被应用程序截获，还是可以轻易确定注入的查询是否得以执行。<br>3。很多时候，只需要在第一个查询中确定一个使用字符串数据类型的字段就可以达到查询的目的。</p>
+
             </div>
             <hr/>
 
@@ -651,9 +679,9 @@ WebShell：asp、php、jsp、cgi等网页形式存在一种命令执行环境，
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《网络安全常见术语》
+                    《SQL注入》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/07/31/网络安全常见术语/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/08/25/SQL注入/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Evolyutsiya
             </a> 采用
@@ -694,7 +722,7 @@ WebShell：asp、php、jsp、cgi等网页形式存在一种命令执行环境，
         repo: 'blogtalk',
         owner: 'Evolyutsiya',
         admin: "Evolyutsiya",
-        id: '2019-07-31T18-03-10',
+        id: '2019-08-25T10-08-41',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -715,73 +743,29 @@ WebShell：asp、php、jsp、cgi等网页形式存在一种命令执行环境，
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/07/31/MakeDown常用语法/">
+                <a href="/2019/08/25/SQL注入/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="MakeDown常用语法">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="SQL注入">
                         
-                        <span class="card-title">MakeDown常用语法</span>
+                        <span class="card-title">SQL注入</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Makedown一种标记语言。语法简明，是博客平台常用语言。
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-31
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-user fa-fw"></i>
-                            Evolyutsiya
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/工具/" target="_blank">
-                        <span class="chip bg-color">工具</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="fa fa-dot-circle-o"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/07/31/网络安全常见术语/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="网络安全常见术语">
-                        
-                        <span class="card-title">网络安全常见术语</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            网络安全：不因偶然或者恶意的破坏、更改、泄露，系统能连续、可靠正常的运行，服务不中断，在网络环境下能够识别和消除不安因素的能力
+                            通过输入特殊字符等手段,获取数据库的信息
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-31
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-25
                             </span>
                         <span class="publish-author">
                             
@@ -789,6 +773,10 @@ WebShell：asp、php、jsp、cgi等网页形式存在一种命令执行环境，
                             
                             <a href="/categories/i春秋/" class="post-category" target="_blank">
                                     i春秋
+                                </a>
+                            
+                            <a href="/categories/i春秋/数据库/" class="post-category" target="_blank">
+                                    数据库
                                 </a>
                             
                             
@@ -799,8 +787,69 @@ WebShell：asp、php、jsp、cgi等网页形式存在一种命令执行环境，
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/第一周/" target="_blank">
-                        <span class="chip bg-color">第一周</span>
+                    <a href="/tags/第六周/" target="_blank">
+                        <span class="chip bg-color">第六周</span>
+                    </a>
+                    
+                    <a href="/tags/SQL注入/" target="_blank">
+                        <span class="chip bg-color">SQL注入</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/08/25/关于TCP协议中的HTTP一些问题/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="关于TCP协议中的HTTP一些问题">
+                        
+                        <span class="card-title">关于TCP协议中的HTTP一些问题</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            1。浏览器在与服务器建立了一个 TCP 连接后是否会在一个 HTTP 请求完成后断开？在HTTP/1.0中，一个服务器在发送完一个HTTP响应后，会断开TCP链接。但是每次请求重新建立和断开TCP连接，代价过大。所以某些服务器对Connec
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                    i春秋
+                                </a>
+                            
+                            <a href="/categories/i春秋/网络基础/" class="post-category" target="_blank">
+                                    网络基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/第六周/" target="_blank">
+                        <span class="chip bg-color">第六周</span>
+                    </a>
+                    
+                    <a href="/tags/网络基础/" target="_blank">
+                        <span class="chip bg-color">网络基础</span>
                     </a>
                     
                 </div>
