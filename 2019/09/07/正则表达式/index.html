@@ -488,8 +488,7 @@
         (?&lt;=&lt;(\w+)&gt;)    等价于  (?&lt;=exp)        exp= &lt;(\w+)&gt;
         .*    匹配任意字符
         (?&lt;=&lt;\/\1&gt;)    等价于    (?&lt;=exp)        exp= &lt;\/\1&gt;    其中 \/ 是转义 \1是后向引用（别名）
-        匹配出来的结果类似于 &lt;b&gt;字符&lt;/b&gt;</code></pre><h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>(?#comment) 包含注释。</p>
-<pre><code>    要包含注释，最好启用“忽略模式里的空白符”，这样在编写表达式时能任意的添加空格。
+        匹配出来的结果类似于 &lt;b&gt;字符&lt;/b&gt;</code></pre><h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><pre><code>(?#comment) 包含注释。</code></pre><pre><code>    要包含注释，最好启用“忽略模式里的空白符”，这样在编写表达式时能任意的添加空格。
     启用“忽略模式里的空白符”，在#后面到这一行结束的所有文本都将被当成注释忽略掉
     (?&lt;=&lt;(\w+)&gt;).*(?&lt;=&lt;\/\1&gt;) 可以改写为
         (?&lt;= #        断言要匹配的文本前缀
